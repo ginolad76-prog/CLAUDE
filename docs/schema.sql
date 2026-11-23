@@ -112,6 +112,9 @@ grant select, update on public.households to authenticated;
 grant select, update on public.members to authenticated;
 grant select, insert, update, delete on public.transactions to authenticated;
 grant select, insert, update, delete on public.budgets to authenticated;
+-- Akses admin (secret key) untuk mencatat transaksi atas nama pemilik.
+grant usage on schema public to service_role;
+grant select, insert, update, delete on public.households, public.members, public.transactions, public.budgets to service_role;
 
 -- Supaya HP satu langsung melihat catatan dari HP lain.
 do $$ begin
