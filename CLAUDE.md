@@ -12,3 +12,7 @@ Cara mencatat:
 - Sebelum insert, sebutkan ulang ke pemilik: tanggal, buku, jenis, kategori, jumlah. Kalau ada yang ambigu (buku keluarga atau toko? tanggal?), tanyakan dulu.
 - Setelah insert, baca balik barisnya untuk memastikan tersimpan, lalu laporkan.
 - Cicilan pinjaman mama dicatat dengan kategori `Cicilan mama` (buku keluarga, keluar).
+
+## Konten media sosial
+
+Sebelum membuat postingan, story, reels, atau papan menu untuk Toko Teh Tjap Dua Koi, baca `konten/PANDUAN-KONTEN.md` (identitas brand, referensi gaya @madlyfuel, format, dan pola post).
