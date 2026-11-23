@@ -105,6 +105,14 @@ grant execute on function public.create_household(text, text) to authenticated;
 grant execute on function public.join_household(text, text) to authenticated;
 grant execute on function public.is_member(uuid) to authenticated;
 
+-- Izin dasar untuk pengguna yang login (project Supabase baru tidak memberikannya otomatis).
+-- Siapa boleh melihat baris mana tetap diatur oleh RLS di atas.
+grant usage on schema public to authenticated;
+grant select, update on public.households to authenticated;
+grant select, update on public.members to authenticated;
+grant select, insert, update, delete on public.transactions to authenticated;
+grant select, insert, update, delete on public.budgets to authenticated;
+
 -- Supaya HP satu langsung melihat catatan dari HP lain.
 do $$ begin
   alter publication supabase_realtime add table public.transactions;
