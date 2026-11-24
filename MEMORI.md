@@ -97,6 +97,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
 - `konten/REFERENSI-KRUM.md` — gaya desain @krum.ae (cookies Dubai): marun+krem, tile tipografi, meme, nota, bingkai foto event; plus terjemahannya untuk Toko Teh. Screenshot di `konten/referensi/krum/`.
+- `konten/SATU-FOTO-ENAM-DESAIN.md` — metode 1 foto produk jadi 6+ desain (contoh Montblanc: kotak cincin, mesin capit, emoji, bubble chat) + bank ide + versi Toko Teh.
 
 ---
 

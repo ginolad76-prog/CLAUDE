@@ -33,3 +33,4 @@ Pemilik akan mengirim mutasi/rekening koran (bank, e-wallet, SPayLater, laporan 
 
 Sebelum membuat postingan, story, reels, atau papan menu untuk Toko Teh Tjap Dua Koi, baca `konten/PANDUAN-KONTEN.md` (identitas brand, referensi gaya @madlyfuel, format, dan pola post).
 Kalau pengguna menyebut "gaya krum" / "kayak krum.ae", baca juga `konten/REFERENSI-KRUM.md`.
+Kalau pengguna kirim satu foto produk dan minta beberapa desain, baca `konten/SATU-FOTO-ENAM-DESAIN.md`.

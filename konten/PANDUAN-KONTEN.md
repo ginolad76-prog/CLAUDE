@@ -36,6 +36,10 @@ Kita bahasa Indonesia santai, sesekali kata lawas ("Tjap", "seduh", "mampir").
 
 Analisis lengkap di `konten/REFERENSI-KRUM.md` (screenshot di `konten/referensi/krum/`). Intinya: marun + krem disiplin, monogram kecil di pojok tiap post, tile tipografi merah diselingi close-up isi meleleh, humor/meme, properti nyata (nota, serbet, bingkai foto event), permainan kata di nama menu.
 
+## 2c. Metode 1 foto → 6 desain
+
+Lihat `konten/SATU-FOTO-ENAM-DESAIN.md`: satu foto produk bersih dimasukkan ke 6 cerita berbeda (kotak cincin, mesin capit, emoji, bubble chat, dll) dengan satu tema payung dan dua warna.
+
 ## 3. Format teknis
 
 - Feed: 1080 × 1350 (4:5). Story/Reels: 1080 × 1920 (9:16), simpan area aman atas 250 px dan bawah 340 px.
