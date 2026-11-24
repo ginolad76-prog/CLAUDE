@@ -41,7 +41,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx).
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
-- Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
+- Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`. Referensi gaya kedua: `konten/REFERENSI-KRUM.md` (@krum.ae).
 
 ### Link artifact (privat, buka dengan akun Claude kamu)
 | Nama | Link |
@@ -94,6 +94,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 - `notes/ai-ad-poster-guide.md` — iklan AI: foto asli, satu ide, tanpa tambahan; template prompt.
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
+- `konten/REFERENSI-KRUM.md` — gaya desain @krum.ae (cookies Dubai): marun+krem, tile tipografi, meme, nota, bingkai foto event; plus terjemahannya untuk Toko Teh. Screenshot di `konten/referensi/krum/`.
 
 ---
 

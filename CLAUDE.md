@@ -25,3 +25,4 @@ Cara mencatat:
 ## Konten media sosial
 
 Sebelum membuat postingan, story, reels, atau papan menu untuk Toko Teh Tjap Dua Koi, baca `konten/PANDUAN-KONTEN.md` (identitas brand, referensi gaya @madlyfuel, format, dan pola post).
+Kalau pengguna menyebut "gaya krum" / "kayak krum.ae", baca juga `konten/REFERENSI-KRUM.md`.
