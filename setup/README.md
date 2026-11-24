@@ -47,6 +47,26 @@ powershell -ExecutionPolicy Bypass -File setup\install-skills.ps1
 
 Script aman dijalankan ulang kapan saja; yang sudah terpasang dilewati, skill dari git akan di-update.
 
+## Plugin & konektor dari akun claude.ai (tidak perlu script)
+
+Ini dipasang lewat akun claude.ai, bukan lewat script, jadi ikut otomatis ke sesi mana pun yang login dengan akun yang sama (dicek 24 Nov 2026 di sesi cloud).
+
+| Nama | Fungsi |
+|---|---|
+| superpowers (obra/superpowers) | Cara kerja terstruktur: brainstorming, rencana, debugging, TDD, review |
+| caveman (akramsystems/caveman) | Mode jawaban super singkat ("caveman mode") |
+| claude-code-setup | Rekomendasi otomasi Claude Code untuk sebuah proyek |
+| claude-security | Pemindai celah keamanan kode |
+| github | Konektor GitHub (issue, PR, repo) |
+| instagram | Baca & balas komentar/DM Instagram (butuh token Graph API, lihat `/instagram:configure`) |
+
+Konektor akun: Gmail, Google Drive, Google Sheets, Canva, Claude Docs, Metricool, TikTok for Business, Windsor.ai, vidIQ, Orla, PocketSmith, Perplexity Computer.
+
+Kalau salah satu plugin di atas tidak muncul di laptop: ketik `/plugin`, cari namanya di tab Discover, lalu install. Untuk superpowers bisa juga:
+`/plugin marketplace add obra/superpowers-marketplace` lalu `/plugin install superpowers@superpowers-marketplace`.
+
+Repo yang dipakai: hanya `ginolad76-prog/claude` (repo ini).
+
 ## Chief of Staff (opsional, manual)
 
 Tidak dimasukkan ke script karena installer-nya menanyakan data pribadi (nama, email, jabatan, zona waktu) dan **menimpa `~/.claude/CLAUDE.md`**. Kalau kamu sudah punya `CLAUDE.md` sendiri, backup dulu.

@@ -30,6 +30,8 @@ Lalu tutup & buka lagi Claude Code. Syarat: Claude Code (login), Git, Node.js 20
 
 Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), discernment-nudge, academy-guide.
 
+Plugin dari akun claude.ai (ikut otomatis, tanpa script): superpowers, caveman, claude-code-setup, claude-security, github, instagram. Daftar + cara pasang manual: `setup/README.md`.
+
 ---
 
 ## 2. Usaha: TOKO TEH · Tjap Dua Koi
