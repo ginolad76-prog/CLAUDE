@@ -16,3 +16,10 @@ Cara mencatat:
 ## Konten media sosial
 
 Sebelum membuat postingan, story, reels, atau papan menu untuk Toko Teh Tjap Dua Koi, baca `konten/PANDUAN-KONTEN.md` (identitas brand, referensi gaya @madlyfuel, format, dan pola post).
+
+### Mencocokkan dengan mutasi rekening
+Pemilik akan mengirim mutasi/rekening koran (bank, e-wallet, SPayLater, laporan ESB). Tugas Claude:
+- Cocokkan tiap baris mutasi dengan transaksi yang sudah tercatat (jumlah, tanggal ±2 hari, keterangan).
+- Daftar yang belum tercatat diusulkan dulu ke pemilik (tanggal, buku, kategori, jumlah) sebelum di-insert; tebak kategori dari nama merchant.
+- Transaksi bertanda "PERKIRAAN" di `note` (mis. 15 kursi TrailTop ±Rp4,7 jt) diganti jumlah/tanggal aslinya saat ketemu di mutasi; laporkan selisihnya.
+- Mutasi yang ambigu (transfer antar rekening sendiri, isi saldo e-wallet, bayar tagihan PayLater) jangan dicatat sebagai pengeluaran baru; tanyakan.
