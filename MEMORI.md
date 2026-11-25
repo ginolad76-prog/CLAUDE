@@ -64,8 +64,8 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 | Keuangan Keluarga & Toko Teh 2026–2027 | https://claude.ai/artifact/WLsYjuYErwjvSnucmruygP |
 
 ### Website resmi (GitHub Pages, gratis)
-- Alamat tujuan: https://tokotehtjapduakoi.github.io (organization GitHub `tokotehtjapduakoi`, repo `tokotehtjapduakoi.github.io`, branch `main`).
-- Sumber file: folder `toko-teh-website/` di repo ini. Semua link/nomor WA/cabang di `toko-teh-website/config.js`. Panduan edit: `toko-teh-website/README.md`.
+- **ONLINE sejak 25 Nov 2026**: https://tokotehtjapduakoi.github.io (organization GitHub `tokotehtjapduakoi`, repo `tokotehtjapduakoi.github.io`, branch `main`).
+- Repo yang tayang: github.com/tokotehtjapduakoi/tokotehtjapduakoi.github.io (salinan sumber: folder `toko-teh-website/` di repo ini; edit di repo yang tayang). Semua link/nomor WA/cabang di `toko-teh-website/config.js`. Panduan edit: `toko-teh-website/README.md`.
 - QR code (hijau & hitam, SVG/PNG, error correction M, sudah dites decoder): folder `toko-teh-qr/`. Cetak di cup perlu lapisan putih di belakang QR.
 - Logo di website = file Drive "Logo Toko Teh FINAL (sama seperti asli) 4000px.png", hanya di-resize.
 
