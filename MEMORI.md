@@ -1,6 +1,6 @@
 # MEMORI — Semua yang pernah dibahas dengan Claude
 
-Satu tempat untuk semua sesi (HP & laptop). Terakhir diperbarui: 24 Nov 2026.
+Satu tempat untuk semua sesi (HP & laptop). Terakhir diperbarui: 25 Nov 2026.
 Repo: https://github.com/ginolad76-prog/CLAUDE
 
 ---
@@ -62,6 +62,12 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 | Database Bahan & HPP | https://claude.ai/artifact/GofdwDvVf5545GnUg9nkiv |
 | Inventaris Aset — Kursi | https://claude.ai/artifact/RKVbpyBA81WhRRnfSFo3ye |
 | Keuangan Keluarga & Toko Teh 2026–2027 | https://claude.ai/artifact/WLsYjuYErwjvSnucmruygP |
+
+### Website resmi (GitHub Pages, gratis)
+- Alamat tujuan: https://tokotehtjapduakoi.github.io (organization GitHub `tokotehtjapduakoi`, repo `tokotehtjapduakoi.github.io`, branch `main`).
+- Sumber file: folder `toko-teh-website/` di repo ini. Semua link/nomor WA/cabang di `toko-teh-website/config.js`. Panduan edit: `toko-teh-website/README.md`.
+- QR code (hijau & hitam, SVG/PNG, error correction M, sudah dites decoder): folder `toko-teh-qr/`. Cetak di cup perlu lapisan putih di belakang QR.
+- Logo di website = file Drive "Logo Toko Teh FINAL (sama seperti asli) 4000px.png", hanya di-resize.
 
 ### Google Drive / Docs
 - Logo final vector: https://drive.google.com/file/d/1qCjtX-Pbnc4CeLjG_i9WNMX0D1a-Xasv/view
