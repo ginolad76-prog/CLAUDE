@@ -59,6 +59,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 | Interior Caravan (halaman) | https://claude.ai/artifact/ANGmWc2y6p9W5m6aA3Ewwd |
 | Interior 3D Caravan | https://claude.ai/artifact/JU2wyTMdY2VgwJKMACT5D2 |
 | Kolam Koi (prototipe gacha) | https://claude.ai/artifact/5toafTUGmmeAmCLrZjw25p |
+| Kolam Koi (versi asli, live) | https://tokotehtjapduakoi.github.io/kolam/ · kasir: /kolam/admin/ · kode & panduan: repo tokotehtjapduakoi.github.io, folder `kolam/` (PANDUAN.md). Database: project Supabase terpisah (bukan Dompet Koi), login member = nomor HP + PIN 6 angka |
 | Database Bahan & HPP | https://claude.ai/artifact/GofdwDvVf5545GnUg9nkiv |
 | Inventaris Aset — Kursi | https://claude.ai/artifact/RKVbpyBA81WhRRnfSFo3ye |
 | Keuangan Keluarga & Toko Teh 2026–2027 | https://claude.ai/artifact/WLsYjuYErwjvSnucmruygP |
