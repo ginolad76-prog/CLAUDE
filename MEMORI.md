@@ -62,6 +62,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 | Database Bahan & HPP | https://claude.ai/artifact/GofdwDvVf5545GnUg9nkiv |
 | Inventaris Aset — Kursi | https://claude.ai/artifact/RKVbpyBA81WhRRnfSFo3ye |
 | Keuangan Keluarga & Toko Teh 2026–2027 | https://claude.ai/artifact/WLsYjuYErwjvSnucmruygP |
+| Tarikan Pertama (paket 9 post launching) | https://claude.ai/artifact/URqWDTqhTxW3aRipL9J32Y |
 
 ### Google Drive / Docs
 - Logo final vector: https://drive.google.com/file/d/1qCjtX-Pbnc4CeLjG_i9WNMX0D1a-Xasv/view
@@ -94,6 +95,8 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 - `notes/ai-ad-poster-guide.md` — iklan AI: foto asli, satu ide, tanpa tambahan; template prompt.
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
+- `konten/PLAYBOOK-REFERENSI.md` — playbook dari @based.dough, @hooluburger, @jagocoffee (25 Nov).
+- Audiens: keluarga, remaja skena, cewek pemburu foto. Jam buka sementara 16.00–24.00. Harga belum ditetapkan.
 
 ---
 

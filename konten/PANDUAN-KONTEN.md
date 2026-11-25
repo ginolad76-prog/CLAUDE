@@ -1,7 +1,7 @@
 # Panduan Konten Toko Teh Tjap Dua Koi
 
 Dipakai setiap kali pemilik minta dibuatkan postingan, story, reels, atau papan menu.
-Terakhir diperbarui: 23 November 2026.
+Terakhir diperbarui: 25 November 2026.
 
 ## 1. Identitas kita (jangan diganti)
 
@@ -11,6 +11,9 @@ Terakhir diperbarui: 23 November 2026.
 - **Huruf:** judul tebal condensed (Oswald / Bebas Neue), subjudul serif klasik (Cinzel) untuk "TJAP DUA KOI", isi Inter.
 - **Aset:** logo bulat dua koi emas (file FINAL di Google Drive: "Logo Toko Teh FINAL ..."), karakter si penarik teh (sanggul hijau, pegang cup), stempel 茶 merah, motif bingkai meander, rumbai hijau-krem.
 - **Produk:** semua minuman dari base C teh tarik (Teh Tarik, Milo Tarik, Matcha Tarik, Houjicha Tarik), cup 14 oz dan jumbo 22 oz, plus bagel dan wrap.
+- **Target audiens (25 Nov):** keluarga; remaja skena; cewek/pemburu foto yang beli karena gengsi dan fotonya cakep.
+- **Jam buka (sementara):** 16.00–24.00.
+- **Gaya bahasa (25 Nov):** skena, asik, gaul; benang merah plesetan "tarik" (tarik ulur, tarikan pertama, tarik temanmu). Lihat juga `konten/PLAYBOOK-REFERENSI.md`.
 - **Lokasi & kanal:** caravan di Mahakam Lampion Garden, Samarinda. Launching Minggu 29 November 2026. Program referral: Teman Tarik.
 
 ## 2. Referensi: @madlyfuel (frozen high-protein wraps, Gading Serpong & Jakarta)
@@ -48,3 +51,8 @@ Kita bahasa Indonesia santai, sesekali kata lawas ("Tjap", "seduh", "mampir").
 5. **Bukti sosial**: chat pelanggan di atas foto produk.
 6. **Ajakan Teman Tarik**: QR + hadiah, karakter si penarik teh.
 7. **Di balik layar**: menyeduh base C, menyiapkan caravan.
+
+
+## 5. Paket launching "Tarikan Pertama" (25 Nov 2026)
+
+9 post (teaser 26/11 → Teman Tarik 5/12), poster bisa disimpan PNG: https://claude.ai/artifact/URqWDTqhTxW3aRipL9J32Y (sumber: `konten/tarikan-pertama.html`). Harga & promo belum final.
