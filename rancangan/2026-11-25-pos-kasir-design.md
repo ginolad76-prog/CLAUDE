@@ -1,6 +1,6 @@
 # Rancangan: Kasir Koi (POS Toko Teh Tjap Dua Koi)
 
-Tanggal: 25 Nov 2026 · Status: draf, menunggu persetujuan pemilik
+Tanggal: 25 Nov 2026 · Status: menunggu persetujuan akhir pemilik
 
 ## 1. Tujuan dan alasannya
 
@@ -20,7 +20,7 @@ Pemilik mengurus semuanya dari HP dan ingin "satu tempat, Claude yang mengurus o
 - Jual: pilih menu → ukuran/varian → total → metode bayar → foto bukti → lunas → kode klaim (QR + tombol kirim WA).
 - Kasir tetap bisa mencatat saat internet putus; nota dikirim otomatis begitu sinyal kembali.
 - Pembatalan (void) hanya lewat pengajuan kasir disertai alasan, lalu disetujui pemilik.
-- Setoran kas saat tutup toko.
+- Shift dan serah terima kas antar kasir.
 - Stok: bahan, resep per menu, stok masuk, hitung stok, dan laporan selisih.
 - Laporan harian pemilik.
 - Omzet harian dikirim ke Dompet Koi.
@@ -66,7 +66,9 @@ Pemilik menyerahkan pilihan ke Claude dengan syarat aman dan tidak bergantung pa
 |---|---|
 | Pembayaran | Tunai, QRIS, transfer bank. QRIS akan ada lebih dari satu (GoPay, ShopeePay), jadi metode bayar berupa **daftar yang bisa diatur pemilik**. |
 | Struk | Tanpa kertas. Utamanya **kirim WA** (link `wa.me` berisi rincian + link klaim). Cadangannya **QR di layar**. |
-| Perangkat | Website, bisa pindah HP; cukup login akun staf. |
+| Perangkat | Website, bisa pindah HP, dan HP boleh milik siapa saja; cukup login akun staf. Struk WA terkirim dari WhatsApp di HP yang dipakai. |
+| Shift | Kasir bergantian shift; uang tunai diserahterimakan saat ganti shift. |
+| Peralihan | Pelan-pelan dari ESB. Inti dulu, stok dan Dompet Koi menyusul. |
 | Offline | Tetap bisa mencatat; dikirim otomatis saat online. |
 | Stok | Ikut dikelola. Pemilik melaporkan jumlah stok ke Claude lewat chat (harian/mingguan), Claude yang memasukkan datanya. |
 | Void | Kasir tidak boleh membatalkan atau mengubah sendiri. Nota lunas terkunci. Kasir hanya bisa mengajukan batal dengan alasan; pemilik yang menyetujui. Setelah disetujui, kasir membuat nota baru. |
@@ -147,9 +149,13 @@ Semua tabel: RLS aktif. Policy select: kasir hanya melihat nota miliknya hari in
 - Voucher hadiah Kolam Koi (`TK-XXXXX`) bisa dipakai langsung di POS: kasir scan/ketik kode, item gratis masuk nota, dan `kk_use_voucher` dipanggil dalam transaksi yang sama. *(Keputusan Claude; menyatukan dua layar kasir.)*
 - Perubahan menu/harga hanya oleh pemilik, tercatat di jejak audit.
 
-### 6.9 Setoran kas
-- Buka toko: kasir mengetik modal awal di laci.
-- Tutup toko: kasir mengetik uang tunai yang dihitung + foto laci. Sistem menampilkan ke pemilik: tunai seharusnya vs dihitung, dan selisihnya.
+### 6.9 Shift dan serah terima kas
+Kasir bekerja per **shift** dengan satu laci bersama. Uang tunai diserahterimakan saat ganti shift.
+- **Buka shift:** kasir mengetik modal awal di laci (shift pertama) atau menerima laci dari shift sebelumnya.
+- Selama shift, nota tercatat atas nama kasir yang login. Hanya satu shift yang terbuka dalam satu waktu.
+- **Serah terima:** kasir yang pulang mengetik uang tunai yang dihitung dan memotret laci. Kasir berikutnya menghitung ulang dan mengetik angkanya sendiri. Kalau dua angka itu berbeda, langsung ditandai. Kedua nama, kedua angka, dan jamnya tercatat.
+- **Tutup toko:** sama seperti serah terima, tanpa kasir berikutnya.
+- Laporan pemilik per shift: tunai seharusnya (modal + tunai masuk) vs dihitung, dan selisihnya, beserta siapa yang memegang laci.
 
 ### 6.10 Stok
 - Data awal bahan, satuan, dan harga diambil dari sheet "Database Bahan & HPP" (26 bahan; resep 14 oz versi A/B/C; 22 oz = bahan ×1,6 + cup/es 22 oz).
@@ -171,9 +177,10 @@ Omzet, jumlah nota, rata-rata per nota, per metode bayar, per kasir, menu terlar
 ### 6.13 Tampilan
 - Mengikuti warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`.
 - Mobile-first, tombol besar, bisa dipakai satu tangan, dan bisa dipasang ke layar utama (manifest + ikon).
-- Layar kasir: Jual · Nota hari ini · Tutup kasir. Layar pemilik menambah: Laporan · Void · Menu · Stok · Perangkat · Staf.
+- Layar kasir: Jual · Nota shift ini · Serah terima / tutup. Layar pemilik menambah: Laporan · Void · Menu · Stok · Perangkat · Staf.
 
 ### 6.14 Peralihan dari ESB
+- **Urutan pembangunan:** (1) inti: login, menu, jual, foto, kode Kolam Koi + WA, void, shift/serah terima kas, laporan harian; (2) stok dan selisih stok; (3) kirim otomatis ke Dompet Koi.
 - Launching 29 Nov tetap memakai ESB.
 - Minggu berikutnya: POS dipakai berdampingan selama 2–3 hari, lalu angkanya dibandingkan.
 - Selama masa berdampingan, **POS yang memberi kode Kolam Koi**. Kasir tidak lagi mendaftarkan nota ESB di Admin Kolam Koi, supaya tidak ada tarikan ganda. Omzet ke Dompet Koi tetap dari ESB, seperti sekarang. Sinkron otomatis POS → Dompet Koi baru dinyalakan setelah ESB berhenti. *(Keputusan Claude.)*
