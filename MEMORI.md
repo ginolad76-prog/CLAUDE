@@ -1,6 +1,6 @@
 # MEMORI — Semua yang pernah dibahas dengan Claude
 
-Satu tempat untuk semua sesi (HP & laptop). Terakhir diperbarui: 24 Nov 2026.
+Satu tempat untuk semua sesi (HP & laptop). Terakhir diperbarui: 25 Nov 2026.
 Repo: https://github.com/ginolad76-prog/CLAUDE
 
 ---
@@ -93,6 +93,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 ## 4. Catatan desain & konten (dari HP)
 - `notes/ai-ad-poster-guide.md` — iklan AI: foto asli, satu ide, tanpa tambahan; template prompt.
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
+- `notes/photobooth-website-ide.md` — **ide disimpan**: website photobooth, hasil berupa struk yang bisa di-print + bank ide photobooth.
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
 
 ---
@@ -108,6 +109,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 | Tjap Dua Koi tea shop launch | 21–23 Nov | Brand, caravan, menu/HPP, marketing, Dompet Koi, rekap ESB |
 | Website visibility issue | 23 Nov | Kenapa Claude chat lain tak bisa buka artifact; tip Rp50rb ke Ocha |
 | Claude-mem installation | 24 Nov | Pasang skill/plugin + script laptop |
-| Pelajari dan ingat (sesi ini) | 24 Nov | Panduan iklan AI, video villa, gabung semua memori |
+| Pelajari dan ingat | 24 Nov | Panduan iklan AI, video villa, gabung semua memori |
+| Photobooth Website | 25 Nov | Ide website photobooth struk/print — disimpan dulu |
 
 Catatan: sesi Tjap Dua Koi sangat panjang; yang dirangkum di sini adalah hasil akhir (file, link, keputusan), bukan setiap pesan.
