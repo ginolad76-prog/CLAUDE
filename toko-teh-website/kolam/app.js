@@ -7,7 +7,7 @@ const CFG=window.KOLAM_CONFIG||{};
 const $=id=>document.getElementById(id);
 const rp=n=>"Rp"+Math.round(n).toLocaleString("id-ID");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function toast(m){const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,3200)}
+function toast(m){if(document.querySelector(".reveal")){toast.pending=m;return}const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,3200)}
 
 /* ===== aturan (diperbarui dari database saat dibuka) ===== */
 const RULE={rate:{R:.80,SR:.17,UR:.03},pts:{R:1,SR:5,UR:25},pitySR:10,pityUR:40,
@@ -89,14 +89,16 @@ async function loadMe(){const me=await rpc("kk_me");if(!me){S=null;return false}
   const L=S&&S._phone===me.phone?S:loadLocal();
   S={_phone:me.phone,name:me.nickname,show:me.show_on_board,inv:me.inv||{},ever:me.ever||[],pity:{sr:me.pity_sr,ur:me.pity_ur},bank:me.bank,trx:me.trx,spent:Number(me.spent),
      exchanged:me.exchanged,exMonth:me.ex_month,skinsBought:me.skins||[],vouchers:me.vouchers||[],
+     ref:{code:me.ref_code||"",month:me.ref_month||0,total:me.ref_total||0,pending:me.ref_pending||0,max:me.ref_max||15,min:me.ref_min||20000,by:me.referred_by||"",done:!!me.ref_done,canUse:!!me.can_use_ref},
+     bonus:me.bonus_pulls||0,postToday:me.post_today||0,
      skin:L.skin||"klasik",customBg:L.customBg,avatar:L.avatar,avatarPos:L.avatarPos,wait:L.wait||[],_seen:S&&S._seen};
   if(!SKINS.some(k=>k.id===S.skin&&unlocked(k)))S.skin="klasik";
   return true}
 
 /* ===== tarik ===== */
-function showReveal(){if(!queue.length){render();return}
+function showReveal(){if(!queue.length){render();if(toast.pending){const m=toast.pending;toast.pending=null;toast(m)}return}
   const c=queue.shift();const isNew=!S._seen||!S._seen.includes(c.id);S._seen=[...(S._seen||[]),c.id];
-  const ov=document.createElement("div");ov.className="reveal";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Hasil tarikan");
+  const ov=document.createElement("div");ov.className="reveal r-"+c.t;ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Hasil tarikan");
   ov.innerHTML=`<div class="rv"><p class="small" style="opacity:.8">Ketuk kartu untuk membuka · sisa ${queue.length}</p>
    <div class="flip" tabindex="0"><div class="in"><div class="face back"><svg viewBox="0 0 300 400" width="100%" height="100%"><rect width="300" height="400" fill="#0e4d32"/><circle cx="150" cy="200" r="90" fill="none" stroke="#b58a3c" stroke-width="6"/>${koi(150,175,120,0,{b:"#f6efdf",s:[]},"bk1")}${koi(150,228,120,180,{b:"#d9602a",s:[]},"bk2")}<text x="150" y="350" text-anchor="middle" font-family="Georgia,serif" font-size="20" letter-spacing="6" fill="#b58a3c">TJAP DUA KOI</text></svg></div>
    <div class="face front glow-${c.t}">${cardHTML(c)}</div></div></div>
@@ -104,7 +106,7 @@ function showReveal(){if(!queue.length){render();return}
    <p class="nmx" hidden><b>${c.nm}</b> · +${RULE.pts[c.t]} poin<br><span style="opacity:.75;font-size:13px">Sudah masuk ke kolam</span></p>
    <button class="btn gold" hidden>${queue.length?"Tarik berikutnya":"Masukkan ke kolam"}</button></div>`;
   document.body.append(ov);const f=ov.querySelector(".flip"),b=ov.querySelector("button");
-  const open=()=>{if(f.classList.contains("open"))return;f.classList.add("open");setTimeout(()=>{ov.querySelector(".rl").hidden=false;ov.querySelector(".nmx").hidden=false;b.hidden=false;b.focus()},650)};
+  const open=()=>{if(f.classList.contains("open"))return;f.classList.add("open");ov.classList.add("open");setTimeout(()=>{ov.querySelector(".rl").hidden=false;ov.querySelector(".nmx").hidden=false;b.hidden=false;b.focus()},650)};
   f.addEventListener("click",open);f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
   b.addEventListener("click",()=>{ov.remove();showReveal()});f.focus()}
 
@@ -115,35 +117,63 @@ const TABS=[["tarik","Tarik"],["kolam","Kolam"],["tukar","Tukar"],["peringkat","
 function nav(){const n=$("tabs");n.hidden=!S;if(!S){n.innerHTML="";return}
   n.innerHTML=TABS.map(([k,l])=>`<button type="button" data-k="${k}" ${k===tab?'aria-current="page"':""}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>${l}</button>`).join("");
   n.querySelectorAll("button").forEach(b=>b.onclick=()=>{tab=b.dataset.k;sel={};render();scrollTo(0,0)})}
-function header(){return `<div class="head"><h1>Kolam Koi</h1><a class="small muted" href="../">Tjap Dua Koi</a></div>
- <p class="small">Halo, <b>${esc(S.name)}</b></p>
- <div class="stats"><div class="stat"><b>${totalPts()}</b><span>poin kartu</span></div><div class="stat"><b>${Math.min(distinct(),12)}/12</b><span>koleksi</span></div><div class="stat"><b>${S.exchanged}</b><span>poin ditukar${S.bank?` · saldo ${S.bank}`:""}</span></div></div>`}
-
+const LAMP=`<svg class="lamp" viewBox="0 0 96 64" aria-hidden="true"><path d="M0 4q48 16 96 0" fill="none" stroke="#C9A24B" stroke-width="1.5"/>${[[22,9],[52,13],[80,8]].map(([x,y],i)=>`<g transform="translate(${x} ${y})"><line x1="0" y1="0" x2="0" y2="6" stroke="#C9A24B" stroke-width="1.5"/><rect x="-5" y="5" width="10" height="3" rx="1" fill="#1F2A25"/><ellipse cx="0" cy="17" rx="9" ry="11" fill="${i===1?"#D9822B":"#B3262E"}" stroke="#1F2A25" stroke-width="1.5"/><path d="M0 6v22M-5 8q-3 9 0 18M5 8q3 9 0 18" stroke="#1F2A25" stroke-width="1" fill="none" opacity=".5"/><rect x="-4" y="27" width="8" height="3" rx="1" fill="#1F2A25"/></g>`).join("")}</svg>`;
+const BACK=`<a class="back" href="../" aria-label="Kembali ke website toko"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>`;
+function top(inner){return `<header class="top">${LAMP}<div class="brand">${BACK}<div><span class="tjap">TJAP DUA KOI</span><h1>Kolam Koi</h1></div></div>${inner||""}</header>`}
+function header(){return top(`<p class="hi">Halo, <b>${esc(S.name)}</b></p>
+ <div class="wallet"><div><b>${totalPts()}</b><span>poin kartu</span></div><div><b>${Math.min(distinct(),12)}<small style="font-size:16px;opacity:.7">/12</small></b><span>koleksi</span></div><div><b>${S.exchanged}</b><span>ditukar${S.bank?` · saldo ${S.bank}`:""}</span></div></div>`)}
+const REF_URL=c=>location.origin+location.pathname.replace(/[^/]*$/,"")+"?ref="+encodeURIComponent(c);
+const refText=()=>`Halo! Daftar Kolam Koi di Toko Teh Tjap Dua Koi pakai kodeku ${S.ref.code}. Belanja minimal ${rp(S.ref.min)}, kamu dapat es teh gratis. Daftar di sini: ${REF_URL(S.ref.code)}`;
+const ICO_ES=`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h12l-1.6 13.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8z"/><path d="M5 6h14M13 6l2-4"/></svg>`;
+function vBonus(){return S.bonus?`<section class="card" style="border-color:var(--gold)"><h2>Tarikan bonus: ${S.bonus}</h2><p class="small muted">Hadiah dari bonus posting. Langsung tarik, tidak perlu nota.</p><button class="btn gold" id="bp">Tarik kartu bonus</button></section>`:""}
+function vAjak(){const R=S.ref;if(!R.code)return "";/* database belum diperbarui */const penuh=R.month>=R.max;
+  let pakai="";
+  if(R.by&&!R.done)pakai=`<section class="card" style="border-color:var(--gold)"><h2>Kamu diajak ${esc(R.by)}</h2><p class="small">Belanja minimal <b>${rp(R.min)}</b>, lalu masukkan notanya di atas. Kamu langsung dapat <b>es teh gratis</b> di Hadiahku, dan ${esc(R.by)} juga dapat satu.</p></section>`;
+  else if(R.canUse)pakai=`<section class="card"><h2>Punya kode dari teman?</h2><p class="small muted">Masukkan sebelum belanja pertama. Belanja minimal ${rp(R.min)}, kamu dan temanmu sama-sama dapat es teh gratis.</p>
+   <label for="rc">Kode teman<input id="rc" class="txt" autocomplete="off" autocapitalize="characters" placeholder="mis. RINA-7KQ"></label><button type="button" class="btn" id="rcb">Pakai kode</button></section>`;
+  return pakai+`<section class="card"><div class="row"><h2>Ajak Teman Tarik</h2>${ICO_ES}</div>
+  <p class="small">Bagikan kodemu. Teman yang <b>baru daftar</b> pakai kodemu dan belanja minimal <b>${rp(R.min)}</b> dapat <b>es teh gratis</b>. Kamu juga dapat <b>es teh gratis</b> untuk tiap teman yang berhasil.</p>
+  <div class="voucher" style="text-align:center"><span class="small muted">Kode ajakmu</span><code style="font-size:24px;letter-spacing:.06em">${esc(R.code)}</code></div>
+  <div class="row" style="gap:8px;flex-wrap:wrap"><a class="btn gold" style="flex:1;display:grid;place-items:center;text-decoration:none;min-width:150px" target="_blank" rel="noopener" id="rwa" href="https://wa.me/?text=${encodeURIComponent(refText())}">Kirim lewat WhatsApp</a>
+  <button type="button" class="btn ghost" style="flex:1;min-width:120px" id="rsh">${navigator.share?"Bagikan":"Salin ajakan"}</button></div>
+  <div class="small" style="display:grid;gap:4px"><div>Berhasil bulan ini: <b>${R.month}/${R.max}</b>${penuh?` · <span style="color:var(--marun)">batas bulan ini tercapai, temanmu tetap dapat es teh</span>`:""}</div><div class="bar"><i style="width:${Math.min(100,R.month/R.max*100)}%"></i></div>
+  ${R.pending?`<div class="muted">${R.pending} teman sudah daftar, menunggu belanja pertama.</div>`:""}${R.total?`<div class="muted">Total teman berhasil: ${R.total}</div>`:""}</div></section>
+  <section class="card"><h2>Bonus posting</h2><p class="small">Posting foto atau story minuman kami dan tag <b>@tokoteh.tjapduakoi</b>. Tunjukkan ke kasir, lalu pilih: <b>es teh gratis</b> atau <b>1 tarikan kartu koi</b>. Berlaku 1 kali sehari.</p>${S.postToday?`<p class="small" style="color:var(--koi)">Bonus posting hari ini sudah diambil. Sampai besok!</p>`:""}</section>`}
 function vTarik(){const tiers=RULE.pulls.slice().reverse();
-  return header()+`<section class="card"><h2>Masukkan nota</h2><p class="small muted">Ketik nomor nota dan total belanja persis seperti di struk. Jumlah tarikan otomatis sesuai total belanja.</p>
+  return header()+vBonus()+`<section class="card"><h2>Masukkan nota</h2><p class="small muted">Ketik nomor nota dan total belanja persis seperti di struk. Jumlah tarikan otomatis sesuai total belanja.</p>
   <label for="nota">Nomor nota<input id="nota" class="txt" autocomplete="off" autocapitalize="characters" placeholder="mis. POS-1123-0303"></label>
   <label for="tot">Total belanja di struk (Rp)<input id="tot" inputmode="numeric" autocomplete="off" placeholder="0"></label>
-  <button class="btn gold" id="go">Cek nota & tarik</button>
+  <button class="btn gold" id="go">Tarik kartu!</button>
   <table class="tiers">${tiers.map(([m,n])=>`<tr><td>Belanja mulai ${rp(m)}</td><td>${n} tarikan</td></tr>`).join("")}</table></section>
   ${S.wait.length?`<section class="card"><h2>Nota belum tercatat</h2><p class="small muted">Toko belum mendaftarkan nota ini, atau totalnya tidak cocok. Biasanya nota tercatat beberapa menit setelah bayar. Tarikanmu tidak hilang.</p>${S.wait.map((w,i)=>`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--line)"><div><b style="font-family:var(--f-mono)">${esc(w.nota)}</b><div class="small muted">${rp(w.total)}</div></div><div class="row" style="gap:6px"><button type="button" class="btn sm" data-w="${i}">Cek lagi</button><button type="button" class="btn sm ghost" data-x="${i}" aria-label="Hapus ${esc(w.nota)}">Hapus</button></div></div>`).join("")}</section>`:""}
-  <section class="card"><h2>Peluang</h2><div class="small">Rare 80% · Super Rare 17% · Ultra Rare 3%</div>
+  <section class="card"><h2>Peluang</h2><div class="odds"><div class="R"><b>80%</b><span>Rare</span></div><div class="SR"><b>17%</b><span>Super Rare</span></div><div class="UR"><b>3%</b><span>Ultra Rare</span></div></div>
   <div class="pity"><div>Super Rare dijamin dalam <b>${Math.max(1,RULE.pitySR-S.pity.sr)}</b> tarikan lagi</div><div class="bar"><i style="width:${S.pity.sr/RULE.pitySR*100}%"></i></div>
   <div>Ultra Rare dijamin dalam <b>${Math.max(1,RULE.pityUR-S.pity.ur)}</b> tarikan lagi</div><div class="bar u"><i style="width:${S.pity.ur/RULE.pityUR*100}%"></i></div></div>
-  <p class="small muted">Setiap tarikan pasti dapat kartu dan poin. Tidak ada zonk.</p></section>`}
+  <p class="small muted">Setiap tarikan pasti dapat kartu dan poin. Tidak ada zonk.</p></section>`.replace(/(<section class="card"><h2>Peluang)/,vAjak()+"$1")}
 const num=v=>Number(String(v).replace(/\D/g,""))||0;
 async function claim(nota,total){nota=String(nota||"").trim().toUpperCase();total=num(total);
   if(!nota)return toast("Isi nomor nota dulu.");if(!total)return toast("Isi total belanja dari struk.");if(busy)return;busy=true;
-  const go=$("go");if(go){go.disabled=true;go.textContent="Mengecek nota..."}
+  const go=$("go");if(go){go.disabled=true;go.textContent="Mengecek nota…"}
   try{const before=SKINS.filter(unlocked).length;const r=await rpc("kk_claim",{p_nota:nota,p_total:total});
     const drop=()=>{S.wait=S.wait.filter(w=>w.nota!==nota)};
-    if(r.status==="ok"){drop();await loadMe();queue=r.cards.map(id=>byId[id]).filter(Boolean);if(r.secret)queue.push(SECRET);save();
-      const after=SKINS.filter(unlocked);toast(after.length>before?`Skin kolam baru terbuka: ${after[after.length-1].nm}!`:`Nota ${nota}: belanja ${rp(r.total)} → ${r.pulls} tarikan`);showReveal()}
+    const ajak=r.ajak?`Es teh gratis dari ajakan ${r.ajak.oleh} masuk ke Hadiahku (kode ${r.ajak.code}). `:"";
+    if(r.status==="ok"){drop();await loadMe();queue=r.cards.map(id=>byId[id]).filter(Boolean);if(r.secret)queue.push(SECRET);save();showReveal();
+      const after=SKINS.filter(unlocked);toast(ajak+(after.length>before?`Skin kolam baru terbuka: ${after[after.length-1].nm}!`:`Nota ${nota}: belanja ${rp(r.total)} → ${r.pulls} tarikan`))}
     else if(r.status==="not_found"){if(!S.wait.some(w=>w.nota===nota))S.wait.push({nota,total});save();render();toast(r.left!=null&&r.left<=3?`Nota belum tercatat atau total tidak cocok. Sisa ${r.left} percobaan hari ini.`:"Nota belum tercatat atau total tidak cocok. Coba lagi beberapa menit lagi.")}
     else if(r.status==="used"){drop();save();render();toast(r.mine?`Nota ${nota} sudah kamu pakai.`:`Nota ${nota} sudah dipakai akun lain. Tanyakan ke kasir.`)}
-    else if(r.status==="too_small"){drop();save();render();toast(`Belanja ${rp(r.total)} belum cukup untuk tarikan (minimal ${rp(RULE.pulls[RULE.pulls.length-1][0])}).`)}
+    else if(r.status==="too_small"){drop();await loadMe();save();render();toast(ajak+`Belanja ${rp(r.total)} belum cukup untuk tarikan (minimal ${rp(RULE.pulls[RULE.pulls.length-1][0])}).`)}
     else if(r.status==="blocked"){render();toast("Terlalu banyak percobaan salah hari ini. Coba lagi besok, atau tanyakan ke kasir.")}
   }catch(e){toast(errMsg(e));render()}finally{busy=false}}
-function bindTarik(){const t=$("tot");t.oninput=()=>{const v=num(t.value);t.value=v?v.toLocaleString("id-ID"):""};
+async function pullBonus(){if(busy)return;busy=true;const b=$("bp");if(b){b.disabled=true;b.textContent="Menarik..."}
+  try{const r=await rpc("kk_pull_bonus");await loadMe();queue=r.cards.map(id=>byId[id]).filter(Boolean);if(r.secret)queue.push(SECRET);save();showReveal()}
+  catch(e){toast(errMsg(e));render()}finally{busy=false}}
+function bindAjak(){const bp=$("bp");if(bp)bp.onclick=pullBonus;
+  const sh=$("rsh");if(sh)sh.onclick=async()=>{const t=refText();
+    if(navigator.share){try{await navigator.share({title:"Kolam Koi · Toko Teh Tjap Dua Koi",text:t})}catch(e){}return}
+    try{await navigator.clipboard.writeText(t);toast("Ajakan tersalin. Tempel di chat temanmu.")}catch(e){toast("Kodemu: "+S.ref.code)}};
+  const rcb=$("rcb");if(rcb)rcb.onclick=async()=>{const c=$("rc").value.trim().toUpperCase();if(!c)return toast("Isi kode dari temanmu.");if(busy)return;busy=true;rcb.disabled=true;
+    try{const n=await rpc("kk_use_ref",{p_code:c});await loadMe();toast(`Kode ${n} terpasang. Belanja minimal ${rp(S.ref.min)} untuk es teh gratismu.`);render()}catch(e){toast(errMsg(e));rcb.disabled=false}finally{busy=false}}}
+function bindTarik(){bindAjak();const t=$("tot");t.oninput=()=>{const v=num(t.value);t.value=v?v.toLocaleString("id-ID"):""};
   $("go").onclick=()=>claim($("nota").value,$("tot").value);
   document.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const w=S.wait[+b.dataset.w];if(w)claim(w.nota,w.total)});
   document.querySelectorAll("[data-x]").forEach(b=>b.onclick=()=>{S.wait.splice(+b.dataset.x,1);save();render()})}
@@ -200,10 +230,10 @@ function vPeringkat(){if(!board){loadBoard().then(render).catch(e=>toast(errMsg(
   const desc={tukar:"Poin yang ditukar bulan ini.",koleksi:`Siapa paling cepat mengumpulkan ke-${N} koi bulan ini. Yang belum lengkap diurutkan dari jumlah koinya.`}[lbCat];
   const top=k=>{const r=(board.prev[k]||[])[0];return r?esc(r.n):"–"};
   return header()+`<section class="card"><div class="row"><h2>Kolam Kehormatan</h2><span class="pill wait">reset ${left} hari lagi</span></div>
-  <p class="small muted">${bln} · papan kembali ke nol tiap tanggal 1. Juara 1 tiap kategori dapat <b>tumbler Tjap Dua Koi</b>.</p>
+  <div class="prize"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 9h20l-2.4 24a2 2 0 0 1-2 1.8H14.4a2 2 0 0 1-2-1.8z" fill="#F6EFDF" stroke="#1F2A25" stroke-width="2"/><path d="M9 9h22M22 9l3-6" stroke="#1F2A25" stroke-width="2" stroke-linecap="round"/><path d="M12 17h16" stroke="#C9A24B" stroke-width="3"/></svg><span>Juara 1 tiap kategori dapat <b>1 minuman gratis</b>. Papan kembali ke nol tiap tanggal 1.</span></div><p class="small muted">${bln}</p>
   <div class="seg" role="group" aria-label="Kategori">${[["tukar","Penukar"],["koleksi","Kolektor"]].map(([k,l])=>`<button type="button" data-c="${k}" aria-pressed="${k===lbCat}">${l}</button>`).join("")}</div>
   <p class="small">${desc}</p>
-  <div>${rows.map((r,i)=>`<div class="lb ${r.me?"me":""}"><div class="rk">${i<3?`<span class="medal" style="background:${med[i]}">${i+1}</span>`:i+1}</div><div>${r.me&&S.avatar?`<img src="${S.avatar}" alt="" style="width:26px;height:26px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;border:2px solid var(--gold)">`:""}<b>${esc(r.n)}${r.me?" (kamu)":""}</b>${i===0&&(r.v>0)?`<div class="small" style="color:var(--gold)">Calon pemenang tumbler</div>`:""}</div><div class="v" style="text-align:right">${val(r)}</div></div>`).join("")}</div>
+  <div>${rows.map((r,i)=>`<div class="lb ${r.me?"me":""}"><div class="rk">${i<3?`<span class="medal" style="background:${med[i]}">${i+1}</span>`:i+1}</div><div>${r.me&&S.avatar?`<img src="${S.avatar}" alt="" style="width:26px;height:26px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;border:2px solid var(--gold)">`:""}<b>${esc(r.n)}${r.me?" (kamu)":""}</b>${i===0&&(r.v>0)?`<div class="small" style="color:var(--gold)">Calon pemenang minuman gratis</div>`:""}</div><div class="v" style="text-align:right">${val(r)}</div></div>`).join("")}</div>
   <p class="small muted">Nama yang tampil adalah nama panggilan pilihan pelanggan. Bisa disembunyikan di tab Akun.</p></section>
   <section class="card"><h2>Juara ${board.prevName}</h2><div class="small" style="display:grid;gap:4px"><div>Penukar terbanyak: <b>${top("tukar")}</b></div><div>Kolektor tercepat: <b>${top("koleksi")}</b></div></div><p class="small muted">Pemenang diumumkan di Story Instagram setiap tanggal 1.</p></section>`}
 function bindPeringkat(){document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{lbCat=b.dataset.c;render()})}
@@ -217,24 +247,26 @@ function vAkun(){return header()+`<section class="card"><h2>Akunku</h2>
   <section class="card"><h2>Lupa PIN?</h2><p class="small muted">PIN bisa direset oleh pemilik toko. Hubungi kami lewat WhatsApp dari nomor HP yang terdaftar.</p>
   <a class="btn ghost" style="display:grid;place-items:center;text-decoration:none" target="_blank" rel="noopener" href="${waLink("Halo Toko Teh Tjap Dua Koi! Aku mau reset PIN Kolam Koi untuk nomor 0"+S._phone.slice(2))}">Chat WhatsApp toko</a></section>
   <section class="card"><h2>Aturan singkat</h2><ul class="small" style="margin:0;padding-left:18px;display:grid;gap:4px">
-  <li>Satu nota hanya bisa dipakai satu kali oleh satu akun.</li><li>Jumlah tarikan mengikuti total belanja di nota.</li><li>Kode hadiah ditunjukkan ke kasir dan berlaku sekali.</li><li>Kartu, poin, dan hadiah tidak bisa diuangkan.</li><li>Toko berhak membatalkan kartu dari nota yang tidak sah.</li></ul></section>
+  <li>Satu nota hanya bisa dipakai satu kali oleh satu akun.</li><li>Jumlah tarikan mengikuti total belanja di nota.</li><li>Kode hadiah ditunjukkan ke kasir dan berlaku sekali.</li><li>Kartu, poin, dan hadiah tidak bisa diuangkan.</li><li>Kode ajak hanya untuk member baru, dipakai sebelum belanja pertama. Satu nomor HP satu akun.</li><li>Es teh ajak teman berlaku setelah teman belanja minimal ${rp(S.ref.min)}. Pengajak maksimal ${S.ref.max} es teh per bulan.</li><li>Bonus posting: 1 kali sehari, ditunjukkan ke kasir.</li><li>Toko berhak membatalkan kartu dari nota yang tidak sah.</li></ul></section>
   <button type="button" class="btn ghost" id="out">Keluar</button>`}
 function bindAkun(){$("sv").onclick=async()=>{const n=$("nn").value.trim();if(!n)return toast("Nama panggilan tidak boleh kosong.");
     try{await rpc("kk_update_profile",{p_nickname:n,p_show:$("show").checked});await loadMe();board=null;toast("Tersimpan.");render()}catch(e){toast(errMsg(e))}};
   $("out").onclick=async()=>{await sb.auth.signOut().catch(()=>{});S=null;board=null;tab="tarik";authMode="masuk";render()}}
 
 /* ===== masuk / daftar ===== */
-let authMode="masuk";
+const URL_REF=(()=>{try{return (new URLSearchParams(location.search).get("ref")||"").trim().toUpperCase().slice(0,16)}catch(e){return ""}})();
+let authMode=URL_REF?"daftar":"masuk";
 function normPhone(v){let d=String(v||"").replace(/\D/g,"");if(d.startsWith("0"))d="62"+d.slice(1);else if(d.startsWith("8"))d="62"+d;return /^62\d{8,13}$/.test(d)?d:null}
 const mail=p=>p+"@member.tjapduakoi.id";
 function vAuth(){const d=authMode==="daftar";
-  return `<div class="head"><h1>Kolam Koi</h1><a class="small muted" href="../">Tjap Dua Koi</a></div>
-  <section class="card" style="text-align:center;justify-items:center"><svg viewBox="0 0 300 200" width="220" aria-hidden="true"><circle cx="150" cy="100" r="90" fill="none" stroke="var(--gold)" stroke-width="5"/>${koi(150,78,120,0,{b:"#e9e1cc",s:[["#d3352c",.1,-.05,.28]]},"h1")}${koi(150,128,120,180,{b:"#d9602a",s:[]},"h2")}</svg>
-  <p>Belanja di Toko Teh Tjap Dua Koi, tarik kartu koi dari notamu, kumpulkan poinnya, lalu tukar dengan minuman gratis dan hadiah.</p></section>
+  return `<section class="card hero"><span class="tjap">TJAP DUA KOI</span><h1>Kolam Koi</h1><svg viewBox="0 0 300 200" width="220" aria-hidden="true"><circle cx="150" cy="100" r="90" fill="none" stroke="var(--gold)" stroke-width="5"/>${koi(150,78,120,0,{b:"#e9e1cc",s:[["#d3352c",.1,-.05,.28]]},"h1")}${koi(150,128,120,180,{b:"#d9602a",s:[]},"h2")}</svg>
+  <ol class="steps"><li>Belanja di Toko Teh Tjap Dua Koi</li><li>Tarik kartu koi dari notamu</li><li>Kumpulkan poin, tukar minuman gratis</li></ol>
+  ${URL_REF?`<p class="small" style="background:var(--gold);color:#1b1408;padding:10px 12px;border-radius:12px;border:2px solid var(--ink)">Kamu diajak teman! Daftar dengan kode <b>${esc(URL_REF)}</b>, lalu belanja minimal Rp20.000: dapat <b>es teh gratis</b>.</p>`:""}</section>
   <section class="card"><div class="seg" role="group" aria-label="Pilih"><button type="button" data-m="masuk" aria-pressed="${!d}">Masuk</button><button type="button" data-m="daftar" aria-pressed="${d}">Daftar baru</button></div>
   <form id="af" style="display:grid;gap:12px" novalidate>
   <label for="hp">Nomor HP (WhatsApp)<input id="hp" class="txt" inputmode="tel" autocomplete="tel" placeholder="0812 3456 7890" required></label>
-  ${d?`<label for="nk">Nama panggilan<input id="nk" class="txt" style="text-transform:none" maxlength="24" autocomplete="nickname" placeholder="mis. Rina K." required></label>`:""}
+  ${d?`<label for="nk">Nama panggilan<input id="nk" class="txt" style="text-transform:none" maxlength="24" autocomplete="nickname" placeholder="mis. Rina K." required></label>
+  <label for="rf">Kode dari teman (kalau ada)<input id="rf" class="txt" autocomplete="off" autocapitalize="characters" placeholder="mis. RINA-7KQ" value="${esc(URL_REF)}"></label>`:""}
   <label for="pin">PIN 6 angka<input id="pin" class="txt" type="password" inputmode="numeric" maxlength="6" autocomplete="${d?"new-password":"current-password"}" placeholder="••••••" required></label>
   ${d?`<label for="pin2">Ulangi PIN<input id="pin2" class="txt" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password" placeholder="••••••" required></label>
   <p class="small muted">PIN dipakai untuk masuk dari HP mana pun. Jangan beri tahu siapa pun, termasuk kasir.</p>`:""}
@@ -244,16 +276,17 @@ function bindAuth(){document.querySelectorAll("[data-m]").forEach(b=>b.onclick=(
   $("af").onsubmit=async e=>{e.preventDefault();if(busy)return;const p=normPhone($("hp").value),pin=$("pin").value.trim();
     if(!p)return toast("Nomor HP belum benar. Contoh: 0812 3456 7890");if(!/^\d{6}$/.test(pin))return toast("PIN harus 6 angka.");
     const d=authMode==="daftar";let nk="";
-    if(d){nk=$("nk").value.trim();if(!nk)return toast("Isi nama panggilan.");if($("pin2").value.trim()!==pin)return toast("PIN tidak sama. Ulangi.");if(/^(\d)\1{5}$|^123456$|^654321$/.test(pin))return toast("PIN terlalu mudah ditebak. Pilih yang lain.")}
+    let rf="";if(d){rf=$("rf").value.trim().toUpperCase();nk=$("nk").value.trim();if(!nk)return toast("Isi nama panggilan.");if($("pin2").value.trim()!==pin)return toast("PIN tidak sama. Ulangi.");if(/^(\d)\1{5}$|^123456$|^654321$/.test(pin))return toast("PIN terlalu mudah ditebak. Pilih yang lain.")}
     busy=true;const ab=$("ab");ab.disabled=true;ab.textContent=d?"Mendaftar...":"Masuk...";
     try{let res;
-      if(d){res=await sb.auth.signUp({email:mail(p),password:pin,options:{data:{nickname:nk}}});
+      if(d&&rf){const who=await rpc("kk_ref_check",{p_code:rf}).catch(e=>/function|schema cache/i.test(e.message||"")?"?":Promise.reject(e));if(!who)throw new Error("Kode teman "+rf+" tidak ditemukan. Periksa lagi, atau kosongkan.")}
+      if(d){res=await sb.auth.signUp({email:mail(p),password:pin,options:{data:rf?{nickname:nk,ref:rf}:{nickname:nk}}});
         if(res.error){if(/already|registered|exists/i.test(res.error.message))throw new Error("Nomor ini sudah terdaftar. Silakan pilih Masuk.");throw res.error}
         if(!res.data.session)res=await sb.auth.signInWithPassword({email:mail(p),password:pin})}
       else res=await sb.auth.signInWithPassword({email:mail(p),password:pin});
       if(res.error){if(/invalid login|credentials/i.test(res.error.message))throw new Error("Nomor HP atau PIN salah.");if(/not confirmed/i.test(res.error.message))throw new Error("Akun belum aktif. Beri tahu toko: konfirmasi email di Supabase harus dimatikan.");throw res.error}
       phone=p;const ok=await loadMe();if(!ok){await sb.auth.signOut();throw new Error("Akun ini bukan akun member.")}
-      tab="tarik";if(d)toast("Selamat datang di Kolam Koi, "+nk+"!");render()}
+      tab="tarik";if(d)toast("Selamat datang di Kolam Koi, "+nk+"!"+(S.ref.by?` Kamu diajak ${S.ref.by}.`:""));if(URL_REF)history.replaceState(null,"",location.pathname);render()}
     catch(err){toast(errMsg(err))}finally{busy=false;if(ab.isConnected){ab.disabled=false;ab.textContent=d?"Daftar & mulai":"Masuk"}}}}
 
 /* ===== foto dari galeri ===== */
@@ -322,7 +355,7 @@ function startPond(){cancelAnimationFrame(pondRAF);const svg=$("pond");if(!svg)r
   $("pdel")&&($("pdel").onclick=()=>{delete S.avatar;delete S.avatarPos;save();render()});
   document.querySelectorAll("[data-skin]").forEach(b=>b.onclick=()=>{const k=SKINS.find(x=>x.id===b.dataset.skin);if(k.photo&&!S.customBg)return setBg();if(!unlocked(k))return toast(k.cost?`Tukar di tab Tukar (${k.cost} poin).`:k.how+" · "+k.prog());S.skin=k.id;save();render()})}
 
-function vClosed(){return `<div class="head"><h1>Kolam Koi</h1><a class="small muted" href="../">Tjap Dua Koi</a></div><section class="card"><h2>Segera dibuka</h2><p class="muted">Kolam Koi sedang disiapkan. Pantau Instagram <b>@tokoteh.tjapduakoi</b> untuk tanggal mulainya.</p><a class="btn" style="display:grid;place-items:center;text-decoration:none" href="../">Kembali ke website</a></section>`}
+function vClosed(){return top()+`<section class="card"><h2>Segera dibuka</h2><p class="muted">Kolam Koi sedang disiapkan. Pantau Instagram <b>@tokoteh.tjapduakoi</b> untuk tanggal mulainya.</p><a class="btn" style="display:grid;place-items:center;text-decoration:none" href="../">Kembali ke website</a></section>`}
 function render(){nav();if(!sb){$("app").innerHTML=vClosed();return}
   if(!S){$("app").innerHTML=vAuth();bindAuth();return}
   const v={tarik:vTarik,kolam:vKolam,tukar:vTukar,peringkat:vPeringkat,akun:vAkun}[tab]();$("app").innerHTML=v;
