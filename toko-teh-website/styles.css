@@ -194,6 +194,9 @@ a.card:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--hita
 .card--marun .card__ikon { background: var(--krem); color: var(--marun); }
 .card--emas   { background: var(--emas); }
 .card--krem   { background: var(--krem); }
+.card--hijau  { background: var(--hijau); color: var(--krem); }
+.card--hijau .card__ikon { background: var(--krem); color: var(--hijau); }
+.card--hijau .card__sub { color: var(--krem); opacity: .9; }
 .card--krem .card__ikon { background: var(--hijau); color: var(--krem); }
 
 .label {
@@ -208,6 +211,7 @@ a.card:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--hita
   border: 2px solid var(--hitam);
 }
 .label--hijau { background: var(--hijau); color: var(--krem); }
+.label--emas  { background: var(--emas); color: #1b1408; }
 .label--abu   { background: var(--krem); color: #4A554F; }
 
 .antar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -438,6 +442,8 @@ body { padding-bottom: 76px; }
 .musik__eq i:nth-child(3) { animation-delay: -.6s; }
 @keyframes eq { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
 .musik.is-nyala .musik__tombol { background: var(--marun); }
+.musik.is-memuat .musik__ikon { animation: denyut 1s ease-in-out infinite; }
+@keyframes denyut { 50% { opacity: .45; } }
 .musik.is-nyala .ikon-main { display: none; }
 .musik.is-nyala .musik__eq { display: flex; }
 @media (prefers-reduced-motion: reduce) {
