@@ -56,3 +56,7 @@ Kita bahasa Indonesia santai, sesekali kata lawas ("Tjap", "seduh", "mampir").
 ## 5. Paket launching "Tarikan Pertama" (25 Nov 2026)
 
 9 post (teaser 26/11 → Teman Tarik 5/12), poster bisa disimpan PNG: https://claude.ai/artifact/URqWDTqhTxW3aRipL9J32Y (sumber: `konten/tarikan-pertama.html`). Harga & promo belum final.
+
+## 6. Pelajaran 26 Nov 2026
+- Pemilik menolak post "hujan sore" karena terlalu mirip format @lokastreetside. **Ambil prinsip dari referensi, jangan formatnya.** Uji: kalau logo diganti brand lain dan idenya masih jalan, berarti belum cukup khas.
+- Ide khas yang dibuat: carousel menyambung **"Geser buat narik"** (geseran pengikut = menarik teh; penggaris 0–100 cm) → `konten/geser-buat-narik.html`, https://claude.ai/artifact/BdHQW7w3UMmFFD7Ji6Q2fg
