@@ -67,6 +67,13 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .tx .del{border:none;background:none;color:var(--bad);font-size:12.5px;cursor:pointer;padding:4px 0;min-height:32px}
 .day{font:500 12px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
 .cat-row{display:grid;gap:6px}
+.icons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ic{display:grid;justify-items:center;gap:4px;padding:10px 4px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);cursor:pointer;min-height:76px;font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.2;text-align:center}
+.ic span{font-size:24px;line-height:1}
+.ic[aria-pressed="true"]{border-color:var(--koi);background:color-mix(in srgb,var(--koi) 14%,var(--paper))}
+.quick{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.quick button{flex:none;display:grid;gap:2px;text-align:left;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);cursor:pointer;color:var(--ink);font-size:12.5px;min-height:52px}
+.quick b{font-family:var(--f-mono);font-size:13px}
 nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 6px) max(8px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:repeat(5,1fr);gap:4px;z-index:10}
 nav.tabs button{min-height:52px;border:none;background:none;border-radius:10px;font-size:11.5px;font-weight:600;color:var(--muted);display:grid;place-items:center;gap:2px;cursor:pointer}
 nav.tabs button svg{width:22px;height:22px}
@@ -99,6 +106,7 @@ const CATS={
     keluar:["Bahan baku","Cup & kemasan","Gas & es","Sewa & listrik lokasi","Gaji","Marketing","Peralatan","Lain-lain toko"]}
 };
 const LOAN_CAT="Cicilan mama";
+const ICON={"Makan & dapur":"🍚","Belanja harian":"🛒","Listrik, air & gas":"💡","Pulsa & internet":"📶","Transport & bensin":"⛽","Anak & sekolah":"🎒","Kesehatan":"💊","Cicilan mama":"🏠","Langganan (Claude dll)":"📱","Pribadi":"👕","Sosial & keluarga":"🎁","Lain-lain":"📦","Ambil dari Toko Teh":"🫖","Pemasukan lain":"💰","Omzet harian":"🧾","GoFood / Grab":"🛵","Event & pesanan":"🎪","Bahan baku":"🥛","Cup & kemasan":"🥤","Gas & es":"🧊","Sewa & listrik lokasi":"🏮","Gaji":"👥","Marketing":"📣","Peralatan":"🪑","Lain-lain toko":"📦"};
 const BULAN=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 const HARI=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
 const app=document.getElementById("app"),tabsEl=document.getElementById("tabs"),toastEl=document.getElementById("toast");
@@ -261,7 +269,10 @@ function viewSummary(){
 function viewAdd(){
   const f=S.form;const cats=CATS[f.book][f.kind];if(!cats.includes(f.cat))f.cat=cats[0];
   const amt=h("input",{id:"amt",class:"amount",inputmode:"numeric",autocomplete:"off",placeholder:"0","aria-label":"Jumlah rupiah",value:f.amt?Number(f.amt).toLocaleString("id-ID"):"",oninput(){const n=digits(this.value);f.amt=n;this.value=n?n.toLocaleString("id-ID"):""}});
-  const cat=h("select",{id:"cat",onchange(){f.cat=this.value}},cats.map(c=>h("option",{value:c,selected:c===f.cat},c)));
+  const cat=h("div",{class:"icons",role:"group","aria-label":"Kategori"},cats.map(c=>h("button",{type:"button","aria-pressed":String(c===f.cat),onclick(){f.cat=c;viewAdd()}},h("span",{"aria-hidden":"true"},ICON[c]||"•"),c)));
+  cat.querySelectorAll("button").forEach(b=>b.classList.add("ic"));
+  const seen=new Set(),recent=[];for(const t of S.txs){const k=t.book+t.kind+t.category+t.amount;if(seen.has(k))continue;seen.add(k);recent.push(t);if(recent.length>=8)break}
+  const quick=recent.length?h("div",null,h("p",{class:"small muted",style:"margin-bottom:6px",text:"Ulangi cepat"}),h("div",{class:"quick"},recent.map(t=>h("button",{type:"button",onclick(){Object.assign(f,{book:t.book,kind:t.kind,cat:t.category,amt:Number(t.amount),note:(t.note||"").replace(/ ?\(dicatat Claude\)/,"")});viewAdd();toast("Terisi. Cek lalu tekan Simpan.")}},h("span",null,(ICON[t.category]||"")+" "+t.category),h("b",{text:(t.kind==="masuk"?"+":"")+short(Number(t.amount))}))))):null;
   const date=h("input",{id:"date",type:"date",value:f.date||today(),onchange(){f.date=this.value}});
   const note=h("input",{id:"note",placeholder:"opsional",value:f.note||"",oninput(){f.note=this.value}});
   const seg=(key,opts)=>h("div",{class:"seg",role:"group"},opts.map(([v,l])=>h("button",{type:"button","aria-pressed":String(f[key]===v),onclick(){f[key]=v;viewAdd()}},l)));
@@ -274,7 +285,7 @@ function viewAdd(){
       toast("Tersimpan: "+f.cat+" "+rp(f.amt));f.amt=0;f.note="";await loadAll();viewAdd();}},
       seg("book",[["keluarga","Keluarga"],["toko","Toko Teh"]]),
       seg("kind",[["keluar","Uang keluar"],["masuk","Uang masuk"]]),
-      amt,h("label",{for:"cat"},"Kategori",cat),h("div",{class:"grid2"},h("label",{for:"date"},"Tanggal",date),h("label",{for:"note"},"Catatan",note)),btn));
+      quick,amt,h("div",{class:"small muted",text:"Kategori"}),cat,h("div",{class:"grid2"},h("label",{for:"date"},"Tanggal",date),h("label",{for:"note"},"Catatan",note)),btn));
   if(!f.amt)setTimeout(()=>amt.focus(),50);
 }
 
