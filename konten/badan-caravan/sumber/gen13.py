@@ -16,15 +16,12 @@ def jar(x,base,w,h,lid,label,fill):
 def kettle(x,base,s):
     return f'<g transform="translate({x} {base}) scale({s})"><path d="M-70 0 Q-90 -100 0 -110 Q90 -100 70 0 Z" fill="#C9CDCC" stroke="{K}" stroke-width="6"/><path d="M60 -70 Q120 -90 130 -140" fill="none" stroke="#C9CDCC" stroke-width="16" stroke-linecap="round"/><path d="M-60 -80 Q-120 -60 -70 -20" fill="none" stroke="{K}" stroke-width="10"/><rect x="-25" y="-130" width="50" height="22" rx="8" fill="{G}"/></g>'
 def sisiB():
-    W,H=2000,900; s=waves2(W,740)
-    # rak
-    y=600; s+=f'<rect x="110" y="{y}" width="900" height="28" rx="6" fill="{WOOD}"/><rect x="150" y="{y+28}" width="24" height="50" fill="{WOODD}"/><rect x="946" y="{y+28}" width="24" height="50" fill="{WOODD}"/>'
-    s+=jar(150,y,240,300,G,'TEH HITAM','#5A3A22')+jar(440,y,240,300,M,'MATCHA','#7FA650')+jar(730,y,240,300,Au,'HOUJICHA','#9A5A32')
-    s+=T(1510,320,'Dua koi di kolam tenang,',70,fam='Playfair Display',fill=K,style='font-style="italic"')
-    s+=T(1510,430,'segelas teh, hati senang.',70,fam='Playfair Display',fill=Au,style='font-style="italic"')
-    s+=f'<line x1="1330" y1="495" x2="1690" y2="495" stroke="{Au}" stroke-width="5"/>'+T(1510,570,'— TJAP DUA KOI',48,w=500,fill=K,ls=8)
-    s+=lily(1300,815,80,True)+lily(1050,868,55)+lily(1860,860,60)
-    s+=koi(1600,790,.55,rot=6,flip=True,pat=ORG)+koi(200,800,.5,rot=-6)
+    W,H=2000,900; s=waves2(W,745)
+    cx,cy,R=1000,400,230
+    for r,op in ((R+60,.35),(R+140,.2)): s+=f'<ellipse cx="{cx}" cy="{cy}" rx="{r*1.25}" ry="{r*.95}" fill="none" stroke="{SAGE}" stroke-opacity="{op}" stroke-width="10"/>'
+    s+=koi(cx+40,cy-150,.95,rot=200)+koi(cx-40,cy+150,.95,rot=20,pat=ORG)
+    for x,y,r in ((cx-320,cy-170,14),(cx-350,cy-215,10),(cx+330,cy+150,14),(cx+360,cy+195,10)): s+=f'<circle cx="{x}" cy="{y}" r="{r}" fill="none" stroke="{K}" stroke-width="6"/>'
+    s+=lily(330,800,85,True)+lily(1680,810,80,True)+lily(1450,868,55)+lily(560,868,55)
     return W,H,G,s
 def papan(txt,fs,step):
     W,H=300,1000
