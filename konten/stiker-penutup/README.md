@@ -2,7 +2,7 @@
 
 Dibuat 26 Nov 2026. Sisi dalam penutup hanya terlihat saat caravan buka, jadi isinya dipakai sebagai papan nama dan penunjuk antrean.
 
-Versi 6 (26 Nov), set final 3 stiker. Ringkasan skala: `SET-FINAL-skala.png`.
+Versi 7 (26 Nov, + ornamen untaian lampion & awan di stiker 2 dan 3), set final 3 stiker. Ringkasan skala: `SET-FINAL-skala.png`.
 
 | File | Ukuran jadi | Isi |
 |---|---|---|
@@ -12,7 +12,7 @@ Versi 6 (26 Nov), set final 3 stiker. Ringkasan skala: `SET-FINAL-skala.png`.
 
 Tambahan (bukan stiker penutup): `meja-member-kolam-koi.pdf` (desain 140×90, untuk dicetak kecil di meja) berisi ajakan GABUNG MEMBER KOLAM KOI + QR ke https://tokotehtjapduakoi.github.io/kolam/.
 
-Akun Instagram toko: @tokoteh.tjapduakoi. Sumber desain: `sumber/gen6.py` (komik) dan `sumber/gen5.py` (rantai gen4 → gen3 → gen2 → gen.py).
+Akun Instagram toko: @tokoteh.tjapduakoi. Sumber desain: `sumber/gen7.py` (stiker 2 & 3 dengan ornamen) dan `sumber/gen5.py` (rantai gen4 → gen3 → gen2 → gen.py).
 
 ## Catatan untuk percetakan
 - PDF vektor, ukuran asli 1:1, sudah termasuk **bleed 2 cm** tiap sisi (file 324 × 94 cm dan 144 × 94 cm). Potong di ukuran jadi.

@@ -15,11 +15,11 @@ def uapLogo():
     s+=f'<path d="M{cx-150} {b+470} c-60 -60 -40 -170 10 -230 M{cx+150} {b+470} c60 -60 40 -170 -10 -230" fill="none" stroke="{K}" stroke-opacity=".45" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 16"/>'
     d=360; s+=L(cx-d/2,b+105,d)
     tx=b+955
-    s+=T(tx,b+250,'IKUTI UAP',120,ls=4)+T(tx,b+380,'TEHNYA!',120,ls=4,fill=Au)
-    pw,ph=640,96; px=tx-pw/2; py=b+425
+    s+=T(tx,b+280,'IKUTI UAP',120,ls=4)+T(tx,b+405,'TEHNYA!',120,ls=4,fill=Au)
+    pw,ph=640,96; px=tx-pw/2; py=b+445
     s+=f'<rect x="{px}" y="{py}" width="{pw}" height="{ph}" rx="{ph/2}" fill="{K}"/>'+igicon(px+30,py+18,60,G)
     s+=T(px+pw/2+40,py+68,'@'+IG,56,fill=G,ls=1)
-    qs=190; qx=px+20; qy=b+575
+    qs=190; qx=px+20; qy=b+590
     s+=qr2(qx,qy,qs,'https://www.instagram.com/'+IG+'/')
     s+=T(qx+qs+30,qy+80,'Scan &amp; follow,',56,fam='Playfair Display',anc='start',style='font-style="italic"')
     s+=T(qx+qs+30,qy+150,'seduhan baru tiap hari.',39,w=500,anc='start',fill=Au,ls=2)
