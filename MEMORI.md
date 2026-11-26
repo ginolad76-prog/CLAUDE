@@ -95,6 +95,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 - `notes/ai-ad-poster-guide.md` — iklan AI: foto asli, satu ide, tanpa tambahan; template prompt.
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
 - `konten/stiker-penutup/` — stiker sisi dalam penutup jendela caravan (320×90 utama, 140×90 komik 'Hari ini berat', 140×90 uap jadi logo + follow IG) + desain meja member Kolam Koi, PDF siap cetak (26 Nov).
+- `konten/elemen-vektor/` — FINAL untuk percetakan: elemen stiker vektor per file (PDF CMYK + SVG), katalog, dan PANDUAN-PASANG-STIKER.pdf.
 - `konten/badan-caravan/` — draf branding badan caravan (sisi 4 m ruko/kolam, strip jendela, sisi 2 m spot foto & ojol); `konten/logo-195cm/` — logo vektor Ø195 cm (26 Nov).
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
 
