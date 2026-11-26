@@ -41,6 +41,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
+- Instagram: **@tokoteh.tjapduakoi**. Member: Kolam Koi (https://tokotehtjapduakoi.github.io/kolam/).
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
 
 ### Link artifact (privat, buka dengan akun Claude kamu)
@@ -93,7 +94,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 ## 4. Catatan desain & konten (dari HP)
 - `notes/ai-ad-poster-guide.md` — iklan AI: foto asli, satu ide, tanpa tambahan; template prompt.
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
-- `konten/stiker-penutup/` — stiker sisi dalam penutup jendela caravan (320×90 ×1, 140×90 ×2), PDF siap cetak (26 Nov).
+- `konten/stiker-penutup/` — stiker sisi dalam penutup jendela caravan (320×90 utama, 140×90 logo, 140×90 uap jadi logo + follow IG) + desain meja member Kolam Koi, PDF siap cetak (26 Nov).
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
 
 ---
