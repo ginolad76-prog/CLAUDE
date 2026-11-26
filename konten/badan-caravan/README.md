@@ -36,3 +36,6 @@ Keputusan 26 Nov: sisi 4 m = **kolam koi**. Sisi 2 m A = emblem + lampion + 茶;
 | `stempel-sudut-20x20.pdf` | 20 × 20 | Stempel 茶 untuk 4 sudut bawah caravan (cetak 4). |
 
 **Garis emas keliling** (tanpa file): stiker polos emas lebar 2 cm, ditempel mengelilingi caravan di batas atas panel bawah (±90 cm dari bawah). Panjang total ±12 m (2 × 4 m + 2 × 2 m), potong di jendela/pintu. Warna emas #C9A24B, bisa pakai vinyl gold metalik.
+
+## Mockup (26 Nov)
+`mockup/SEMUA-SISI.png` dan `mockup/MOCKUP-*.png`: semua desain dipasang di tampak caravan (penutup terbuka, strip, panel bawah, garis emas, stempel sudut). Sisi belakang: logo Ø195 digeser ke kiri (tepi kiri ±17,5 cm, atas ±10 cm) supaya tidak kena roda; garis emas berhenti di tepi logo dan pintu.
