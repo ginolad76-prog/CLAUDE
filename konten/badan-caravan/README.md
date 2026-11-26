@@ -27,3 +27,12 @@ Ukuran masih PERKIRAAN. Sudah diketahui: sisi 2 m bawah jendela 90 cm, kiri-kana
 - Warna di layar (RGB) akan sedikit lebih kalem setelah dicetak CMYK, terutama teal dan pink. Minta proof warna dulu.
 
 Keputusan 26 Nov: sisi 4 m = **kolam koi**. Sisi 2 m A = emblem + lampion + 茶; sisi 2 m B = papan gantung + rak toples + puisi. Semua isi permanen. Tampak: `TAMPAK-2m-sisiA.png`, `TAMPAK-2m-sisiB.png`.
+
+## Tambahan (26 Nov, ide lain)
+| File | Ukuran | Isi |
+|---|---|---|
+| `2m-alt-jam-kopitiam-200x90.pdf` | 200 × 90 | Alternatif sisi 2 m: jam kopitiam "JAM TEH" + "Selalu waktunya teh." + kolam. |
+| `2m-alt-mahakam-malam-200x90.pdf` | 200 × 90 | Alternatif sisi 2 m: siluet jembatan Mahakam, bulan, perahu, koi + "dari tepi Mahakam". |
+| `stempel-sudut-20x20.pdf` | 20 × 20 | Stempel 茶 untuk 4 sudut bawah caravan (cetak 4). |
+
+**Garis emas keliling** (tanpa file): stiker polos emas lebar 2 cm, ditempel mengelilingi caravan di batas atas panel bawah (±90 cm dari bawah). Panjang total ±12 m (2 × 4 m + 2 × 2 m), potong di jendela/pintu. Warna emas #C9A24B, bisa pakai vinyl gold metalik.
