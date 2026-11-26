@@ -2,17 +2,17 @@
 
 Dibuat 26 Nov 2026. Sisi dalam penutup hanya terlihat saat caravan buka, jadi isinya dipakai sebagai papan nama dan penunjuk antrean.
 
-Versi 5 (26 Nov), set final 3 stiker. Ringkasan skala: `SET-FINAL-skala.png`.
+Versi 6 (26 Nov), set final 3 stiker. Ringkasan skala: `SET-FINAL-skala.png`.
 
 | File | Ukuran jadi | Isi |
 |---|---|---|
 | `1-penutup-utama-320x90.pdf` | 320 × 90 cm | Logo besar, TOKO TEH · TJAP DUA KOI, "Sepasang koi, segelas teh", lampion di kedua ujung. |
-| `2-samping-logo-140x90.pdf` | 140 × 90 cm | Logo besar + awan emas. |
+| `2-samping-komik-140x90.pdf` | 140 × 90 cm | Komik 4 panel: Hari ini berat… / Mampir dulu. / Tehnya ditarik… / Ahh… enaknya! |
 | `3-samping-uap-logo-140x90.pdf` | 140 × 90 cm | Uap segelas teh naik jadi logo + "IKUTI UAP TEHNYA!" + @tokoteh.tjapduakoi + QR ke Instagram. |
 
 Tambahan (bukan stiker penutup): `meja-member-kolam-koi.pdf` (desain 140×90, untuk dicetak kecil di meja) berisi ajakan GABUNG MEMBER KOLAM KOI + QR ke https://tokotehtjapduakoi.github.io/kolam/.
 
-Akun Instagram toko: @tokoteh.tjapduakoi. Sumber desain: `sumber/gen5.py` (rantai gen4 → gen3 → gen2 → gen.py).
+Akun Instagram toko: @tokoteh.tjapduakoi. Sumber desain: `sumber/gen6.py` (komik) dan `sumber/gen5.py` (rantai gen4 → gen3 → gen2 → gen.py).
 
 ## Catatan untuk percetakan
 - PDF vektor, ukuran asli 1:1, sudah termasuk **bleed 2 cm** tiap sisi (file 324 × 94 cm dan 144 × 94 cm). Potong di ukuran jadi.
