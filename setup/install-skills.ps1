@@ -45,6 +45,13 @@ Pasang-Plugin "pbakaus/impeccable" "impeccable@impeccable"
 Pasang-Skill "wheresryan22/anatomy"   "anatomy"
 Pasang-Skill "BehiSecc/VibeSec-Skill" "vibesec"
 
+# Remotion (bikin video pakai kode): salinan ada di repo ini, .claude\skills\
+Write-Host "`n==> Skill: remotion-best-practices" -ForegroundColor Cyan
+$Rem = Join-Path $SkillsDir "remotion-best-practices"
+if (Test-Path $Rem) { Remove-Item -Recurse -Force $Rem }
+Copy-Item -Recurse (Join-Path $PSScriptRoot "..\.claude\skills\remotion-best-practices") $Rem
+if ($?) { $Ok += "remotion-best-practices" } else { $Gagal += "remotion-best-practices" }
+
 Write-Host "`n========================================"
 Write-Host " Berhasil: $($Ok.Count)   Gagal: $($Gagal.Count)"
 foreach ($g in $Gagal) { Write-Host "   - gagal: $g" -ForegroundColor Red }
