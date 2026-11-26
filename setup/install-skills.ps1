@@ -40,6 +40,7 @@ Pasang-Plugin "thedotmack/claude-mem"                "claude-mem@thedotmack"
 Pasang-Plugin "anthropics/skills"                    "example-skills@anthropic-agent-skills"
 Pasang-Plugin "nextlevelbuilder/ui-ux-pro-max-skill" "ui-ux-pro-max@ui-ux-pro-max-skill"
 Pasang-Plugin "DietrichGebert/ponytail" "ponytail@ponytail"
+Pasang-Plugin "pbakaus/impeccable" "impeccable@impeccable"
 
 Pasang-Skill "wheresryan22/anatomy"   "anatomy"
 Pasang-Skill "BehiSecc/VibeSec-Skill" "vibesec"
