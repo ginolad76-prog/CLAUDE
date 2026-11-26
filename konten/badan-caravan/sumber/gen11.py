@@ -46,11 +46,11 @@ def kolam():
     s+=koi(1000,700,1.0,rot=-4)+koi(3000,700,1.0,rot=4,flip=True,pat=ORG)
     return W,H,M,s
 def strip4(side):
-    W,H=400,1000; s=lantern(200,10,.8)
+    W,H=400,1000; s=lantern(200,0,1.2)
     if side=='L':
         for i,ch in enumerate('TEHTARIK'):
-            y=430+i*70+(24 if i>=3 else 0); s+=T(W/2,y,ch,70,fill=K if i<3 else Au)
-    else: s+=koi(200,520,.4,rot=-90,pat=ORG)+koi(200,820,.4,rot=-90,pat=R)
+            y=455+i*68+(20 if i>=3 else 0); s+=T(W/2,y,ch,70,fill=K if i<3 else Au)
+    else: s+=koi(200,560,.6,rot=-90,pat=ORG)+koi(200,840,.6,rot=-90,pat=R)
     return W,H,M,s
 def tegel(y,W,h=70):
     g=''
@@ -64,7 +64,7 @@ def spotfoto():
     s+=lantern(110,0,.55)+lantern(1890,0,.55)+star(700,140,26)+star(1290,190,22)
     return W,H,G,s
 def strip2():
-    W,H=300,1000; s=lantern(150,10,.62)+koi(150,560,.32,rot=-90,pat=ORG)+koi(150,820,.32,rot=-90,pat=R)
+    W,H=300,1000; s=lantern(150,0,1.1)+koi(150,545,.5,rot=-90,pat=ORG)+koi(150,825,.5,rot=-90,pat=R)
     return W,H,G,s
 P={'4m-ruko-400x90':ruko,'4m-kolam-400x90':kolam,'strip-kiri-40x100':lambda:strip4('L'),'strip-kanan-40x100':lambda:strip4('R'),'2m-spot-foto-200x90':spotfoto,'strip-2m-30x100':strip2}
 for n,f in P.items():
