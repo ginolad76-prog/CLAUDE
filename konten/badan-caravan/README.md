@@ -2,7 +2,7 @@
 
 **Sistem: stiker potong (print & cut kontur).** Cat dinding tetap (marun di sisi 4 m, hijau di sisi 2 m); yang ditempel hanya elemennya. PDF berlatar TRANSPARAN; percetakan memotong mengikuti bentuk elemen (offset kontur ±3 mm). Pratinjau (`*-preview.png`, `TAMPAK-*`) memperlihatkan elemen di atas warna dinding.
 
-Ukuran masih PERKIRAAN. Sudah diketahui: sisi 2 m bawah jendela 90 cm, kiri-kanan jendela ±30 cm (jendela ±140 cm). Ukur dulu bersama Pakde sebelum cetak: roda (diameter fender, posisi, tinggi tonjolan), jendela sisi 2 m, tinggi atas jendela, posisi pintu di sisi belakang.
+Ukuran masih PERKIRAAN. Sudah diketahui: tinggi badan ±210 cm (bawah 90 + jendela 90 + atas 30); sisi 2 m: tiang 30 | jendela 140 | tiang 30. Logo belakang disarankan Ø180. Ukur dulu bersama Pakde sebelum cetak: roda (diameter fender, posisi, tinggi tonjolan), jendela sisi 2 m, tinggi atas jendela, posisi pintu di sisi belakang.
 
 | File | Ukuran | Letak | Isi |
 |---|---|---|---|
