@@ -10,9 +10,10 @@ Ukuran masih PERKIRAAN. Sudah diketahui: sisi 2 m bawah jendela 90 cm, kiri-kana
 | `4m-kolam-400x90.pdf` | 400 × 90 | Sisi 4 m, bawah jendela | Pilihan B: TOKO TEH + kolam, dua koi besar, riak air mengelilingi roda. |
 | `strip-kiri-40x100.pdf` | 40 × 100 | Kiri jendela utama | Stempel 茶 + "TEH TARIK" tersusun vertikal. |
 | `strip-kanan-40x100.pdf` | 40 × 100 | Kanan jendela utama | Stempel 茶 + dua koi berenang naik. |
-| `2m-spot-foto-200x90.pdf` | 200 × 90 | Sisi 2 m menghadap area duduk (hijau) | Cup Toko Teh raksasa + "FOTO DULU, BARU TARIK." + @tokoteh.tjapduakoi. |
+| `2m-spot-foto-200x90.pdf` | 200 × 90 | Cadangan (kurang awet) | Cup Toko Teh raksasa + "FOTO DULU, BARU TARIK." + @tokoteh.tjapduakoi. |
 | `strip-2m-30x100.pdf` | 30 × 100 | Kiri & kanan jendela sisi 2 m (cetak 4) | Lampion menyala + dua koi berenang naik. |
-| (sisi 2 m kedua) | 200 × 90 | Sisi 2 m lainnya | Belum ditentukan (desain ojol dibatalkan). |
+| `2m-emblem-200x90.pdf` | 200 × 90 | Sisi 2 m (pilihan) | Emblem TOKO TEH · TJAP DUA KOI · EST. 2026 · SAMARINDA + lampion + koi & teratai lanjutan kolam. |
+| `2m-lampion-cha-200x90.pdf` | 200 × 90 | Sisi 2 m (pilihan) | Untaian lampion + stempel 茶 besar + koi & teratai lanjutan kolam. |
 
 - `TAMPAK-4m-ruko.png` / `TAMPAK-4m-kolam.png`: gambar tampak sisi 4 m lengkap (strip + panel bawah + roda perkiraan).
 - `*-preview.png` panel 4 m memperlihatkan zona roda (magenta) — jangan dicetak. PDF sudah tanpa tanda itu, bleed 2 cm.
@@ -23,3 +24,5 @@ Ukuran masih PERKIRAAN. Sudah diketahui: sisi 2 m bawah jendela 90 cm, kiri-kana
 - Semua PDF (badan caravan, stiker penutup, logo Ø195) sudah dikonversi ke **CMYK** (Ghostscript, DeviceCMYK) dan siap untuk percetakan.
 - Palet kalem: warna brand + sage #A9C2A6 dan mustard #D9B35F (ruko), hijau teratai #5FAF5A & pink lotus #F29BB0 (kolam). Tanpa efek cahaya/gradasi transparan karena stiker dipotong.
 - Warna di layar (RGB) akan sedikit lebih kalem setelah dicetak CMYK, terutama teal dan pink. Minta proof warna dulu.
+
+Keputusan 26 Nov: sisi 4 m = **kolam koi**. Sisi 2 m = emblem EST. 2026 dan lampion + 茶 (isi permanen, tanpa harga/promo). Tampak: `TAMPAK-2m-emblem.png`, `TAMPAK-2m-lampion-cha.png`.
