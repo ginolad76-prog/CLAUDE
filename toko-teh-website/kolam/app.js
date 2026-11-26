@@ -66,7 +66,7 @@ const ELN={api:"API",listrik:"LISTRIK",air:"AIR",batu:"BATU",bulan:"BULAN",matah
 const cardHTML=(c,cls,count)=>`<div class="kc ${c.t} ${cls||""}">${art(c)}<span class="tag">${c.t}</span>${c.el?`<span class="el">${ELN[c.el]}</span>`:""}${count>1?`<span class="cnt">×${count}</span>`:""}<span class="nm">${c.nm}</span></div>`;
 
 /* ===== state: dari server + pilihan tampilan di HP ini ===== */
-let sb=null,S=null,phone="",tab="tarik",sel={},lbCat="tukar",queue=[],board=null,busy=false;
+let sb=null,S=null,phone="",legacy=false,legacyOpen=false,tab="tarik",sel={},lbCat="tukar",queue=[],board=null,busy=false;
 const LKEY=()=>"kolamkoi-v1-"+phone;
 const LOCAL=["skin","customBg","avatar","avatarPos","wait"];
 function save(){if(!S)return;const o={};LOCAL.forEach(k=>{if(S[k]!==undefined)o[k]=S[k]});try{localStorage.setItem(LKEY(),JSON.stringify(o))}catch(e){toast("Penyimpanan HP penuh. Foto kolam tidak tersimpan.")}}
@@ -85,7 +85,10 @@ async function loadRules(){try{
   if(k.data)k.data.forEach(x=>{const s=SKINS.find(z=>z.id===x.id);if(s){s.cost=x.cost;s.nm=x.name;s.how="Tukar "+x.cost+" poin"}});
 }catch(e){}}
 
+/* Klaim lama (nomor nota + total) bisa dimatikan pemilik di Admin. Gagal dibaca = dianggap mati. */
+async function loadLegacy(){legacy=false;try{const {data,error}=await sb.from("kk_settings").select("legacy_nota_claim").eq("id",1).maybeSingle();legacy=!error&&!!data&&data.legacy_nota_claim===true}catch(e){}}
 async function loadMe(){const me=await rpc("kk_me");if(!me){S=null;return false}
+  await loadLegacy();
   const L=S&&S._phone===me.phone?S:loadLocal();
   S={_phone:me.phone,name:me.nickname,show:me.show_on_board,inv:me.inv||{},ever:me.ever||[],pity:{sr:me.pity_sr,ur:me.pity_ur},bank:me.bank,trx:me.trx,spent:Number(me.spent),
      exchanged:me.exchanged,exMonth:me.ex_month,skinsBought:me.skins||[],vouchers:me.vouchers||[],
@@ -110,7 +113,6 @@ function showReveal(){if(!queue.length){render();if(toast.pending){const m=toast
   f.addEventListener("click",open);f.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
   b.addEventListener("click",()=>{ov.remove();showReveal()});f.focus()}
 
-
 /* ===== tampilan ===== */
 const ICON={tarik:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',kolam:'<path d="M3 12c3-4 6-4 9 0s6 4 9 0M3 17c3-4 6-4 9 0s6 4 9 0M7 7c2-2 4-2 6 0"/>',tukar:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',peringkat:'<path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>',akun:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'};
 const TABS=[["tarik","Tarik"],["kolam","Kolam"],["tukar","Tukar"],["peringkat","Peringkat"],["akun","Akun"]];
@@ -128,7 +130,7 @@ const ICO_ES=`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke
 function vBonus(){return S.bonus?`<section class="card" style="border-color:var(--gold)"><h2>Tarikan bonus: ${S.bonus}</h2><p class="small muted">Hadiah dari bonus posting. Langsung tarik, tidak perlu nota.</p><button class="btn gold" id="bp">Tarik kartu bonus</button></section>`:""}
 function vAjak(){const R=S.ref;if(!R.code)return "";/* database belum diperbarui */const penuh=R.month>=R.max;
   let pakai="";
-  if(R.by&&!R.done)pakai=`<section class="card" style="border-color:var(--gold)"><h2>Kamu diajak ${esc(R.by)}</h2><p class="small">Belanja minimal <b>${rp(R.min)}</b>, lalu masukkan notanya di atas. Kamu langsung dapat <b>es teh gratis</b> di Hadiahku, dan ${esc(R.by)} juga dapat satu.</p></section>`;
+  if(R.by&&!R.done)pakai=`<section class="card" style="border-color:var(--gold)"><h2>Kamu diajak ${esc(R.by)}</h2><p class="small">Belanja minimal <b>${rp(R.min)}</b>, lalu masukkan kode dari notanya di atas. Kamu langsung dapat <b>es teh gratis</b> di Hadiahku, dan ${esc(R.by)} juga dapat satu.</p></section>`;
   else if(R.canUse)pakai=`<section class="card"><h2>Punya kode dari teman?</h2><p class="small muted">Masukkan sebelum belanja pertama. Belanja minimal ${rp(R.min)}, kamu dan temanmu sama-sama dapat es teh gratis.</p>
    <label for="rc">Kode teman<input id="rc" class="txt" autocomplete="off" autocapitalize="characters" placeholder="mis. RINA-7KQ"></label><button type="button" class="btn" id="rcb">Pakai kode</button></section>`;
   return pakai+`<section class="card"><div class="row"><h2>Ajak Teman Tarik</h2>${ICO_ES}</div>
@@ -140,29 +142,35 @@ function vAjak(){const R=S.ref;if(!R.code)return "";/* database belum diperbarui
   ${R.pending?`<div class="muted">${R.pending} teman sudah daftar, menunggu belanja pertama.</div>`:""}${R.total?`<div class="muted">Total teman berhasil: ${R.total}</div>`:""}</div></section>
   <section class="card"><h2>Bonus posting</h2><p class="small">Belanja minimal <b>${rp(S.postMin)}</b> dan masukkan notanya di sini. Lalu posting foto atau story minuman kami dan tag <b>@tokoteh.tjapduakoi</b>. Kirim buktinya lewat WhatsApp, paling lambat 3 hari setelah belanja. Setelah kami cek, voucher <b>es teh gratis</b> atau <b>1 tarikan kartu</b> masuk ke akunmu. 1 nota untuk 1 bonus.</p>
   <a class="btn" style="display:grid;place-items:center;text-decoration:none" target="_blank" rel="noopener" href="${waLink(`Halo Toko Teh Tjap Dua Koi! Aku sudah posting & tag @tokoteh.tjapduakoi.\nNomor Kolam Koi: 0${S._phone.slice(2)}\nNota belanja: \nLink postingan: \nAku pilih: es teh gratis / 1 tarikan kartu`)}">Kirim bukti lewat WhatsApp</a>${S.postToday?`<p class="small" style="color:var(--koi)">Bonus posting hari ini sudah kamu terima.</p>`:""}</section>`}
+function waitRows(){return S.wait.map((w,i)=>w.nota&&!legacy?"":`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--line)"><div><b style="font-family:var(--f-mono)">${esc(w.kode||w.nota)}</b>${w.total?`<div class="small muted">${rp(w.total)}</div>`:""}</div><div class="row" style="gap:6px"><button type="button" class="btn sm" data-w="${i}">Cek lagi</button><button type="button" class="btn sm ghost" data-x="${i}" aria-label="Hapus ${esc(w.kode||w.nota)}">Hapus</button></div></div>`).join("")}
 function vTarik(){const tiers=RULE.pulls.slice().reverse();
-  return header()+vBonus()+`<section class="card"><h2>Masukkan nota</h2><p class="small muted">Ketik nomor nota dan total belanja persis seperti di struk. Jumlah tarikan otomatis sesuai total belanja.</p>
-  <label for="nota">Nomor nota<input id="nota" class="txt" autocomplete="off" autocapitalize="characters" placeholder="mis. POS-1123-0303"></label>
+  return header()+vBonus()+`<section class="card"><h2>Masukkan kode</h2><p class="small muted">Ketik kode 10 huruf dan angka dari struk atau pesan WhatsApp kasir. Jumlah tarikan otomatis sesuai total belanja.</p>
+  <label for="kode">Kode<input id="kode" class="txt" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="11" placeholder="XXXXX-XXXXX"></label>
+  <button class="btn gold" id="go">Cek kode & tarik</button>
+  ${legacy?`<p class="small muted" style="margin:0"><a href="#" id="lama">Punya nota lama? Masukkan nomor &amp; total</a></p>
+  <div id="lamaf" style="display:${legacyOpen?"grid":"none"};gap:12px"><label for="nota">Nomor nota<input id="nota" class="txt" autocomplete="off" autocapitalize="characters" placeholder="mis. POS-1123-0303"></label>
   <label for="tot">Total belanja di struk (Rp)<input id="tot" inputmode="numeric" autocomplete="off" placeholder="0"></label>
-  <button class="btn gold" id="go">Tarik kartu!</button>
+  <button class="btn" id="go-lama">Cek nota & tarik</button></div>`:""}
   <table class="tiers">${tiers.map(([m,n])=>`<tr><td>Belanja mulai ${rp(m)}</td><td>${n} tarikan</td></tr>`).join("")}</table></section>
-  ${S.wait.length?`<section class="card"><h2>Nota belum tercatat</h2><p class="small muted">Toko belum mendaftarkan nota ini, atau totalnya tidak cocok. Biasanya nota tercatat beberapa menit setelah bayar. Tarikanmu tidak hilang.</p>${S.wait.map((w,i)=>`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--line)"><div><b style="font-family:var(--f-mono)">${esc(w.nota)}</b><div class="small muted">${rp(w.total)}</div></div><div class="row" style="gap:6px"><button type="button" class="btn sm" data-w="${i}">Cek lagi</button><button type="button" class="btn sm ghost" data-x="${i}" aria-label="Hapus ${esc(w.nota)}">Hapus</button></div></div>`).join("")}</section>`:""}
+  ${S.wait.some(w=>w.kode||legacy)?`<section class="card"><h2>Belum bisa dipakai</h2><p class="small muted">Toko belum mendaftarkan nota ini, atau notanya sedang diperiksa. Biasanya tercatat beberapa menit setelah bayar. Tarikanmu tidak hilang.</p>${waitRows()}</section>`:""}
   <section class="card"><h2>Peluang</h2><div class="odds"><div class="R"><b>80%</b><span>Rare</span></div><div class="SR"><b>17%</b><span>Super Rare</span></div><div class="UR"><b>3%</b><span>Ultra Rare</span></div></div>
   <div class="pity"><div>Super Rare dijamin dalam <b>${Math.max(1,RULE.pitySR-S.pity.sr)}</b> tarikan lagi</div><div class="bar"><i style="width:${S.pity.sr/RULE.pitySR*100}%"></i></div>
   <div>Ultra Rare dijamin dalam <b>${Math.max(1,RULE.pityUR-S.pity.ur)}</b> tarikan lagi</div><div class="bar u"><i style="width:${S.pity.ur/RULE.pityUR*100}%"></i></div></div>
   <p class="small muted">Setiap tarikan pasti dapat kartu dan poin. Tidak ada zonk.</p></section>`.replace(/(<section class="card"><h2>Peluang)/,vAjak()+"$1")}
 const num=v=>Number(String(v).replace(/\D/g,""))||0;
+/* Hadiah Teman Tarik dari klaim pertama (nota lama atau kode): pesan di depan toast. */
+const ajakMsg=r=>r&&r.ajak?`Es teh gratis dari ajakan ${r.ajak.oleh} masuk ke Hadiahku (kode ${r.ajak.code}). `:"";
+function claimOk(r,pesan){const before=SKINS.filter(unlocked).length;return loadMe().then(()=>{queue=r.cards.map(id=>byId[id]).filter(Boolean);if(r.secret)queue.push(SECRET);save();
+  const after=SKINS.filter(unlocked);toast(ajakMsg(r)+(after.length>before?`Skin kolam baru terbuka: ${after[after.length-1].nm}!`:pesan));showReveal()})}
 async function claim(nota,total){nota=String(nota||"").trim().toUpperCase();total=num(total);
   if(!nota)return toast("Isi nomor nota dulu.");if(!total)return toast("Isi total belanja dari struk.");if(busy)return;busy=true;
-  const go=$("go");if(go){go.disabled=true;go.textContent="Mengecek nota…"}
-  try{const before=SKINS.filter(unlocked).length;const r=await rpc("kk_claim",{p_nota:nota,p_total:total});
+  const go=$("go-lama")||$("go");if(go){go.disabled=true;go.textContent="Mengecek nota..."}
+  try{const r=await rpc("kk_claim",{p_nota:nota,p_total:total});
     const drop=()=>{S.wait=S.wait.filter(w=>w.nota!==nota)};
-    const ajak=r.ajak?`Es teh gratis dari ajakan ${r.ajak.oleh} masuk ke Hadiahku (kode ${r.ajak.code}). `:"";
-    if(r.status==="ok"){drop();await loadMe();queue=r.cards.map(id=>byId[id]).filter(Boolean);if(r.secret)queue.push(SECRET);save();showReveal();
-      const after=SKINS.filter(unlocked);toast(ajak+(after.length>before?`Skin kolam baru terbuka: ${after[after.length-1].nm}!`:`Nota ${nota}: belanja ${rp(r.total)} → ${r.pulls} tarikan`))}
+    if(r.status==="ok"){drop();await claimOk(r,`Nota ${nota}: belanja ${rp(r.total)} → ${r.pulls} tarikan`)}
     else if(r.status==="not_found"){if(!S.wait.some(w=>w.nota===nota))S.wait.push({nota,total});save();render();toast(r.left!=null&&r.left<=3?`Nota belum tercatat atau total tidak cocok. Sisa ${r.left} percobaan hari ini.`:"Nota belum tercatat atau total tidak cocok. Coba lagi beberapa menit lagi.")}
     else if(r.status==="used"){drop();save();render();toast(r.mine?`Nota ${nota} sudah kamu pakai.`:`Nota ${nota} sudah dipakai akun lain. Tanyakan ke kasir.`)}
-    else if(r.status==="too_small"){drop();await loadMe();save();render();toast(ajak+`Belanja ${rp(r.total)} belum cukup untuk tarikan (minimal ${rp(RULE.pulls[RULE.pulls.length-1][0])}).`)}
+    else if(r.status==="too_small"){drop();await loadMe();save();render();toast(ajakMsg(r)+`Belanja ${rp(r.total)} belum cukup untuk tarikan (minimal ${rp(RULE.pulls[RULE.pulls.length-1][0])}).`)}
     else if(r.status==="blocked"){render();toast("Terlalu banyak percobaan salah hari ini. Coba lagi besok, atau tanyakan ke kasir.")}
   }catch(e){toast(errMsg(e));render()}finally{busy=false}}
 async function pullBonus(){if(busy)return;busy=true;const b=$("bp");if(b){b.disabled=true;b.textContent="Menarik..."}
@@ -174,9 +182,47 @@ function bindAjak(){const bp=$("bp");if(bp)bp.onclick=pullBonus;
     try{await navigator.clipboard.writeText(t);toast("Ajakan tersalin. Tempel di chat temanmu.")}catch(e){toast("Kodemu: "+S.ref.code)}};
   const rcb=$("rcb");if(rcb)rcb.onclick=async()=>{const c=$("rc").value.trim().toUpperCase();if(!c)return toast("Isi kode dari temanmu.");if(busy)return;busy=true;rcb.disabled=true;
     try{const n=await rpc("kk_use_ref",{p_code:c});await loadMe();toast(`Kode ${n} terpasang. Belanja minimal ${rp(S.ref.min)} untuk es teh gratismu.`);render()}catch(e){toast(errMsg(e));rcb.disabled=false}finally{busy=false}}}
-function bindTarik(){bindAjak();const t=$("tot");t.oninput=()=>{const v=num(t.value);t.value=v?v.toLocaleString("id-ID"):""};
-  $("go").onclick=()=>claim($("nota").value,$("tot").value);
-  document.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const w=S.wait[+b.dataset.w];if(w)claim(w.nota,w.total)});
+
+/* Kode dari kasir: XXXXX-XXXXX (10 huruf/angka). Sama seperti claim(), hasil "ok" memakai animasi tarikan yang sama. */
+const fmtKode=v=>{const k=String(v||"").toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,10);return k.length>5?k.slice(0,5)+"-"+k.slice(5):k};
+const MSG_KODE={expired:"Kode sudah kedaluwarsa.",wrong_phone:"Kode ini untuk nomor HP lain. Masuk dengan nomor yang dipakai saat belanja.",
+  pending:"Nota sedang diperiksa toko. Coba lagi nanti.",void:"Nota ini dibatalkan.",staff_own:"Kode dari nota yang kamu buat sendiri tidak bisa diklaim.",
+  blocked:"Terlalu banyak percobaan salah hari ini. Coba lagi besok, atau tanyakan ke kasir."};
+async function claimCode(kode){kode=fmtKode(kode);
+  if(kode.length!==11){toast("Kode terdiri dari 10 huruf dan angka, contoh ABCDE-23456.");return true}if(busy)return true;busy=true;
+  const go=$("go");if(go){go.disabled=true;go.textContent="Mengecek kode..."}
+  try{const r=await rpc("kk_claim_code",{p_code:kode});
+    const drop=()=>{S.wait=S.wait.filter(w=>w.kode!==kode)};
+    const tunggu=()=>{if(!S.wait.some(w=>w.kode===kode))S.wait.push({kode});save()};
+    if(r.status==="ok"){drop();await claimOk(r,`Belanja ${rp(r.total)} → ${r.pulls} tarikan`)}
+    else if(r.status==="not_found"){tunggu();render();toast(r.left!=null&&r.left<=3?`Kode belum dikenali. Periksa lagi hurufnya. Sisa ${r.left} percobaan hari ini.`:"Kode belum dikenali. Periksa lagi hurufnya, atau coba lagi beberapa menit lagi.")}
+    else if(r.status==="pending"){tunggu();render();toast(MSG_KODE.pending)}
+    else if(r.status==="used"){drop();save();render();toast(r.mine?"Kode ini sudah kamu pakai.":"Kode ini sudah dipakai akun lain. Tanyakan ke kasir.")}
+    else if(r.status==="too_small"){drop();await loadMe();save();render();toast(ajakMsg(r)+`Belanja ${rp(r.total)} belum cukup untuk tarikan (minimal ${rp(RULE.pulls[RULE.pulls.length-1][0])}).`)}
+    else if(MSG_KODE[r.status]){if(r.status!=="blocked")drop();save();render();toast(MSG_KODE[r.status])}
+    else{render();toast("Kode belum bisa dipakai. Coba lagi nanti.")}
+    return true
+  }catch(e){toast(errMsg(e));render();return false}finally{busy=false}}
+
+/* ?kode= dari tautan WhatsApp: disimpan di sessionStorage dan dibuang dari URL; diklaim begitu member sudah masuk. */
+const KKEY="kolamkoi-kode";
+function simpanKodeUrl(){try{const u=new URL(location.href),k=u.searchParams.get("kode");if(k===null)return;
+  const f=fmtKode(k);if(f.length===11)sessionStorage.setItem(KKEY,f);else setTimeout(()=>toast("Kode di tautan tidak lengkap. Ketik kodenya sendiri di bawah."),300);
+  u.searchParams.delete("kode");history.replaceState(null,"",u.pathname+(u.search||"")+u.hash)}catch(e){}}
+const kodeTertunda=()=>{try{return sessionStorage.getItem(KKEY)||""}catch(e){return ""}};
+function lupakanKode(){try{sessionStorage.removeItem(KKEY)}catch(e){}}
+/* Kode tertunda dihapus hanya setelah server menjawab (status apa pun). Gagal jaringan atau sibuk: masuk daftar tunggu supaya bisa "Cek lagi". */
+async function klaimTertunda(){const k=kodeTertunda();if(!k||!S)return;tab="tarik";
+  if(busy){tunggu(k);return}
+  lupakanKode();render();if(!(await claimCode(k)))tunggu(k)}
+function tunggu(k){if(!S.wait.some(w=>w.kode===k))S.wait.push({kode:k});save();render()}
+function bindTarik(){bindAjak();const k=$("kode");k.oninput=()=>{k.value=fmtKode(k.value)};
+  k.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();claimCode(k.value)}};
+  $("go").onclick=()=>claimCode(k.value);
+  const lama=$("lama");if(lama){const t=$("tot");t.oninput=()=>{const v=num(t.value);t.value=v?v.toLocaleString("id-ID"):""};
+    lama.onclick=e=>{e.preventDefault();legacyOpen=!legacyOpen;$("lamaf").style.display=legacyOpen?"grid":"none"};
+    $("go-lama").onclick=()=>claim($("nota").value,$("tot").value)}
+  document.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const w=S.wait[+b.dataset.w];if(!w)return;if(w.kode)claimCode(w.kode);else claim(w.nota,w.total)});
   document.querySelectorAll("[data-x]").forEach(b=>b.onclick=()=>{S.wait.splice(+b.dataset.x,1);save();render()})}
 
 function vKolam(){const all=[...CARDS,...(S.ever.includes("tjap")?[SECRET]:[])];
@@ -262,6 +308,7 @@ const mail=p=>p+"@member.tjapduakoi.id";
 function vAuth(){const d=authMode==="daftar";
   return `<section class="card hero"><span class="tjap">TJAP DUA KOI</span><h1>Kolam Koi</h1><svg viewBox="0 0 300 200" width="220" aria-hidden="true"><circle cx="150" cy="100" r="90" fill="none" stroke="var(--gold)" stroke-width="5"/>${koi(150,78,120,0,{b:"#e9e1cc",s:[["#d3352c",.1,-.05,.28]]},"h1")}${koi(150,128,120,180,{b:"#d9602a",s:[]},"h2")}</svg>
   <ol class="steps"><li>Belanja di Toko Teh Tjap Dua Koi</li><li>Tarik kartu koi dari notamu</li><li>Kumpulkan poin, tukar minuman gratis</li></ol>
+  ${kodeTertunda()?`<p class="small" id="info-kode"><b>Masuk atau daftar dulu.</b> Kodemu sudah tersimpan dan langsung dipakai setelah itu.</p>`:""}
   ${URL_REF?`<p class="small" style="background:var(--gold);color:#1b1408;padding:10px 12px;border-radius:12px;border:2px solid var(--ink)">Kamu diajak teman! Daftar dengan kode <b>${esc(URL_REF)}</b>, lalu belanja minimal Rp20.000: dapat <b>es teh gratis</b>.</p>`:""}</section>
   <section class="card"><div class="seg" role="group" aria-label="Pilih"><button type="button" data-m="masuk" aria-pressed="${!d}">Masuk</button><button type="button" data-m="daftar" aria-pressed="${d}">Daftar baru</button></div>
   <form id="af" style="display:grid;gap:12px" novalidate>
@@ -287,7 +334,7 @@ function bindAuth(){document.querySelectorAll("[data-m]").forEach(b=>b.onclick=(
       else res=await sb.auth.signInWithPassword({email:mail(p),password:pin});
       if(res.error){if(/invalid login|credentials/i.test(res.error.message))throw new Error("Nomor HP atau PIN salah.");if(/not confirmed/i.test(res.error.message))throw new Error("Akun belum aktif. Beri tahu toko: konfirmasi email di Supabase harus dimatikan.");throw res.error}
       phone=p;const ok=await loadMe();if(!ok){await sb.auth.signOut();throw new Error("Akun ini bukan akun member.")}
-      tab="tarik";if(d)toast("Selamat datang di Kolam Koi, "+nk+"!"+(S.ref.by?` Kamu diajak ${S.ref.by}.`:""));if(URL_REF)history.replaceState(null,"",location.pathname);render()}
+      tab="tarik";if(d)toast("Selamat datang di Kolam Koi, "+nk+"!"+(S.ref.by?` Kamu diajak ${S.ref.by}.`:""));if(URL_REF)history.replaceState(null,"",location.pathname);render();setTimeout(klaimTertunda,0)}
     catch(err){toast(errMsg(err))}finally{busy=false;if(ab.isConnected){ab.disabled=false;ab.textContent=d?"Daftar & mulai":"Masuk"}}}}
 
 /* ===== foto dari galeri ===== */
@@ -363,13 +410,14 @@ function render(){nav();if(!sb){$("app").innerHTML=vClosed();return}
   ({tarik:bindTarik,tukar:bindTukar,peringkat:bindPeringkat,akun:bindAkun,kolam:startPond}[tab]||(()=>{}))()}
 
 async function boot(){
+  simpanKodeUrl();
   if(!CFG.supabaseUrl||!CFG.supabaseKey||!window.supabase){render();return}
   sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseKey,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"kolamkoi-auth"}});
   $("app").innerHTML=`<p class="muted" style="text-align:center;padding:40px 0">Membuka kolam...</p>`;
   await loadRules();
   try{const {data}=await sb.auth.getSession();const em=data.session&&data.session.user.email||"";
     if(em.endsWith("@member.tjapduakoi.id")){phone=em.split("@")[0];await loadMe()}}catch(e){toast(errMsg(e))}
-  render();
+  render();await klaimTertunda();
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&S&&!busy&&!document.querySelector(".reveal"))loadMe().then(()=>{if(tab!=="kolam")render()}).catch(()=>{})})}
 boot();
 })();

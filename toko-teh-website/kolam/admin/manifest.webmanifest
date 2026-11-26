@@ -1,0 +1,32 @@
+{
+ "name": "Admin Kolam Koi",
+ "short_name": "Admin Koi",
+ "description": "Voucher, bonus posting, dan laporan Kolam Koi.",
+ "lang": "id",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#7A1F2B",
+ "theme_color": "#7A1F2B",
+ "icons": [
+  {
+   "src": "../../assets/ikon/admin-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "../../assets/ikon/admin-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "../../assets/ikon/admin-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

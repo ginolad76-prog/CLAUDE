@@ -1,0 +1,32 @@
+{
+ "name": "Kolam Koi · Toko Teh Tjap Dua Koi",
+ "short_name": "Kolam Koi",
+ "description": "Tarik kartu koi dari notamu, ajak teman, tukar es teh gratis.",
+ "lang": "id",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#0E4D32",
+ "theme_color": "#0E4D32",
+ "icons": [
+  {
+   "src": "../assets/ikon/kolam-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "../assets/ikon/kolam-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "../assets/ikon/kolam-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
