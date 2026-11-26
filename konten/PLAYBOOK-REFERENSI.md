@@ -29,3 +29,9 @@ Kedua akun pizza & burger itu dari Samarinda dan pernah kolaborasi — pesaing l
 - Ikut kalender kota (festival kuliner, lari pagi, pilates, DJ lokal).
 
 Jangan tiru aset mereka (maskot, slogan, ilustrasi). Pelajari polanya saja.
+
+## Tambahan: @lokastreetside (kopi kaki lima, Berau) — 26 Nov 2026
+- **Meme berita lokal**: kutipan besar ("UMP Berau naik Rp229 ribu"), gambar garis karakter mikir, jawabannya dihitung dalam cup ("bisa dapet 9 cup Loka Blanc"), kredit iseng kecil ("inspired by …").
+- **Label tulisan tangan** menunjuk tiap minuman di foto produk; warna kalem satu nada; wordmark kecil di atas.
+- Promo berulang sederhana ("Every Friday · Americano 5k, 10 slot") dan post empati untuk kejadian lokal (Pray for Berau/NTT), hari besar.
+- Dicoba: post "Samarinda hujan terus tiap jam 4 sore" → `konten/hujan-sore.html`.
