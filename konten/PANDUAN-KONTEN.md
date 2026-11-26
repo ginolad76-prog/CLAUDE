@@ -5,7 +5,7 @@ Terakhir diperbarui: 23 November 2026.
 
 ## 1. Identitas kita (jangan diganti)
 
-- **Nama:** TOKO TEH · Tjap Dua Koi. Slogan: "Sepasang koi, secangkir teh". Neon: "Teh kental, teman kental."
+- **Nama:** TOKO TEH · Tjap Dua Koi. Slogan: "Sepasang koi, segelas teh". Neon: "Teh kental, teman kental."
 - **Gaya:** kopitiam / toko teh lawas, modern. Bukan kafe mahal, bukan gerobak tanpa nama.
 - **Warna:** hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - **Huruf:** judul tebal condensed (Oswald / Bebas Neue), subjudul serif klasik (Cinzel) untuk "TJAP DUA KOI", isi Inter.

@@ -2,11 +2,15 @@
 
 Dibuat 26 Nov 2026. Sisi dalam penutup hanya terlihat saat caravan buka, jadi isinya dipakai sebagai papan nama dan penunjuk antrean.
 
-| File | Ukuran jadi | Jumlah | Isi |
-|---|---|---|---|
-| `1-penutup-utama-320x90.pdf` | 320 × 90 cm | 1 | Logo, TOKO TEH · TJAP DUA KOI, slogan. Kiri "3 AMBIL PESANAN", kanan "1 PESAN & BAYAR" (sesuai alur bar). |
-| `2-penutup-samping-A-140x90.pdf` | 140 × 90 cm | 1 | Maskot + "Teh kental, teman kental." + "Mampir dulu, yuk!" |
-| `3-penutup-samping-B-140x90.pdf` | 140 × 90 cm | 1 | Logo + "PESANAN ONLINE · OJOL AMBIL DI SINI" (jendela B, rak ojol). |
+Versi 2 (26 Nov): penunjuk pesan/ambil dan "pesanan online" dihapus atas permintaan pemilik.
+
+| File | Ukuran jadi | Isi |
+|---|---|---|
+| `1-penutup-utama-320x90.pdf` | 320 × 90 cm | Logo besar, TOKO TEH · TJAP DUA KOI, "Sepasang koi, segelas teh", lampion di kedua ujung. |
+| `2A-komik-140x90.pdf` + `3B-komik-140x90.pdf` | 140 × 90 cm (2) | **Pilihan 1:** komik 6 panel kisah dua koi: sendirian, mencium wangi teh, melompat / koi kedua juga melompat, bertemu di segelas teh, logo + slogan. |
+| `2A-alternatif-140x90.pdf` + `3B-alternatif-140x90.pdf` | 140 × 90 cm (2) | **Pilihan 2:** A uap teh jadi koi + "Sepasang koi," / "Tarik napas, tarik teh."; B koi berenang + "segelas teh." / "Hidup sudah berat, tehnya jangan." |
+
+Cetak salah satu pasangan (komik ATAU alternatif) untuk dua penutup samping. Sumber desain: `sumber/gen2.py`.
 
 ## Catatan untuk percetakan
 - PDF vektor, ukuran asli 1:1, sudah termasuk **bleed 2 cm** tiap sisi (file 324 × 94 cm dan 144 × 94 cm). Potong di ukuran jadi.
