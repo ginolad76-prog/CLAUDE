@@ -62,3 +62,4 @@ Kita bahasa Indonesia santai, sesekali kata lawas ("Tjap", "seduh", "mampir").
 ## 6. Pelajaran 26 Nov 2026
 - Pemilik menolak post "hujan sore" karena terlalu mirip format @lokastreetside. **Ambil prinsip dari referensi, jangan formatnya.** Uji: kalau logo diganti brand lain dan idenya masih jalan, berarti belum cukup khas.
 - Ide khas yang dibuat: carousel menyambung **"Geser buat narik"** (geseran pengikut = menarik teh; penggaris 0–100 cm) → `konten/geser-buat-narik.html`, https://claude.ai/artifact/BdHQW7w3UMmFFD7Ji6Q2fg
+- Ide khas kedua: **"Cari tjap-nya"** — kolam penuh koi, cari sepasang koi emas yang membentuk logo; komen kotak peta, jawaban di story besok → `konten/cari-tjapnya.html`, https://claude.ai/artifact/WgkdJHixcDjpUtwVPj3c6j
