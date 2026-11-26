@@ -11,7 +11,7 @@ def emblem(cx,cy,r):
     g+=f'<text font-family="Oswald" font-weight="700" font-size="{r*.135}" fill="{K}" letter-spacing="{r*.025}" text-anchor="middle"><textPath href="#a{i}" startOffset="50%">TOKO TEH · TJAP DUA KOI</textPath></text>'
     g+=f'<text font-family="Cinzel" font-weight="700" font-size="{r*.13}" fill="{Au}" letter-spacing="{r*.06}" text-anchor="middle" dominant-baseline="hanging"><textPath href="#b{i}" startOffset="50%">SAMARINDA</textPath></text>'
     for a in (-1,1): g+=star(cx+a*rr,cy,r*.05).replace(f'fill="{Au}"',f'fill="{K}"')
-    g+=T(cx,cy-r*.2,'EST.',r*.14,fam='Cinzel',fill=Au,ls=r*.04)+T(cx,cy+r*.2,'2026',r*.4,fill=K,ls=r*.02)
+    g+=T(cx,cy-r*.2,'EST.',r*.14,fam='Cinzel',fill=Au,ls=r*.04)+T(cx,cy+r*.2,'2025',r*.4,fill=K,ls=r*.02)
     g+=koi(cx-r*.05,cy+r*.42,r*.0011*r/ r*0+ r*.0011, rot=0) if False else ''
     g+=f'<line x1="{cx-r*.36}" y1="{cy+r*.3}" x2="{cx+r*.36}" y2="{cy+r*.3}" stroke="{Au}" stroke-width="{r*.015}"/>'
     g+=stamp(cx-r*.1,cy+r*.36,r*.2)

@@ -12,8 +12,8 @@ Ukuran masih PERKIRAAN. Sudah diketahui: sisi 2 m bawah jendela 90 cm, kiri-kana
 | `strip-kanan-40x100.pdf` | 40 × 100 | Kanan jendela utama | Stempel 茶 + dua koi berenang naik. |
 | `2m-spot-foto-200x90.pdf` | 200 × 90 | Cadangan (kurang awet) | Cup Toko Teh raksasa + "FOTO DULU, BARU TARIK." + @tokoteh.tjapduakoi. |
 | `strip-2m-30x100.pdf` | 30 × 100 | Kiri & kanan jendela sisi 2 m A (cetak 2) | Lampion menyala + dua koi berenang naik. |
-| `2m-sisiA-emblem-200x90.pdf` | 200 × 90 | Sisi 2 m A | Emblem EST. 2026 · SAMARINDA + dua untaian lampion + 2 stempel 茶 + koi & teratai lanjutan kolam. Strip: `strip-2m-30x100` (cetak 2). |
-| `2m-sisiB-rak-puisi-200x90.pdf` | 200 × 90 | Sisi 2 m B | Rak toples teh (teh hitam, matcha, houjicha, gula aren, susu) + puisi "Dua koi di kolam tenang, segelas teh, hati senang." + kolam. |
+| `2m-sisiA-emblem-200x90.pdf` | 200 × 90 | Sisi 2 m A | Emblem EST. 2025 · SAMARINDA + dua untaian lampion + 2 stempel 茶 + koi & teratai lanjutan kolam. Strip: `strip-2m-30x100` (cetak 2). |
+| `2m-sisiB-rak-puisi-200x90.pdf` | 200 × 90 | Sisi 2 m B | Rak toples teh satu tingkat (teh hitam, matcha, houjicha) + puisi "Dua koi di kolam tenang, segelas teh, hati senang." + kolam. |
 | `strip-2m-papan-kiri-30x100.pdf` / `-kanan-` | 30 × 100 | Kiri/kanan jendela sisi B | Papan nama gantung vertikal: TOKO TEH / DUA KOI. |
 
 - `TAMPAK-4m-ruko.png` / `TAMPAK-4m-kolam.png`: gambar tampak sisi 4 m lengkap (strip + panel bawah + roda perkiraan).
@@ -26,7 +26,7 @@ Ukuran masih PERKIRAAN. Sudah diketahui: sisi 2 m bawah jendela 90 cm, kiri-kana
 - Palet kalem: warna brand + sage #A9C2A6 dan mustard #D9B35F (ruko), hijau teratai #5FAF5A & pink lotus #F29BB0 (kolam). Tanpa efek cahaya/gradasi transparan karena stiker dipotong.
 - Warna di layar (RGB) akan sedikit lebih kalem setelah dicetak CMYK, terutama teal dan pink. Minta proof warna dulu.
 
-Keputusan 26 Nov: sisi 4 m = **kolam koi**. Sisi 2 m A = emblem + lampion + 茶; sisi 2 m B = papan gantung + rak toples + puisi. Semua isi permanen. Tampak: `TAMPAK-2m-sisiA.png`, `TAMPAK-2m-sisiB.png`.
+Keputusan 26 Nov: sisi 4 m = **kolam koi**. Sisi 2 m A = emblem EST. 2025 + lampion (tanpa stempel ganda); sisi 2 m B = papan gantung + rak toples + puisi. Semua isi permanen. Tampak: `TAMPAK-2m-sisiA.png`, `TAMPAK-2m-sisiB.png`.
 
 ## Tambahan (26 Nov, ide lain)
 | File | Ukuran | Isi |

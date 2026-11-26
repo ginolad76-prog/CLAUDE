@@ -41,7 +41,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
-- Instagram: **@tokoteh.tjapduakoi**. Member: Kolam Koi (https://tokotehtjapduakoi.github.io/kolam/).
+- Toko Teh berdiri **2025** (pakai "EST. 2025"). Instagram: **@tokoteh.tjapduakoi**. Member: Kolam Koi (https://tokotehtjapduakoi.github.io/kolam/).
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
 
 ### Link artifact (privat, buka dengan akun Claude kamu)
