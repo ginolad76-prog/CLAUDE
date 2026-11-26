@@ -4,6 +4,8 @@ Kode: repo tokotehtjapduakoi/tokotehtjapduakoi.github.io, cabang `claude/pos-tok
 Semua 14 langkah rencana + review akhir + 2 gabungan dengan main (d4f2562, Teman Tarik/voucher) selesai. Uji: pytest 161, e2e 55 lulus.
 Ledger lengkap (keputusan & temuan kecil yang ditunda): `rancangan/2026-11-25-pos-kasir-ledger.md`.
 
+## Status 26 Nov: website tayang (main 80192c7), SQL sudah dijalankan pemilik, uji asap asli hanya bisa sebagai service_role (proxy menimpa apikey). Menunggu uji manual pemilik di HP.
+
 ## Sisa langkah
 1. (Opsional, dihentikan pemilik) review keamanan hasil gabungan cabang vs main.
 2. Cek main belum berubah lagi (sesi lain sering mengubah Kolam Koi); kalau berubah, gabung lagi.

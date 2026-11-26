@@ -152,3 +152,6 @@ Final: minor (deferred): kk_set_* toggles toast success when settings row missin
 Final fix: 4479d9e asap uppercase fix (verified by controller grep). main moved to 2bdc44e (Teman Tarik referral, new Kolam UI from another session) → merge dispatched (a0a18fa29151cfdb4)
 Merge: 2b4169f..a861068 (pytest 157, e2e 55)
 Merge2: bc559d6..80192c7 (pytest 161, e2e 55)
+26 Nov 02:2x UTC: main fast-forwarded to 80192c7 (Pages live). Owner ran kolam + kasir SQL ("Run and enable RLS"): verified tables present, kk_settings transition on.
+asap_asli live: 13/19; all failures traced to proxy injecting secret apikey on EVERY request (even with publishable apikey) → all calls run as service_role (kk_board denied too). User-role checks impossible from this environment; data cleaned (no locked notas). Owner to do manual phone test.
+Note: service_role has no EXECUTE on public functions (revoke from public) — grant specific functions to service_role when Claude stock/sync is built.
