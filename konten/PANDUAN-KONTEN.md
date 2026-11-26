@@ -5,6 +5,8 @@ Terakhir diperbarui: 25 November 2026.
 
 ## 1. Identitas kita (jangan diganti)
 
+- **Aturan (26 Nov 2026): jangan masukkan nama karyawan ke konten apa pun.** Kalau butuh sosok, pakai "tukang tarik kami", tangan/aliran teh tanpa wajah, atau maskot si penarik teh.
+
 - **Nama:** TOKO TEH · Tjap Dua Koi. Slogan: "Sepasang koi, secangkir teh". Neon: "Teh kental, teman kental."
 - **Gaya:** kopitiam / toko teh lawas, modern. Bukan kafe mahal, bukan gerobak tanpa nama.
 - **Warna:** hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.

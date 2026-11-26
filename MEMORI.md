@@ -37,7 +37,8 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Caravan di **Mahakam Lampion Garden, Samarinda**. Launching **Minggu 29 November 2026**.
 - Slogan: "Sepasang koi, secangkir teh". Neon: "Teh kental, teman kental."
 - Produk: semua dari base C teh tarik (Teh Tarik, Milo Tarik, Matcha Tarik, Houjicha Tarik), cup 14 oz & jumbo 22 oz, plus **bagel dan wrap**.
-- Program referral: **Teman Tarik**. Karyawan: Ocha.
+- Program referral: **Teman Tarik**. Karyawan pertama (Ocha) sudah berhenti per 26 Nov 2026.
+- **Aturan konten: jangan pernah memasukkan nama karyawan ke konten apa pun** (post, caption, reels, poster).
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx).
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.

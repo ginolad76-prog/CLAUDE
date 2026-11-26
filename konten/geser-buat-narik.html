@@ -135,7 +135,7 @@ h2{font-family:var(--display);font-weight:400;font-size:32px;line-height:1;margi
       <div class="block"><div class="rowhead"><h3>Caption</h3><button class="mini" id="cp" type="button">Salin</button></div>
 <p class="cap" id="cap">Teh tarik yang bener itu ditarik. Jadi kali ini kamu yang narik 👉 geser sampai habis.
 
-Makin panjang tarikannya, makin berbusa, makin kental. Ocha biasa sampai 75 cm. Kamu berhenti di slide berapa? 😏
+Makin panjang tarikannya, makin berbusa, makin kental. Kamu berhenti di slide berapa? 😏
 
 Tarikan aslinya bisa kamu tonton langsung mulai Minggu 29.11, jam 16.00–24.00 di Mahakam Lampion Garden.
 
@@ -145,16 +145,15 @@ Tarikan aslinya bisa kamu tonton langsung mulai Minggu 29.11, jam 16.00–24.00 
           <li><b>GESER buat narik.</b> Teko miring mulai menuang. "Pelan-pelan aja, kayak PDKT." Panah ke kanan.</li>
           <li><b>25 cm</b> · masih teh biasa. <i>belum ditarik namanya.</i></li>
           <li><b>50 cm</b> · mulai berbusa. <i>di sini teh mulai kenalan sama udara.</i></li>
-          <li><b>75 cm</b> · level Ocha. <i>jangan dicoba di rumah, nanti lantainya ikut ngeteh.</i></li>
-          <li><b>100 cm · KENTAL.</b> Teh jatuh ke cup. "Kamu yang geser, Ocha yang narik." Info buka.</li>
+          <li><b>75 cm</b> · level pro. <i>jangan dicoba di rumah, nanti lantainya ikut ngeteh.</i></li>
+          <li><b>100 cm · KENTAL.</b> Teh jatuh ke cup. "Tarikan aslinya di Lampion." Info buka.</li>
         </ol>
       </div>
       <div class="block"><h3>Cara pakai &amp; turunannya</h3>
         <ul>
-          <li>Posting Jumat 27.11 sekitar 19.00, menggantikan post kenalan Ocha. Post Ocha bisa geser ke Senin.</li>
+          <li>Posting Jumat 27.11 sekitar 19.00 (post 2 di paket Tarikan Pertama).</li>
           <li>Story: rekam layar saat menggeser carousel ini, tambahkan stiker "geser sampai habis →".</li>
-          <li>Reels lanjutan saat buka: Ocha menarik teh sungguhan di depan penggaris kayu 1 meter yang ditempel di caravan. Penggaris itu juga jadi spot foto.</li>
-          <li>Angka "Ocha sampai 75 cm" perlu dicek ke Ocha. Ganti kalau tarikannya lebih pendek atau lebih panjang.</li>
+          <li>Reels lanjutan saat buka: teh ditarik sungguhan di depan penggaris kayu 1 meter yang ditempel di caravan (cukup tangan dan aliran teh). Penggaris itu juga jadi spot foto: "kamu narik sampai berapa cm?"</li>
         </ul>
       </div>
     </div>
@@ -212,9 +211,9 @@ function pano(){
   for(var i=0;i<5;i++){h+='<div class="a pg" '+pos(i*1080+960,58)+'>'+(i+1)+'/5</div>';}
   h+='<div class="a s1h"><p class="D">GESER</p><p class="S">buat narik.</p><p class="small">Pelan-pelan aja,<br>kayak PDKT.</p></div>';
   h+='<div class="a arrow">→</div>';
-  var mk=[[25,"masih teh biasa.","belum ditarik namanya."],[50,"mulai berbusa.","di sini teh mulai kenalan sama udara."],[75,"level Ocha.","jangan dicoba di rumah, nanti lantainya ikut ngeteh."]];
+  var mk=[[25,"masih teh biasa.","belum ditarik namanya."],[50,"mulai berbusa.","di sini teh mulai kenalan sama udara."],[75,"level pro.","jangan dicoba di rumah, nanti lantainya ikut ngeteh."]];
   mk.forEach(function(m,i){var x=X0+m[0]*PX_CM;h+='<div class="a mk" '+pos(x-300,i===0?100:(i===1?170:220))+'><p class="D">'+m[0]+'<small>CM</small></p><p>'+m[1]+'<span>'+m[2]+'</span></p></div>';});
-  h+='<div class="a s5h"><p class="D">KENTAL.</p><p class="S">kamu yang geser, Ocha yang narik.</p></div>';
+  h+='<div class="a s5h"><p class="D">KENTAL.</p><p class="S">tarikan aslinya di Lampion.</p></div>';
   [0,25,50,75].forEach(function(cm){h+='<div class="a rl" '+pos(X0+cm*PX_CM,1300)+'>'+cm+' cm</div>';});
   h+='<div class="a" '+pos(5300,52)+'><span class="stamp">茶</span></div>';
   h+='<div class="a pills"><span class="pill f">Minggu 29.11 · 16.00–24.00</span><span class="pill">Mahakam Lampion Garden</span></div>';

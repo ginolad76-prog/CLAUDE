@@ -134,18 +134,16 @@ footer{padding-block:24px 40px;color:var(--muted);font-size:12.5px;border-top:1p
 .p1 .h .S{position:absolute;right:-1cqw;top:13cqw;font-size:15cqw;color:var(--emas);transform:rotate(-7deg)}
 .p1 .pills{margin-top:5cqw;color:var(--krem)}
 
-/* P2 Ocha polaroid */
+/* P2 geser buat narik (slide 1 dari carousel menyambung) */
 .p2{background:var(--krem);color:var(--koi)}
-.p2 .frame{position:absolute;left:9cqw;right:9cqw;top:11cqw;height:66cqw;background:#fff;padding:2.4cqw 2.4cqw 0;box-shadow:0 1.6cqw 4cqw rgba(14,77,50,.25);transform:rotate(-2.5deg)}
-.p2 .shot{position:relative;height:57cqw;overflow:hidden;background:radial-gradient(circle at 20% 25%,rgba(201,162,75,.9) 0 3cqw,transparent 3.2cqw),radial-gradient(circle at 78% 18%,rgba(179,38,30,.85) 0 2.4cqw,transparent 2.6cqw),radial-gradient(circle at 62% 34%,rgba(201,162,75,.6) 0 1.6cqw,transparent 1.8cqw),radial-gradient(circle at 40% 12%,rgba(246,239,223,.5) 0 1.2cqw,transparent 1.4cqw),linear-gradient(180deg,#2c4a3a,#0E4D32 70%,#0a3a26)}
-.p2 .shot svg{position:absolute;left:50%;bottom:-2cqw;width:46cqw;transform:translateX(-50%)}
-.p2 .shot .phnote{left:2cqw;bottom:2cqw}
-.p2 .cap2{font-family:var(--script);font-size:6cqw;text-align:center;padding:.6cqw 0 0;color:var(--koi)}
-.p2 .txt{position:absolute;left:7cqw;right:7cqw;bottom:8cqw}
-.p2 .txt .D{font-size:12cqw}
-.p2 .txt .S{font-size:9cqw;color:var(--marun);position:absolute;right:0;top:-6cqw;transform:rotate(-6deg)}
-.p2 .pills{margin-top:2.4cqw;color:var(--koi)}
-
+.p2 .tk{position:absolute;left:52cqw;top:11cqw;width:34cqw;height:30cqw}
+.p2 .stream{position:absolute;left:0;top:0;width:100cqw;height:125cqw}
+.p2 .pin{justify-content:flex-end;padding-bottom:16cqw}
+.p2 .D{font-size:33cqw}
+.p2 .S{font-size:13cqw;color:var(--marun);margin:-4cqw 0 0 16cqw;transform:rotate(-6deg)}
+.p2 .small{margin:4cqw 0 0;font-size:3.4cqw;font-weight:700;line-height:1.35}
+.p2 .arr{position:absolute;right:6cqw;bottom:17cqw;font-family:var(--display);font-size:14cqw;color:var(--marun);line-height:1}
+.p2 .rul{position:absolute;left:0;right:0;bottom:4.5cqw;height:4cqw;border-top:.4cqw solid var(--koi);background:repeating-linear-gradient(90deg,var(--koi) 0 .3cqw,transparent .3cqw 3cqw);background-size:100% 1.6cqw;background-repeat:no-repeat}
 /* P3 reel cover */
 .p3{background:#1a1410;color:var(--krem)}
 .p3 .ph{background:radial-gradient(ellipse at 30% 20%,rgba(201,162,75,.35),transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(122,31,43,.45),transparent 60%),linear-gradient(160deg,#2b2219,#120e0b)}
@@ -289,7 +287,7 @@ footer{padding-block:24px 40px;color:var(--muted);font-size:12.5px;border-top:1p
     <p class="sub">Belum ada foto, jadi ini daftar wajib dari HP. Rekam vertikal 4K, bersihkan lensa, jangan pakai zoom digital. Jam terbaik: 16.30–18.15 (cahaya emas, lalu lampu lampion menyala).</p>
     <ol class="shots">
       <li><div><b>Caravan saat lampu menyala</b><span>Dari depan, agak rendah, 18.00. Untuk post 1 slide 2 dan post 4.</span></div></li>
-      <li><div><b>Ocha menarik teh</b><span>Mode burst, dari bawah, aliran teh di udara. Untuk post 2.</span></div></li>
+      <li><div><b>Teh ditarik</b><span>Mode burst, cukup tangan dan aliran teh di udara, tanpa wajah. Untuk reels lanjutan post 2.</span></div></li>
       <li><div><b>Slow-mo tarikan</b><span>Mode slow-mo 120 fps, 5 detik, latar gelap. Untuk post 5 versi reels.</span></div></li>
       <li><div><b>Busa teh tarik dari atas</b><span>Top-down, cup tanpa tutup, di atas kain hijau.</span></div></li>
       <li><div><b>Tangan pegang cup</b><span>Logo menghadap kamera, latar bokeh lampion (mode Potret). Untuk post 7.</span></div></li>
@@ -365,9 +363,10 @@ var R={
 p1:function(){return '<div class="poster p1">'+corners('H-3','#TarikanPertama','16.00—24.00','<span class="stamp">茶</span>')+
  '<div class="car">'+CARAVAN+'</div><div class="pin"><div class="h"><p class="D">ADA YANG<br>LAGI DISEDUH</p><p class="S">pelan-pelan</p></div>'+
  '<div class="pills"><span class="pill">Mahakam Lampion Garden</span><span class="pill fill">Minggu · 29.11.26</span></div></div></div>';},
-p2:function(){return '<div class="poster p2">'+corners('Kru #01','#TarikanPertama','Shift 16.00—24.00','<span class="stamp">茶</span>')+
- '<div class="frame"><div class="shot">'+MASCOT+'<span class="phnote">FOTO: Ocha menarik teh, 16.30</span></div><div class="cap2">si tukang tarik</div></div>'+
- '<div class="txt"><p class="D">KENALAN: OCHA</p><div class="pills"><span class="pill">Spesialis tarikan tinggi</span><span class="pill">Narik teh, bukan narik ulur</span></div></div></div>';},
+p2:function(){return '<div class="poster p2"><div class="stream"><svg width="100%" height="100%" viewBox="0 0 1080 1350" aria-hidden="true"><path d="M813 255 C1000 330 1060 360 1100 380" fill="none" stroke="#9A6A3C" stroke-width="34" stroke-linecap="round"/><path d="M813 255 C1000 330 1060 360 1100 380" fill="none" stroke="#B9824F" stroke-width="24"/></svg></div>'+
+ '<div class="tk"><svg width="100%" height="100%" viewBox="540 120 340 300" aria-hidden="true"><g transform="rotate(35 710 280)"><path d="M630 190 H790 V350 Q790 372 768 372 H652 Q630 372 630 350 Z" fill="#D6DCD8" stroke="#0E4D32" stroke-width="9" stroke-linejoin="round"/><path d="M630 230 Q560 240 566 290 Q572 340 630 335" fill="none" stroke="#0E4D32" stroke-width="14" stroke-linecap="round"/><rect x="655" y="300" width="110" height="22" rx="4" fill="#0E4D32"/></g></svg></div>'+
+ corners('','1/5','','')+'<div class="rul"></div><div class="arr">→</div>'+
+ '<div class="pin"><p class="D">GESER</p><p class="S">buat narik.</p><p class="small">Pelan-pelan aja,<br>kayak PDKT.</p></div></div>';},
 p3:function(){return '<div class="poster p3"><div class="ph"></div><div class="grain"></div><div class="leak"></div>'+corners('H-1','Reels · 0:25','Sabtu 28.11','<span class="stamp">茶</span>')+
  '<div class="pin"><div class="hminus">BESOK · 16.00</div><p class="D">BESOK</p><p class="S">tinggal</p><p class="D">TARIK.</p>'+
  '<p class="sub3">"Ada yang baru di Lampion. Bisa ditarik, tapi nggak bikin sakit hati."</p></div>'+
@@ -409,12 +408,12 @@ var POSTS=[
  vis:["Slide 1: poster ini. Latar hijau koi polos, siluet caravan garis putus-putus krem, headline besar, kata \"pelan-pelan\" dalam script emas.","Slide 2: foto asli caravan saat lampu menyala (shot list no. 1), ditutup kain atau terpal sebagian supaya masih misterius.","Empat pojok berisi mikro-teks seperti poster editorial."],
  prompt:"Vertical 4:5 photo, a small vintage tea caravan parked in an evening lantern garden by a river in Samarinda, Indonesia, half covered with a cream canvas sheet, warm string lights, red paper lanterns softly out of focus, deep green paint on the caravan, cinematic film grain, moody blue-hour light, no text, no logo",
  why:"Penonton diajak ikut menebak. Komentar di post pertama juga membantu jangkauan post berikutnya."},
-{id:"p2",n:2,when:"Jumat 27 Nov · 17.00",fmt:"Carousel 3 slide",type:"Storytelling · kenalan kru",
- head:"KENALAN: OCHA",hook:"Brand terasa manusiawi. @based.dough dan @hooluburger sama-sama memperkenalkan tim sebelum produk.",
- cap:"Kenalan dulu sama Ocha 👋\nKerjaannya narik teh, bukan narik ulur 😌\n\nMulai Minggu, Ocha standby dari jam 4 sore sampai tengah malam. Mampir, sapa, terus tantang dia narik paling tinggi.\n\nSlide terakhir: fakta yang nggak penting tapi kalian harus tahu 👉\n\n#TarikanPertama #TjapDuaKoi",
- vis:["Slide 1: bingkai polaroid miring di latar krem. Di dalamnya foto Ocha menarik teh (shot list no. 2), tulisan tangan \"si tukang tarik\".","Slide 2: foto close-up tangan Ocha memegang dua cangkir, aliran teh membeku di udara.","Slide 3: latar hijau, 3 fakta singkat: menu favorit Ocha, rekor tarikan tertinggi, lagu wajib saat shift."],
- prompt:"Vertical 4:5 photo, young Indonesian barista in a dark green apron pulling milk tea between two steel mugs, long stream of tea in mid-air, golden hour backlight, tea caravan behind, red lanterns bokeh, joyful candid expression, shot from slightly below, 35mm film look",
- why:"Pembeli kembali ke orangnya, bukan cuma ke menunya. Ocha jadi wajah brand."},
+{id:"p2",n:2,when:"Jumat 27 Nov · 19.00",fmt:"Carousel 5 slide",type:"Carousel menyambung · ide khas teh tarik",
+ head:"GESER BUAT NARIK",hook:"Lima slide jadi satu gambar panjang. Tiap geseran memperpanjang tarikan teh sampai jatuh ke cup di slide 5. File lengkap: halaman \"Geser Buat Narik\".",
+ cap:"Teh tarik yang bener itu ditarik. Jadi kali ini kamu yang narik 👉 geser sampai habis.\n\nMakin panjang tarikannya, makin berbusa, makin kental. Kamu berhenti di slide berapa? 😏\n\nTarikan aslinya bisa kamu tonton langsung mulai Minggu 29.11, jam 16.00–24.00 di Mahakam Lampion Garden.\n\n#GeserBuatNarik #TarikanPertama #TjapDuaKoi #SamarindaNgeteh",
+ vis:["Slide 1: GESER buat narik. Teko miring mulai menuang, panah ke kanan.","Slide 2–4: penanda 25 cm (masih teh biasa), 50 cm (mulai berbusa), 75 cm (level pro), dengan penggaris di bawah.","Slide 5: teh jatuh ke cup. KENTAL. Tarikan aslinya di Lampion. Info buka.","Simpan kelima slide dari halaman Geser Buat Narik, unggah berurutan tanpa dipotong ulang."],
+ prompt:"",
+ why:"Gerakan khas teh tarik dipindahkan ke jempol pengikut. Ide ini tidak bisa dipakai brand lain."},
 {id:"p3",n:3,when:"Sabtu 28 Nov · 19.00",fmt:"Reels 25 detik",type:"Sketsa relatable · H-1",
  head:"BESOK TINGGAL TARIK",hook:"Sketsa obrolan absurd ala @jagocoffee: 90% cerita, 10% jualan, ditutup kartu ajakan.",
  cap:"Besok jam 4 sore. Yang ditarik tehnya, perasaanmu aman 🫶\n\nTag bestie yang selalu bilang \"ngapain ke Lampion, udah sering\".\n\n#TarikanPertama #TjapDuaKoi",
