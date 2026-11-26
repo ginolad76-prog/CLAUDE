@@ -38,7 +38,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Slogan: "Sepasang koi, secangkir teh". Neon: "Teh kental, teman kental."
 - Produk: semua dari base C teh tarik (Teh Tarik, Milo Tarik, Matcha Tarik, Houjicha Tarik), cup 14 oz & jumbo 22 oz, plus **bagel dan wrap**.
 - Program referral: **Teman Tarik**. Karyawan: Ocha.
-- Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx).
+- Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.

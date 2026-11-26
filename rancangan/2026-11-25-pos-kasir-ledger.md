@@ -155,3 +155,7 @@ Merge2: bc559d6..80192c7 (pytest 161, e2e 55)
 26 Nov 02:2x UTC: main fast-forwarded to 80192c7 (Pages live). Owner ran kolam + kasir SQL ("Run and enable RLS"): verified tables present, kk_settings transition on.
 asap_asli live: 13/19; all failures traced to proxy injecting secret apikey on EVERY request (even with publishable apikey) → all calls run as service_role (kk_board denied too). User-role checks impossible from this environment; data cleaned (no locked notas). Owner to do manual phone test.
 Note: service_role has no EXECUTE on public functions (revoke from public) — grant specific functions to service_role when Claude stock/sync is built.
+26 Nov: owner approved monthly report + 1-month simulation (local test DB only). Dispatched.
+Owner 26 Nov: no menu delete feature (deactivate is enough). Stock (phase 2): two paths — owner/Claude via chat for belanja & counts; kasir blind daily stock count as SOP at every tutup toko (required before closing laci), photo of shelf; stok masuk only owner/Claude. Paket menu: pending answer (fixed contents vs customer chooses flavors).
+Range report 6793b11,6a698cb; cash moves 4bed5f7 (pytest 186, e2e 57). Review dispatched.
+Review range+cash: Approved (minors: photo check before lock in pos_cash_move; tambah not idempotent; stale range responses; sim guard; key name count vs moves_count; midnight flake; int overflow msg; orphan photos). Upgrade path 80192c7→4bed5f7 verified on scratch DB. main fast-forwarded to 4bed5f7.

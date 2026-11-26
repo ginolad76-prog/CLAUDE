@@ -1,18 +1,18 @@
-# Kasir Koi — titik lanjut (dijeda 26 Nov 2026, kuota habis)
+# Kasir Koi — status (26 Nov 2026)
 
-Kode: repo tokotehtjapduakoi/tokotehtjapduakoi.github.io, cabang `claude/pos-toko-teh-tjap-dua-koi-1mze9t` (HEAD 80192c7), sudah di-push. Main TIDAK disentuh; database asli BELUM diubah.
-Semua 14 langkah rencana + review akhir + 2 gabungan dengan main (d4f2562, Teman Tarik/voucher) selesai. Uji: pytest 161, e2e 55 lulus.
-Ledger lengkap (keputusan & temuan kecil yang ditunda): `rancangan/2026-11-25-pos-kasir-ledger.md`.
+**TAYANG.** https://tokotehtjapduakoi.github.io/kasir/ (main = 4bed5f7). SQL Kolam Koi + Kasir Koi sudah dijalankan pemilik (versi terbaru). Pemilik sudah: verifikasi 2 langkah, nomor HP di Staf, HP disetujui, uji jual + batal (2 nota batal 26 Nov).
+Masa transisi ESB menyala (nota manual kasir + klaim nota lama). Matikan keduanya di Admin Kolam Koi → Nota saat ESB berhenti.
+Kunci secret Kolam Koi ada di environment "Toko Teh Tjap Dua Koi" (network secret, header apikey) → Claude baca semua tabel sebagai service_role. Catatan: proxy menimpa apikey di SETIAP request dari environment ini, jadi uji sebagai kasir/member tidak bisa dari sini; service_role tidak punya EXECUTE fungsi (baca tabel langsung).
 
-## Status 26 Nov: website tayang (main 80192c7), SQL sudah dijalankan pemilik, uji asap asli hanya bisa sebagai service_role (proxy menimpa apikey). Menunggu uji manual pemilik di HP.
+## Fitur yang ada
+Jual (tunai/QRIS/transfer, foto wajib, nota terkunci), kode Kolam Koi (QR/WA, terikat nomor), offline, shift + serah terima buta, void lewat pemilik, laporan Harian + Rentang (bebas, ≤366 hari), ambil/tambah kas pemilik, HP disetujui, 2 langkah pemilik, Teman Tarik/voucher bernota.
 
-## Sisa langkah
-1. (Opsional, dihentikan pemilik) review keamanan hasil gabungan cabang vs main.
-2. Cek main belum berubah lagi (sesi lain sering mengubah Kolam Koi); kalau berubah, gabung lagi.
-3. Merge cabang ke main (pemilik mengizinkan tindakan yang bisa dibalik).
-4. Pemilik jalankan SQL dari HP: `/kolam/admin/sql.html` (Kolam Koi) lalu `/kolam/admin/sql.html?f=kasir`. Ikuti `kasir/PANDUAN.md`.
-5. Kunci secret Kolam Koi sudah tersimpan di environment "Toko Teh Tjap Dua Koi" (network secret, header apikey). Sebelum SQL baru dijalankan, service_role ditolak (42501) — normal.
-6. Jalankan `_uji/asap_asli.py` ke database asli (di luar jam buka), lalu minta pemilik jalankan SQL pembersih yang dicetak.
-7. Pemilik pasang verifikasi 2 langkah (Google Authenticator) di /kasir/ dan /kolam/admin/ — belum pernah dicoba sungguhan.
-8. Perbarui MEMORI.md & CLAUDE.md (bagian Kasir Koi).
-9. Tahap berikut (rencana terpisah): stok & selisih stok; sinkron omzet ke Dompet Koi; hapus foto >3 bulan.
+## Keputusan pemilik terbaru
+- Menu tidak perlu dihapus: cukup nonaktif. Paket dibuat manual sebagai menu biasa (kategori Paket).
+- Stok (tahap 2, belum dibangun): dua jalur — pemilik/Claude lewat chat (belanja & hitung); kasir WAJIB hitung stok buta setiap tutup toko (SOP harian, foto rak). Stok masuk hanya pemilik/Claude.
+
+## Berikutnya
+1. Tahap 2: stok & selisih stok (lihat atas) — brainstorm/rencana dulu.
+2. Sinkron omzet harian ke Dompet Koi (perlu grant fungsi/tabel untuk service_role + kunci Dompet Koi).
+3. Hapus foto bukti > 3 bulan.
+4. Minor tertunda: lihat ledger (`rancangan/2026-11-25-pos-kasir-ledger.md`).
