@@ -1,6 +1,6 @@
 # MEMORI — Semua yang pernah dibahas dengan Claude
 
-Satu tempat untuk semua sesi (HP & laptop). Terakhir diperbarui: 24 Nov 2026.
+Satu tempat untuk semua sesi (HP & laptop). Terakhir diperbarui: 27 Nov 2026.
 Repo: https://github.com/ginolad76-prog/CLAUDE
 
 ---
@@ -40,6 +40,8 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Program referral: **Teman Tarik**. Karyawan: Ocha.
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
+- Sablon logo cup: **Rp650/cup** (harga sementara), sudah pesan **500 pcs** (Rp325.000) — 27 Nov 2026. Sudah masuk HPP di sheet Database Bahan & HPP.
+- Resep base yang disetujui: menurut pemilik pakai **Tiga Sapi + SKM "Dairy" (Champ atau Crown?)**, bukan Carnation seperti tertulis di sheet. Belum dikonfirmasi detailnya (27 Nov 2026) — tanyakan dulu sebelum mengubah sheet.
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
 
