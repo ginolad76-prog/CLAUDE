@@ -44,3 +44,12 @@ Video 35 detik, ±30 potongan (kira-kira 1 potongan per detik).
 - **Sinematik:** depth of field tipis, cahaya sore hangat, over-the-shoulder, close-up wajah. Cutaway produk hanya satu kali dan tepat di klimaks.
 - **Format seri:** sosok penjual tetap, pelanggan dan masalahnya berganti (video sebelumnya: "calon gue", "namanya hidup, bang").
 - **Untuk kita:** pakai sosok peran ("tukang tarik"), jangan nama karyawan, dan sebaiknya diperankan pemilik atau aktor supaya seri tidak putus saat karyawan berganti. Pembedanya: metafora menarik teh ("ditarik biar nyatu, bukan diulur"), suasana lampion malam, dan slogan "Teh kental, teman kental".
+
+## Tambahan: video "Apple-style motion graphic dengan Claude Code + Remotion" (dipelajari 27 Nov 2026)
+Video TikTok 38 detik dari akun jasa motion graphic. Isinya promosi file skill mereka.
+- **Alur:** hook pertanyaan yang diketik kata demi kata ("Is it possible to make Apple-style motion graphic videos in under 20 minutes?") → jawaban satu kata di pil bertimer ("Absolutely") → "And here's how" → tiga bahan (Claude Code + Remotion + video referensi) → "Custom skill files": Timing, Transitions, Motion design → "The result?" deret contoh → nilai ("normally hours", "and companies pay a f**k ton") → CTA kata kunci: "DM me APPLE" → "my skill files".
+- **Gaya Apple:** latar terang polos, satu baris teks besar, UI (HP, jendela app, kolom search, pil) muncul dengan blur-in dan spring, emoji sebagai aksen, ritme cepat.
+- **Untuk kita:**
+  1. Claude Code bisa membuat video motion graphic lewat Remotion (kode → MP4), misalnya reels menu, animasi jawaban "Cari tjap-nya", atau versi reels "Geser buat narik", dengan warna & huruf Tjap Dua Koi.
+  2. CTA kata kunci di komentar ("Komen TARIK → kita DM-in kode Teman Tarik") cocok untuk program referral; butuh auto-DM (konektor Instagram/ManyChat).
+  3. Rumus hook → "bisa" → caranya → hasil → nilai → CTA kata kunci dapat dipakai untuk konten edukasi ("Kenapa teh tarik harus ditarik?").
