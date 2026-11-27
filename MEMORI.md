@@ -44,7 +44,8 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - **Resep resmi = base C**: SKM Tiga Sapi + evaporasi Tiga Sapi, tanpa krimer. Konsentrat 110 ml, SKM 30 g, evaporasi 30 g, rich milk 24 ml, gula cair 10 ml. **Semua menu wajib pakai konsentrat teh** (tidak boleh diganti air panas). Versi A (Carnation) & B hanya pembanding.
 - HPP 14 oz base C (27 Nov 2026, cup Rp650 + sedotan asumsi Rp100): Teh Tarik Rp4.357 · Milo Tarik (20 g) Rp6.554 · Matcha Tarik (2 g) Rp7.469 · Houjicha Tarik (3 g) Rp7.338. Selalu cek margin ≥65% per menu.
 - **Isian minuman = 50% dari total oz cup** (sisanya es): 14 oz ≈ 207 ml (master base 200 ml), 20 oz ≈ 296 ml → bahan 20 oz = bahan 14 oz × 20/14.
-- **Harga jual (27 Nov 2026), 14 oz / 20 oz:** Teh Tarik Rp15.000/20.000 · Milo Tarik Rp20.000/25.000 · Matcha Tarik Rp25.000/30.000 · Houjicha Tarik Rp25.000/30.000. Margin 14 oz semua ≥67%. Margin 20 oz tergantung harga cup 20 oz (belum ada); Milo 20 oz < 65% kecuali Milo 20 oz dikurangi ke ±25 g.
+- **Harga jual (27 Nov 2026), 14 oz / 20 oz:** Teh Tarik Rp15.000/20.000 · Milo Tarik Rp20.000/25.000 · Matcha Tarik Rp25.000/30.000 · Houjicha Tarik Rp25.000/30.000. Margin 14 oz semua ≥67%. Margin 20 oz tergantung harga cup 20 oz (belum ada); Milo 20 oz < 65% di Rp25.000 dengan harga Milo normal; solusinya beli Milo lebih murah (≤Rp88.900/990 g) atau naikkan harga, BUKAN mengurangi resep.
+- **Resep TIDAK BOLEH dikurangi.** Rasa harus sama di semua ukuran: semua bahan 20 oz = 14 oz × 20/14, termasuk bubuk. Kejar margin lewat harga beli bahan/kemasan atau harga jual, bukan takaran.
 - **Harga upsize 14 → 20 oz = +Rp5.000 untuk semua menu.** Harga 14 oz dipilih supaya 14 oz DAN 20 oz sama-sama margin ≥65%.
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
