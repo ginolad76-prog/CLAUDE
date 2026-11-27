@@ -43,6 +43,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - **Cup 14 oz sablon = Rp650/cup** (harga cup sudah termasuk sablon, bukan biaya tambahan). Sudah pesan 500 pcs = Rp325.000 (27 Nov 2026). Cup 22 oz belum ada harga asli.
 - **Resep resmi = base C**: SKM Tiga Sapi + evaporasi Tiga Sapi, tanpa krimer. Konsentrat 110 ml, SKM 30 g, evaporasi 30 g, rich milk 24 ml, gula cair 10 ml. **Semua menu wajib pakai konsentrat teh** (tidak boleh diganti air panas). Versi A (Carnation) & B hanya pembanding.
 - HPP 14 oz base C (27 Nov 2026): Teh Tarik Rp4.249 · Milo Tarik (20 g) Rp6.446 · Matcha Tarik (2 g) Rp7.361 · Houjicha Tarik (3 g) Rp7.230. Selalu cek margin ≥65% per menu.
+- **Isian minuman = 50% dari total oz cup** (sisanya es): 14 oz ≈ 207 ml (master base 200 ml), 22 oz ≈ 325 ml → bahan 22 oz = bahan 14 oz × 22/14.
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
 
