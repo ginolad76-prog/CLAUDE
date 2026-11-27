@@ -41,6 +41,7 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - **Aturan konten: jangan pernah memasukkan nama karyawan ke konten apa pun** (post, caption, reels, poster).
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
+- **Belum final (27 Nov 2026):** harga jual 14 oz & 22 oz, resep, dan HPP per menu. Pemilik akan membahasnya di sesi Claude Code terpisah; mulai dari artifact "Database Bahan & HPP" (link di tabel bawah). Setelah final, isi badge harga di paket konten Tarikan Pertama.
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
 
