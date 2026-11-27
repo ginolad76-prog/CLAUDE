@@ -8,3 +8,7 @@
 - Bagian: (1) logo garis + TOKO TEH · TJAP DUA KOI · EST. 2025, (2) sepasang koi melingkar + "Sepasang koi, segelas teh.", (3) stempel 茶 + IG & TikTok @tokoteh.tjapduakoi · Mahakam Lampion Garden · Samarinda. Tiap bagian punya deretan ruko + lampion sendiri di bawahnya.
 - Sengaja **tanpa QR dan nomor WA**: QR 1 warna di atas minuman yang warnanya berbeda-beda sulit di-scan, dan nomor bisa berganti. QR Teman Tarik/member cukup di meja atau stiker.
 - Kalau tetap mau hijau 1 warna: jangan pakai huruf bening (knockout); cetak huruf langsung hijau di atas bening — tetap kurang kontras di Matcha.
+
+## Desain koi berenang (27 Nov) — pilihan terbaru
+- `cup-1warna-putih-koi-berenang-separasi.pdf` (260 × 78 mm, 3 bagian berjarak, hitam = tinta putih). Simulasi: `SIMULASI-cup-koi-berenang.png`.
+- Cerita: (1) koi berenang sendiri + TOKO TEH · TJAP DUA KOI, (2) koi melompat dari air + stempel 茶, (3) sepasang koi melingkar + "Sepasang koi, segelas teh." + @tokoteh.tjapduakoi. Air bergelombang + teratai di bawah tiap bagian.
