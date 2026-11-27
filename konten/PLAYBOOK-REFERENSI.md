@@ -35,3 +35,12 @@ Jangan tiru aset mereka (maskot, slogan, ilustrasi). Pelajari polanya saja.
 - **Label tulisan tangan** menunjuk tiap minuman di foto produk; warna kalem satu nada; wordmark kecil di atas.
 - Promo berulang sederhana ("Every Friday · Americano 5k, 10 slot") dan post empati untuk kejadian lokal (Pray for Berau/NTT), hari besar.
 - Dicoba: post "Samarinda hujan terus tiap jam 4 sore" → `konten/hujan-sore.html`.
+
+## Tambahan: video @jagocoffee "curhat di gerobak" (dipelajari 27 Nov 2026)
+Video 35 detik, ±30 potongan (kira-kira 1 potongan per detik).
+- **Alur:** pelanggan langganan datang ke gerobak ("kayak biasa ya") → penjual membaca suasana hati ("dia lagi, kak?") → curhat ("dia lebih milih yang lain dibanding saya") → nasihat singkat yang bisa dikutip ("Jodoh bukan tentang siapa yang paling lama kita kenal, tapi siapa yang Tuhan izinkan untuk tinggal sampai akhir… mungkin belum waktunya aja") → close-up cup diserahkan ("semangat ya kak") → pelanggan minum, senyum → shot penutup gedung kota → kartu logo.
+- **Produk = gestur peduli.** Tidak ada harga, tidak ada ajakan beli. Brand hanya muncul di cup, seragam, gerobak, dan kartu penutup.
+- **Tipografi kinetik:** kata kunci dibesarkan (serif putih + kuning tebal, garis bawah) dan ditempel di sekitar wajah. Kata sambung kecil. Dialog ringan pakai subtitle kecil kuning miring.
+- **Sinematik:** depth of field tipis, cahaya sore hangat, over-the-shoulder, close-up wajah. Cutaway produk hanya satu kali dan tepat di klimaks.
+- **Format seri:** sosok penjual tetap, pelanggan dan masalahnya berganti (video sebelumnya: "calon gue", "namanya hidup, bang").
+- **Untuk kita:** pakai sosok peran ("tukang tarik"), jangan nama karyawan, dan sebaiknya diperankan pemilik atau aktor supaya seri tidak putus saat karyawan berganti. Pembedanya: metafora menarik teh ("ditarik biar nyatu, bukan diulur"), suasana lampion malam, dan slogan "Teh kental, teman kental".
