@@ -9,7 +9,10 @@ Satu script untuk memasang semua plugin & skill yang dipakai.
 | claude-mem | Plugin | Memori antar sesi: Claude ingat pekerjaan sebelumnya |
 | example-skills (Anthropic) | Plugin | frontend-design, canvas-design, theme-factory, algorithmic-art, brand-guidelines, dll |
 | UI UX Pro Max | Plugin | Database 80 gaya UI, 194 palet warna, 74 pasangan font, banner & slide |
+| ponytail | Plugin | Mode "senior dev malas": solusi paling sederhana, kode sesedikit mungkin |
+| impeccable | Plugin | Desain frontend rapi: /impeccable polish, audit, critique, dll |
 | anatomy | Skill | Ilustrasi isometrik interaktif untuk menjelaskan ide teknis |
+| remotion-best-practices | Skill | Bikin video promo pakai kode (Remotion). Salinan di `.claude/skills/` |
 | VibeSec | Skill | Panduan keamanan saat membuat web app |
 
 ## Syarat

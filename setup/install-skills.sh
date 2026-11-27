@@ -31,6 +31,8 @@ pasang_plugin() { # $1 = repo GitHub, $2 = plugin@marketplace
 pasang_plugin thedotmack/claude-mem                 claude-mem@thedotmack
 pasang_plugin anthropics/skills                     example-skills@anthropic-agent-skills
 pasang_plugin nextlevelbuilder/ui-ux-pro-max-skill  ui-ux-pro-max@ui-ux-pro-max-skill
+pasang_plugin DietrichGebert/ponytail                ponytail@ponytail
+pasang_plugin pbakaus/impeccable                     impeccable@impeccable
 
 # --- Skill (folder di ~/.claude/skills) --------------------------------------
 pasang_skill() { # $1 = repo GitHub, $2 = nama folder
@@ -47,6 +49,10 @@ pasang_skill() { # $1 = repo GitHub, $2 = nama folder
 
 pasang_skill wheresryan22/anatomy      anatomy
 pasang_skill BehiSecc/VibeSec-Skill    vibesec
+
+# Remotion (bikin video pakai kode): salinan ada di repo ini, .claude/skills/
+info "Skill: remotion-best-practices"
+if rm -rf "$SKILLS_DIR/remotion-best-practices" && cp -r "$(dirname "$0")/../.claude/skills/remotion-best-practices" "$SKILLS_DIR/"; then sukses remotion-best-practices; else gagal remotion-best-practices; fi
 
 # --- Ringkasan ----------------------------------------------------------------
 echo
