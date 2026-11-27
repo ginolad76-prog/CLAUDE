@@ -1,0 +1,263 @@
+<title>Cari Tjap-nya</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Inter:wght@500;600;700;800&family=Mr+Dafoe&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E8%8C%B6&display=swap" rel="stylesheet">
+<style>
+/* Satu post permainan: kolam penuh koi, cari sepasang yang membentuk logo. Kiri kanvas, kanan brief. */
+:root{
+  --koi:#0E4D32; --koi-ink:#062619; --krem:#F6EFDF; --emas:#C9A24B; --marun:#7A1F2B;
+  --muted:#A9C2B4; --line:rgba(246,239,223,.16);
+  --display:"Bebas Neue","Arial Narrow",sans-serif; --script:"Mr Dafoe",cursive; --serif:"Cinzel",Georgia,serif; --body:"Inter",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--koi-ink);color:var(--krem);font-family:var(--body);font-size:15px;line-height:1.55}
+:focus-visible{outline:3px solid var(--emas);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 40px;display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:36px;align-items:start}
+@media (max-width:880px){.wrap{grid-template-columns:minmax(0,1fr)}}
+canvas{width:100%;height:auto;aspect-ratio:4/5;display:block;border-radius:6px;background:var(--koi)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{font:700 13.5px var(--body);border-radius:10px;padding:10px 14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--krem)}
+.btn.primary{background:var(--emas);border-color:var(--emas);color:var(--koi-ink)}
+.btn[aria-pressed="true"]{background:var(--krem);color:var(--koi)}
+.hint{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+.eyebrow{font-family:var(--serif);font-size:11px;letter-spacing:.3em;color:var(--emas);text-transform:uppercase}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(48px,7vw,80px);line-height:.88;margin:6px 0 10px}
+h1 em{font-family:var(--script);font-style:normal;color:var(--emas);font-size:.7em}
+.lede{margin:0 0 16px;color:#D5E3DA;max-width:62ch}
+.block{background:rgba(246,239,223,.05);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px;margin-bottom:12px;min-width:0}
+.block h2{margin:0;font-family:var(--serif);font-size:11px;letter-spacing:.2em;color:var(--emas);text-transform:uppercase}
+.block p,.block li{margin:0;font-size:14px}
+.block ul,.block ol{margin:0;padding-left:18px;display:grid;gap:5px}
+.cap{white-space:pre-wrap}
+.rowhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mini{font:700 12px var(--body);background:transparent;border:1px solid var(--line);color:var(--krem);border-radius:8px;padding:4px 10px;cursor:pointer}
+.ans{font-family:var(--display);font-size:28px;color:var(--emas);letter-spacing:.04em}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:50;display:grid;place-items:center;padding:16px}
+.ov .box{display:grid;gap:10px;justify-items:center;max-width:min(440px,100%)}
+.ov img{width:100%;height:auto;max-height:74vh;object-fit:contain;border-radius:4px}
+.ov p{margin:0;text-align:center;font-size:13.5px;color:#ddd}
+</style>
+
+<main class="wrap">
+  <div>
+    <canvas id="cv" width="1080" height="1350" role="img" aria-label="Poster: kolam penuh ikan koi, dengan sepasang koi emas tersembunyi yang membentuk logo"></canvas>
+    <div class="controls">
+      <button class="btn" id="reveal" type="button" aria-pressed="false">Tunjukkan jawaban</button>
+      <button class="btn" id="reroll" type="button">Acak kolam</button>
+      <button class="btn primary" id="saveQ" type="button">Simpan gambar soal</button>
+      <button class="btn primary" id="saveA" type="button">Simpan gambar jawaban</button>
+    </div>
+    <p class="hint">Coba cari dulu sebelum menekan "Tunjukkan jawaban". Kalau terlalu gampang atau terlalu susah, tekan "Acak kolam".</p>
+  </div>
+
+  <div>
+    <div class="eyebrow">Ide baru · post tebak-tebakan</div>
+    <h1>Cari tjap-nya. <em>ada sepasang.</em></h1>
+    <p class="lede">Nama kita "Tjap Dua Koi": tanda dari dua ekor koi. Di post ini nama itu berubah jadi permainan. Kolamnya penuh puluhan koi yang berenang sendiri-sendiri. Hanya satu pasang yang berenang memutar saling mengejar sampai membentuk lingkaran logo kita. Pengikut harus menemukannya, lalu menulis kotak petanya di komentar, misalnya "B4".</p>
+
+    <div class="block"><h2>Jawaban kolam ini</h2><p>Tjap-nya ada di kotak <span class="ans" id="ansCell">—</span>. Jangan dibocorkan di caption.</p></div>
+
+    <div class="block"><div class="rowhead"><h2>Caption</h2><button class="mini" id="cp" type="button">Salin</button></div>
+<p class="cap" id="cap">Namanya Tjap Dua Koi. Tapi di kolam ini cuma ada SATU pasang yang bikin tjap-nya 👀
+
+Cari sepasang koi emas yang lagi muter berdua, saling ngejar. Ketemu? Tulis kotaknya di komentar (contoh: B4).
+
+Jangan nyontek komentar orang ya. Jawabannya kita buka di story besok jam 19.00 🫣
+
+📍 Mahakam Lampion Garden · buka Minggu 29.11, 16.00–24.00
+
+#CariTjapnya #TjapDuaKoi #TarikanPertama</p></div>
+
+    <div class="block"><h2>Kenapa ini khas kita</h2>
+      <ul>
+        <li>Nama brand-nya sendiri yang jadi soal. Brand lain tidak bisa memakai ide ini tanpa mengganti nama.</li>
+        <li>Orang menatap post lebih lama, memperbesar gambar, dan berkomentar. Itu sinyal yang paling disukai Instagram.</li>
+        <li>Jawaban di story besoknya membuat orang kembali dua kali. Yang benar merasa menang, dan itu bahan gengsi buat remaja.</li>
+        <li>Logo dua koi jadi mudah diingat: orang yang sudah mencarinya akan langsung mengenali bentuknya di cup.</li>
+      </ul>
+    </div>
+
+    <div class="block"><h2>Cara pakai</h2>
+      <ul>
+        <li>Posting gambar soal. Besok jam 19.00, unggah gambar jawaban ke story, lalu sebutkan beberapa akun yang menjawab benar.</li>
+        <li>Hadiah opsional (belum diputuskan): yang benar dan menunjukkan komentarnya di caravan dapat upgrade ke jumbo.</li>
+        <li>Lanjutannya bisa jadi seri: "Cari tjap-nya" versi lampion, versi keramaian pasar malam, versi tumpukan cup.</li>
+        <li>Bisa juga dibawa ke dunia nyata: tempel satu stiker dua koi kecil di sudut caravan. Siapa yang menemukannya, foto dan tag kita.</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<div class="ov" id="ov" hidden><div class="box"><img id="ovimg" alt="Gambar siap disimpan"><p>Tekan lama gambar lalu pilih Simpan. Di laptop: klik kanan → Simpan gambar.</p><button class="btn primary" id="ovclose" type="button">Tutup</button></div></div>
+
+<script>
+(function(){
+var W=1080,H=1350,TOP=300,BOT=1200,COLS=5,ROWS=6,CW=W/COLS,RH=(BOT-TOP)/ROWS;
+var cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+var seed=20261129,reveal=false,pairCell=null,pairC=null;
+
+function R(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646;};}
+
+var SCHEMES={
+ kohaku:{base:"#F4EFE6",p:["#D9442B"]},
+ sanke:{base:"#F4EFE6",p:["#D9442B","#1d1d1d"]},
+ showa:{base:"#202020",p:["#D9442B","#F4EFE6"]},
+ orange:{base:"#E8792B",p:["#F6C27D"]},
+ ogon:{base:"#D3AE58",p:["#EBD08A"]},
+ shiro:{base:"#F4EFE6",p:[]}
+};
+var POOL=["kohaku","kohaku","kohaku","sanke","sanke","showa","orange","orange","orange","ogon","shiro"];
+
+/* ---- koi drawn along a curved spine ---- */
+function spine(x,y,h,L,k){var N=26,ds=L/N,pts=[];for(var i=0;i<=N;i++){pts.push({x:x,y:y,h:h});x+=Math.cos(h)*ds;y+=Math.sin(h)*ds;h+=k*ds;}return pts;}
+function wid(t,L){var b=L*0.125;if(t<0.22)return b*Math.sqrt(t/0.22)*0.96+b*0.04;if(t<0.9)return b*(1-(t-0.22)/0.68*0.86);return b*0.14;}
+function bodyPath(pts,L){var N=pts.length-1,lf=[],rt=[];
+ for(var i=0;i<=N;i++){var p=pts[i],w=wid(i/N,L),nx=-Math.sin(p.h),ny=Math.cos(p.h);lf.push([p.x+nx*w,p.y+ny*w]);rt.push([p.x-nx*w,p.y-ny*w]);}
+ var path=new Path2D();path.moveTo(lf[0][0],lf[0][1]);
+ var p0=pts[0],bx=p0.x-Math.cos(p0.h)*L*0.04,by=p0.y-Math.sin(p0.h)*L*0.04;
+ for(var j=1;j<=N;j++)path.lineTo(lf[j][0],lf[j][1]);
+ for(var m=N;m>=0;m--)path.lineTo(rt[m][0],rt[m][1]);
+ path.quadraticCurveTo(bx,by,lf[0][0],lf[0][1]);path.closePath();return path;}
+function drawKoi(x,y,h,L,k,scheme,rnd){
+ var s=SCHEMES[scheme],pts=spine(x,y,h,L,k),N=pts.length-1,e=pts[N];
+ var dx=Math.cos(e.h),dy=Math.sin(e.h),nx=-dy,ny=dx;
+ var finCol=scheme==="showa"?"rgba(60,60,60,.75)":"rgba(246,239,223,.62)";
+ // shadow + fins + tail
+ ctx.save();ctx.shadowColor="rgba(0,0,0,.35)";ctx.shadowBlur=14;ctx.shadowOffsetX=10;ctx.shadowOffsetY=14;
+ var tail=new Path2D(),tw=wid(1,L);
+ tail.moveTo(e.x+nx*tw,e.y+ny*tw);
+ tail.quadraticCurveTo(e.x+dx*L*0.1+nx*L*0.06,e.y+dy*L*0.1+ny*L*0.06,e.x+dx*L*0.24+nx*L*0.13,e.y+dy*L*0.24+ny*L*0.13);
+ tail.lineTo(e.x+dx*L*0.13,e.y+dy*L*0.13);
+ tail.lineTo(e.x+dx*L*0.24-nx*L*0.13,e.y+dy*L*0.24-ny*L*0.13);
+ tail.quadraticCurveTo(e.x+dx*L*0.1-nx*L*0.06,e.y+dy*L*0.1-ny*L*0.06,e.x-nx*tw,e.y-ny*tw);tail.closePath();
+ ctx.fillStyle=finCol;ctx.fill(tail);
+ var f=pts[Math.round(N*0.24)],fw=wid(0.24,L);
+ [1,-1].forEach(function(sg){var fx=f.x+(-Math.sin(f.h))*fw*sg,fy=f.y+Math.cos(f.h)*fw*sg;
+   ctx.beginPath();ctx.ellipse(fx+Math.cos(f.h)*L*0.05+(-Math.sin(f.h))*L*0.04*sg,fy+Math.sin(f.h)*L*0.05+Math.cos(f.h)*L*0.04*sg,L*0.09,L*0.04,f.h+0.7*sg,0,Math.PI*2);ctx.fill();});
+ var body=bodyPath(pts,L);ctx.fillStyle=s.base;ctx.fill(body);ctx.restore();
+ // patches
+ ctx.save();ctx.clip(body);
+ s.p.forEach(function(col,ci){var n=ci===0?3+Math.floor(rnd()*3):2+Math.floor(rnd()*3);ctx.fillStyle=col;
+   for(var i=0;i<n;i++){var t=0.05+rnd()*0.75,p=pts[Math.round(t*N)],o=(rnd()-.5)*wid(t,L)*1.4;
+     ctx.beginPath();ctx.ellipse(p.x+(-Math.sin(p.h))*o,p.y+Math.cos(p.h)*o,L*(ci===0?0.09:0.045)*(0.6+rnd()*0.7),L*(ci===0?0.07:0.035)*(0.6+rnd()*0.7),p.h+rnd(),0,Math.PI*2);ctx.fill();}});
+ // sheen
+ ctx.strokeStyle="rgba(255,255,255,.22)";ctx.lineWidth=L*0.025;ctx.beginPath();
+ for(var i=2;i<N*0.8;i++){var p=pts[i];if(i===2)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);}ctx.stroke();
+ ctx.restore();
+ // eyes
+ var hd=pts[2],ew=wid(2/N,L)*0.62;ctx.fillStyle="#111";
+ [1,-1].forEach(function(sg){ctx.beginPath();ctx.arc(hd.x+(-Math.sin(hd.h))*ew*sg,hd.y+Math.cos(hd.h)*ew*sg,L*0.016,0,Math.PI*2);ctx.fill();});
+}
+/* koi whose spine follows a circle of radius r around (cx,cy), head at angle a */
+function circleKoi(cx,cy,r,a,L,scheme,rnd,flip){
+ var hx=cx+r*Math.cos(a),hy=cy+r*Math.sin(a),h=Math.atan2(-Math.cos(a),Math.sin(a)),best=null;
+ [1,-1].forEach(function(sg){var p=spine(hx,hy,h,L,sg/r),e=p[p.length-1],d=Math.abs(Math.hypot(e.x-cx,e.y-cy)-r);if(!best||d<best.d)best={d:d,k:sg/r};});
+ drawKoi(hx,hy,h,L,flip?-best.k:best.k,scheme,rnd);}
+
+/* ---- water ---- */
+function water(rnd){
+ var g=ctx.createRadialGradient(W*0.5,H*0.45,80,W*0.5,H*0.5,H*0.8);g.addColorStop(0,"#17603F");g.addColorStop(0.55,"#0E4D32");g.addColorStop(1,"#062619");
+ ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ for(var i=0;i<10;i++){var x=rnd()*W,y=TOP+rnd()*(BOT-TOP),r=60+rnd()*90,c=rnd()<.6?"201,162,75":"179,38,30";
+   var rg=ctx.createRadialGradient(x,y,0,x,y,r);rg.addColorStop(0,"rgba("+c+",.22)");rg.addColorStop(1,"rgba("+c+",0)");ctx.fillStyle=rg;ctx.fillRect(x-r,y-r,r*2,r*2);}
+ ctx.strokeStyle="rgba(246,239,223,.05)";ctx.lineWidth=3;
+ for(var j=0;j<40;j++){var x0=rnd()*W,y0=rnd()*H;ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(x0+40+rnd()*60,y0+(rnd()-.5)*40,x0+90+rnd()*80,y0+(rnd()-.5)*30);ctx.stroke();}
+ ctx.strokeStyle="rgba(246,239,223,.09)";ctx.lineWidth=2;
+ for(var q=0;q<5;q++){var cx=rnd()*W,cy=TOP+rnd()*(BOT-TOP);for(var rr=1;rr<=3;rr++){ctx.beginPath();ctx.ellipse(cx,cy,rr*26,rr*11,0,0,Math.PI*2);ctx.stroke();}}
+}
+function lily(x,y,r,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.shadowColor="rgba(0,0,0,.3)";ctx.shadowBlur=10;ctx.shadowOffsetY=6;
+ ctx.fillStyle="#2E7046";ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,r,0.35,Math.PI*2-0.05);ctx.closePath();ctx.fill();
+ ctx.shadowColor="transparent";ctx.strokeStyle="rgba(246,239,223,.18)";ctx.lineWidth=2;for(var i=0;i<6;i++){ctx.beginPath();ctx.moveTo(0,0);var a=0.6+i*0.95;ctx.lineTo(Math.cos(a)*r*0.85,Math.sin(a)*r*0.85);ctx.stroke();}
+ ctx.restore();}
+
+/* ---- text ---- */
+function txt(){
+ // darken bands for legibility
+ var tg=ctx.createLinearGradient(0,0,0,TOP+30);tg.addColorStop(0,"rgba(6,38,25,.92)");tg.addColorStop(1,"rgba(6,38,25,0)");ctx.fillStyle=tg;ctx.fillRect(0,0,W,TOP+30);
+ var bg=ctx.createLinearGradient(0,BOT-20,0,H);bg.addColorStop(0,"rgba(6,38,25,0)");bg.addColorStop(.45,"rgba(6,38,25,.9)");bg.addColorStop(1,"rgba(6,38,25,.96)");ctx.fillStyle=bg;ctx.fillRect(0,BOT-20,W,H-BOT+20);
+ ctx.fillStyle="#F6EFDF";ctx.textAlign="center";ctx.textBaseline="alphabetic";
+ ctx.font='700 24px "Cinzel", Georgia, serif';ctx.fillText("T O K O   T E H   ·   T J A P   D U A   K O I",W/2,66);
+ ctx.textAlign="left";ctx.font='400 172px "Bebas Neue", "Arial Narrow", sans-serif';ctx.fillText("CARI TJAP-NYA.",64,222);
+ ctx.save();ctx.translate(92,280);ctx.rotate(-0.025);ctx.fillStyle="#C9A24B";ctx.font='400 54px "Mr Dafoe", cursive';ctx.fillText("ada sepasang koi yang lagi muter berdua.",0,0);ctx.restore();
+ // stamp
+ ctx.fillStyle="#B3261E";roundRect(W-110,30,64,64,10);ctx.fill();ctx.fillStyle="#F6EFDF";ctx.textAlign="center";ctx.font='700 40px "Noto Serif SC", serif';ctx.fillText("茶",W-78,76);
+ // grid
+ ctx.save();ctx.setLineDash([8,10]);ctx.strokeStyle="rgba(246,239,223,.16)";ctx.lineWidth=2;
+ for(var c=1;c<COLS;c++){ctx.beginPath();ctx.moveTo(c*CW,TOP);ctx.lineTo(c*CW,BOT);ctx.stroke();}
+ for(var r=0;r<=ROWS;r++){ctx.beginPath();ctx.moveTo(0,TOP+r*RH);ctx.lineTo(W,TOP+r*RH);ctx.stroke();}
+ ctx.restore();
+ ctx.font='800 22px "Inter", sans-serif';ctx.fillStyle="rgba(246,239,223,.75)";
+ for(var c2=0;c2<COLS;c2++){for(var r2=0;r2<ROWS;r2++){ctx.textAlign="left";ctx.fillText("ABCDE"[c2]+(r2+1),c2*CW+10,TOP+r2*RH+28);}}
+ // bottom pills
+ var pw=pill(64,1232,"Komen kotaknya, contoh: B4",true);
+ pill(64+pw+14,1232,"Jawaban di story besok 19.00",false);
+ ctx.textAlign="left";ctx.fillStyle="rgba(246,239,223,.8)";ctx.font='600 22px "Inter", sans-serif';
+ ctx.fillText("Mahakam Lampion Garden · buka Minggu 29.11, 16.00–24.00",64,1316);
+}
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function pill(x,y,t,fill){ctx.font='800 26px "Inter", sans-serif';var w=ctx.measureText(t).width+48;roundRect(x,y,w,52,26);
+ if(fill){ctx.fillStyle="#F6EFDF";ctx.fill();ctx.fillStyle="#0E4D32";}else{ctx.strokeStyle="#F6EFDF";ctx.lineWidth=3;ctx.stroke();ctx.fillStyle="#F6EFDF";}
+ ctx.textAlign="left";ctx.fillText(t,x+24,y+35);return w;}
+
+/* ---- scene ---- */
+function scene(){
+ var rnd=R(seed);
+ ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);water(rnd);
+ var occ=[];
+ function free(x,y,r){if(y-r<TOP-30||y+r>BOT+20||x-r<-20||x+r>W+20)return false;for(var i=0;i<occ.length;i++){var o=occ[i];if(Math.hypot(o.x-x,o.y-y)<(o.r+r)*0.95)return false;}return true;}
+ // pick pair cell (avoid edges)
+ var pc=1+Math.floor(rnd()*3),pr=1+Math.floor(rnd()*4);
+ pairCell="ABCDE"[pc]+(pr+1);
+ var px=pc*CW+CW/2+(rnd()-.5)*50,py=TOP+pr*RH+RH/2+(rnd()-.5)*30;pairC={x:px,y:py};
+ occ.push({x:px,y:py,r:100});
+ // lily pads
+ for(var l=0;l<6;l++){for(var t=0;t<50;t++){var lx=rnd()*W,ly=TOP+rnd()*(BOT-TOP),lr=38+rnd()*34;if(free(lx,ly,lr)){occ.push({x:lx,y:ly,r:lr});lily(lx,ly,lr,rnd()*6.28);break;}}}
+ // decoy near-pairs (one koi curves the wrong way)
+ var decoys=[];
+ for(var d=0;d<4;d++){for(var t2=0;t2<80;t2++){var dx=rnd()*W,dy=TOP+rnd()*(BOT-TOP);if(free(dx,dy,78)){occ.push({x:dx,y:dy,r:78});decoys.push({x:dx,y:dy});break;}}}
+ // singles
+ var singles=[];
+ for(var t3=0;t3<4000&&singles.length<64;t3++){var x=rnd()*W,y=TOP+rnd()*(BOT-TOP),L=95+rnd()*45;if(free(x,y,L*0.5)){occ.push({x:x,y:y,r:L*0.5});singles.push({x:x,y:y,L:L,h:rnd()*6.283,k:(rnd()-.5)*0.014,s:POOL[Math.floor(rnd()*POOL.length)]});}}
+ // give some singles gold so colour alone doesn't give the pair away
+ singles.forEach(function(s,i){if(i%5===0)s.s="ogon";});
+ // draw
+ singles.forEach(function(s){var hx=s.x-Math.cos(s.h)*s.L*0.45,hy=s.y-Math.sin(s.h)*s.L*0.45;drawKoi(hx,hy,s.h,s.L,s.k,s.s,rnd);});
+ decoys.forEach(function(d,i){var r=46+rnd()*10,a=rnd()*6.28,L=0.85*Math.PI*r;var sc=i%2?"ogon":POOL[Math.floor(rnd()*POOL.length)];
+   circleKoi(d.x,d.y,r,a,L,sc,rnd,false);circleKoi(d.x+(rnd()-.5)*20,d.y+(rnd()-.5)*20,r,a+Math.PI,L,"ogon",rnd,true);});
+ var pa=rnd()*6.28,Rr=46,PL=0.86*Math.PI*Rr;
+ circleKoi(px,py,Rr,pa,PL,"ogon",rnd,false);circleKoi(px,py,Rr,pa+Math.PI,PL,"ogon",rnd,false);
+ txt();
+ document.getElementById("ansCell").textContent=pairCell;
+ if(reveal)drawReveal();
+}
+function drawReveal(){
+ ctx.save();ctx.fillStyle="rgba(6,38,25,.62)";ctx.beginPath();ctx.rect(0,TOP-10,W,BOT-TOP+20);ctx.arc(pairC.x,pairC.y,105,0,Math.PI*2,true);ctx.fill("evenodd");
+ ctx.strokeStyle="#C9A24B";ctx.lineWidth=8;ctx.setLineDash([]);ctx.beginPath();ctx.arc(pairC.x,pairC.y,105,0,Math.PI*2);ctx.stroke();
+ var tx=pairC.x>W/2?pairC.x-130:pairC.x+130,al=pairC.x>W/2?"right":"left";
+ ctx.textAlign=al;ctx.fillStyle="#C9A24B";ctx.font='400 96px "Bebas Neue", sans-serif';ctx.fillText("KETEMU! "+pairCell,tx,pairC.y+10);
+ ctx.fillStyle="#F6EFDF";ctx.font='400 48px "Mr Dafoe", cursive';ctx.fillText("ini tjap kita.",tx,pairC.y+64);
+ ctx.restore();
+}
+
+function render(){scene();}
+var fontsReady=Promise.all(['400 100px "Bebas Neue"','700 24px "Cinzel"','800 22px "Inter"','600 22px "Inter"','400 60px "Mr Dafoe"','700 40px "Noto Serif SC"'].map(function(f){return document.fonts?document.fonts.load(f,f.indexOf("Noto")>-1?"茶":"A").catch(function(){}):Promise.resolve();}));
+render();fontsReady.then(render);
+
+var rv=document.getElementById("reveal");
+rv.onclick=function(){reveal=!reveal;rv.setAttribute("aria-pressed",reveal?"true":"false");rv.textContent=reveal?"Sembunyikan jawaban":"Tunjukkan jawaban";render();};
+document.getElementById("reroll").onclick=function(){seed=Math.floor(Math.random()*2e9)+1;render();};
+var ov=document.getElementById("ov");
+function show(withAns){var prev=reveal;reveal=withAns;render();document.getElementById("ovimg").src=cv.toDataURL("image/png");reveal=prev;render();ov.hidden=false;}
+document.getElementById("saveQ").onclick=function(){show(false);};
+document.getElementById("saveA").onclick=function(){show(true);};
+document.getElementById("ovclose").onclick=function(){ov.hidden=true;};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ov.hidden=true;});
+document.getElementById("cp").onclick=function(){var b=this,t=document.getElementById("cap").textContent;
+ try{navigator.clipboard.writeText(t).then(function(){b.textContent="Tersalin";setTimeout(function(){b.textContent="Salin";},1600);},function(){b.textContent="Pilih teks manual";});}catch(e){b.textContent="Pilih teks manual";}};
+})();
+</script>

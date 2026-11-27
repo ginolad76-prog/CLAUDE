@@ -1,0 +1,248 @@
+<title>Geser Buat Narik</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Inter:wght@500;600;700;800&family=Mr+Dafoe&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E8%8C%B6&display=swap" rel="stylesheet">
+<style>
+/* Carousel 5 slide yang menyambung: menggeser = menarik teh. Atas: preview HP yang bisa digeser; bawah: strip utuh + brief. */
+:root{
+  --koi:#0E4D32; --koi-ink:#062619; --krem:#F6EFDF; --emas:#C9A24B; --marun:#7A1F2B; --stempel:#B3261E; --teh:#B9824F; --teh-2:#DDB07A;
+  --muted:#A9C2B4; --line:rgba(246,239,223,.16);
+  --display:"Bebas Neue","Oswald","Arial Narrow",sans-serif; --script:"Mr Dafoe","Brush Script MT",cursive; --serif:"Cinzel",Georgia,serif; --body:"Inter",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--koi-ink);color:var(--krem);font-family:var(--body);font-size:15px;line-height:1.55}
+:focus-visible{outline:3px solid var(--emas);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:36px;padding-block:28px;align-items:start}
+@media (max-width:860px){.top{grid-template-columns:minmax(0,1fr)}}
+.eyebrow{font-family:var(--serif);font-size:11px;letter-spacing:.3em;color:var(--emas);text-transform:uppercase}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(48px,7vw,80px);line-height:.88;margin:6px 0 10px}
+h1 em{font-family:var(--script);font-style:normal;color:var(--emas);font-size:.75em}
+h2{font-family:var(--display);font-weight:400;font-size:32px;line-height:1;margin:0 0 10px}
+.lede{margin:0 0 16px;color:#D5E3DA;max-width:62ch}
+.block{background:rgba(246,239,223,.05);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px;margin-bottom:12px;min-width:0}
+.block h3{margin:0;font-family:var(--serif);font-size:11px;letter-spacing:.2em;color:var(--emas);text-transform:uppercase}
+.block p,.block li{margin:0;font-size:14px}
+.block ul,.block ol{margin:0;padding-left:18px;display:grid;gap:5px}
+.cap{white-space:pre-wrap}
+.rowhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.btn{font:700 13.5px var(--body);border-radius:10px;padding:10px 14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--krem)}
+.btn.primary{background:var(--emas);border-color:var(--emas);color:var(--koi-ink)}
+.mini{font:700 12px var(--body);background:transparent;border:1px solid var(--line);color:var(--krem);border-radius:8px;padding:4px 10px;cursor:pointer}
+.status{font-size:12.5px;color:var(--emas)}
+
+/* phone preview */
+.phone{background:#000;border-radius:20px;border:1px solid var(--line);padding:12px 0 14px}
+.phone .handle{display:flex;align-items:center;gap:10px;padding:0 14px 10px;font-weight:700;font-size:14px}
+.phone .av{width:34px;height:34px;border-radius:50%;background:var(--koi);border:2px solid var(--emas);display:grid;place-items:center;font-family:"Noto Serif SC",serif;font-size:15px}
+.vp{width:100%;aspect-ratio:4/5;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.vp::-webkit-scrollbar{display:none}
+.track{display:flex;width:500%;height:100%;position:relative}
+.track .snap{flex:0 0 20%;scroll-snap-align:start}
+.track .pano{position:absolute;inset:0}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#555}
+.dots i.on{background:#3897f0}
+.hint{text-align:center;font-size:12.5px;color:var(--muted);margin:8px 0 0}
+
+.strip{position:relative;width:100%;aspect-ratio:4/1;max-width:100%}
+.strip .pano{position:absolute;inset:0}
+.strip .seams{position:absolute;inset:0;display:flex;pointer-events:none}
+.strip .seams div{flex:1;border-right:2px dashed rgba(122,31,43,.55)}
+.strip .seams div:last-child{border-right:0}
+.stripbox{overflow-x:auto}
+.stripbox .strip{min-width:720px}
+.sec{padding-block:24px;border-top:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:50;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 16px) max(16px,env(safe-area-inset-left,0px))}
+.ov .box{max-width:900px;margin:0 auto;display:grid;gap:12px}
+.ov .imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.ov figure{margin:0;display:grid;gap:4px}
+.ov img{width:100%;height:auto;border-radius:4px}
+.ov figcaption{font-size:12px;color:#ccc;text-align:center}
+.ov p{margin:0;font-size:13.5px;color:#ddd}
+#stage{position:fixed;left:-30000px;top:0;width:5400px;height:1350px}
+
+/* =========== PANORAMA 5400×1350 — 1 unit = var(--u) =========== */
+.pano{container-type:inline-size;overflow:hidden;background:var(--krem);color:var(--koi);font-family:var(--body);--u:calc(100cqw / 5400)}
+.pano *{box-sizing:border-box}
+.pano .a{position:absolute}
+.pano .bg{left:0;top:0;width:100%;height:100%;background:radial-gradient(ellipse at 15% 20%,#FBF7EC 0,rgba(246,239,223,0) 40%),radial-gradient(ellipse at 90% 80%,#EFE5CD 0,rgba(246,239,223,0) 45%)}
+.pano .svgbox{left:0;top:0;width:100%;height:100%}
+.pano .D{font-family:var(--display);font-weight:400;line-height:.86;margin:0;letter-spacing:calc(var(--u)*4)}
+.pano .S{font-family:var(--script);line-height:1;margin:0;white-space:nowrap}
+.pano .wm{top:calc(var(--u)*62);left:0;width:calc(var(--u)*1080);text-align:center;font-family:var(--serif);font-size:calc(var(--u)*24);letter-spacing:calc(var(--u)*6)}
+.pano .pg{top:calc(var(--u)*58);font-size:calc(var(--u)*24);font-weight:700;opacity:.6}
+.pano .stamp{width:calc(var(--u)*64);height:calc(var(--u)*64);background:var(--stempel);color:var(--krem);border-radius:calc(var(--u)*9);display:grid;place-items:center;font-family:"Noto Serif SC",serif;font-size:calc(var(--u)*40)}
+.pano .s1h{left:calc(var(--u)*80);top:calc(var(--u)*520)}
+.pano .s1h .D{font-size:calc(var(--u)*360);color:var(--koi)}
+.pano .s1h .S{font-size:calc(var(--u)*140);color:var(--marun);margin:calc(var(--u)*-40) 0 0 calc(var(--u)*170);transform:rotate(-6deg)}
+.pano .s1h p.small{margin:calc(var(--u)*40) 0 0;font-size:calc(var(--u)*36);font-weight:700;line-height:1.35}
+.pano .arrow{top:calc(var(--u)*900);left:calc(var(--u)*880);font-family:var(--display);font-size:calc(var(--u)*150);color:var(--marun);line-height:1}
+.pano .mk{width:calc(var(--u)*700)}
+.pano .mk .D{font-size:calc(var(--u)*200);color:var(--koi)}
+.pano .mk .D small{font-size:.42em;margin-left:calc(var(--u)*8)}
+.pano .mk p{margin:calc(var(--u)*14) 0 0;font-size:calc(var(--u)*40);font-weight:800;line-height:1.25}
+.pano .mk p span{display:block;font-weight:600;font-size:calc(var(--u)*30);opacity:.7;margin-top:calc(var(--u)*6)}
+.pano .s5h{left:calc(var(--u)*4320);width:calc(var(--u)*1080);top:calc(var(--u)*140);text-align:center}
+.pano .s5h .D{font-size:calc(var(--u)*300);color:var(--koi)}
+.pano .s5h .S{font-size:calc(var(--u)*68);color:var(--marun);margin-top:calc(var(--u)*-10);transform:rotate(-4deg)}
+.pano .pills{left:calc(var(--u)*4320);width:calc(var(--u)*1080);top:calc(var(--u)*1218);display:flex;justify-content:center;gap:calc(var(--u)*14)}
+.pano .pill{border:calc(var(--u)*3) solid var(--koi);border-radius:999px;padding:calc(var(--u)*9) calc(var(--u)*24);font-size:calc(var(--u)*27);font-weight:800;white-space:nowrap}
+.pano .pill.f{background:var(--koi);color:var(--krem)}
+.pano .rl{font-size:calc(var(--u)*24);font-weight:800;transform:translateX(-50%)}
+</style>
+
+<main class="wrap">
+  <section class="top">
+    <div>
+      <div class="phone">
+        <div class="handle"><div class="av">茶</div>tjapduakoi</div>
+        <div class="vp" id="vp" tabindex="0" aria-label="Preview carousel, geser ke kanan"><div class="track"><div class="snap"></div><div class="snap"></div><div class="snap"></div><div class="snap"></div><div class="snap"></div><div class="pano" id="panoPhone"></div></div></div>
+        <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <p class="hint">Geser preview di atas, rasanya seperti yang akan dialami pengikutmu.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Ide baru · carousel 5 slide menyambung</div>
+      <h1>Geser <em>buat narik.</em></h1>
+      <p class="lede">Teh tarik itu bedanya di gerakan menarik. Di carousel ini gerakan itu dilakukan pengikut sendiri: setiap kali mereka menggeser, aliran teh dari teko makin panjang, busanya makin banyak, sampai jatuh ke cup di slide terakhir. Lima slide membentuk satu gambar panjang. Garis teh menyambung melewati batas antar slide, dan penggaris di bawahnya mengukur seberapa jauh teh sudah "ditarik".</p>
+      <div class="block"><h3>Kenapa ini bukan salinan referensi</h3>
+        <ul>
+          <li>Tidak ada satu pun akun referensi yang memakai geseran carousel sebagai bagian dari cerita. Mereka memakai carousel sebagai album foto.</li>
+          <li>Ide ini cuma bisa dipakai oleh brand teh tarik. Kalau logonya diganti brand lain, idenya tidak jalan.</li>
+          <li>Yang diambil dari referensi hanya prinsipnya: satu warna yang dimiliki, kata script menimpa headline, info kecil yang rapi, humor lokal.</li>
+        </ul>
+      </div>
+      <div class="actions" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" id="save" type="button">Simpan 5 slide (1080×1350)</button><span class="status" id="st" role="status"></span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Strip utuh</h2>
+    <p class="lede">Garis putus-putus merah = batas slide. Unggah lima potongannya berurutan sebagai satu carousel, ukuran 4:5, tanpa dipotong ulang.</p>
+    <div class="stripbox"><div class="strip"><div class="pano" id="panoStrip"></div><div class="seams"><div></div><div></div><div></div><div></div><div></div></div></div></div>
+  </section>
+
+  <section class="sec">
+    <div class="cols">
+      <div class="block"><div class="rowhead"><h3>Caption</h3><button class="mini" id="cp" type="button">Salin</button></div>
+<p class="cap" id="cap">Teh tarik yang bener itu ditarik. Jadi kali ini kamu yang narik 👉 geser sampai habis.
+
+Makin panjang tarikannya, makin berbusa, makin kental. Kamu berhenti di slide berapa? 😏
+
+Tarikan aslinya bisa kamu tonton langsung mulai Minggu 29.11, jam 16.00–24.00 di Mahakam Lampion Garden.
+
+#GeserBuatNarik #TarikanPertama #TjapDuaKoi #SamarindaNgeteh</p></div>
+      <div class="block"><h3>Isi tiap slide</h3>
+        <ol>
+          <li><b>GESER buat narik.</b> Teko miring mulai menuang. "Pelan-pelan aja, kayak PDKT." Panah ke kanan.</li>
+          <li><b>25 cm</b> · masih teh biasa. <i>belum ditarik namanya.</i></li>
+          <li><b>50 cm</b> · mulai berbusa. <i>di sini teh mulai kenalan sama udara.</i></li>
+          <li><b>75 cm</b> · level pro. <i>jangan dicoba di rumah, nanti lantainya ikut ngeteh.</i></li>
+          <li><b>100 cm · KENTAL.</b> Teh jatuh ke cup. "Tarikan aslinya di Lampion." Info buka.</li>
+        </ol>
+      </div>
+      <div class="block"><h3>Cara pakai &amp; turunannya</h3>
+        <ul>
+          <li>Posting Jumat 27.11 sekitar 19.00 (post 2 di paket Tarikan Pertama).</li>
+          <li>Story: rekam layar saat menggeser carousel ini, tambahkan stiker "geser sampai habis →".</li>
+          <li>Reels lanjutan saat buka: teh ditarik sungguhan di depan penggaris kayu 1 meter yang ditempel di caravan (cukup tangan dan aliran teh). Penggaris itu juga jadi spot foto: "kamu narik sampai berapa cm?"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="stage" aria-hidden="true"></div>
+<div class="ov" id="ov" hidden><div class="box"><div class="rowhead"><p>Tekan lama tiap gambar lalu pilih Simpan, urut 1 sampai 5. Di laptop: klik kanan → Simpan gambar.</p><button class="btn primary" id="ovclose" type="button">Tutup</button></div><div class="imgs" id="imgs"></div></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function(){
+var PATH="M813 255 C1150 390 1450 500 1807 520 S2480 590 2825 600 S3500 660 3842 690 S4650 760 4860 850";
+var X0=790,PX_CM=(4860-790)/100;
+function u(n){return 'calc(var(--u)*'+n+')';}
+function pos(x,y,extra){return 'style="left:'+u(x)+';top:'+u(y)+';'+(extra||'')+'"';}
+
+function rnd(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};}
+function bubbles(){
+  var p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d",PATH);
+  var L=p.getTotalLength(),r=rnd(42),out="";
+  for(var i=0;i<260;i++){var t=Math.pow(r(),0.55);if(t<0.12)continue;var pt=p.getPointAtLength(t*L);
+    var spread=8+t*34,size=3+t*11*r();
+    out+='<circle cx="'+(pt.x+(r()-.5)*spread*1.4).toFixed(1)+'" cy="'+(pt.y-(r())*spread).toFixed(1)+'" r="'+size.toFixed(1)+'" fill="#F6EFDF" stroke="#B9824F" stroke-width="2" opacity="'+(0.55+0.45*t).toFixed(2)+'"/>';}
+  return out;}
+var BUB=null;
+
+function ruler(){var s='<line x1="0" y1="1290" x2="4560" y2="1290" stroke="#0E4D32" stroke-width="4"/>';
+  for(var cm=0;cm<=100;cm+=5){var x=X0+cm*PX_CM;if(x>4560)break;var big=cm%25===0;s+='<line x1="'+x+'" y1="'+(big?1250:1272)+'" x2="'+x+'" y2="1290" stroke="#0E4D32" stroke-width="'+(big?5:3)+'"/>';}
+  return s;}
+function marker(cm){var x=X0+cm*PX_CM;
+  var y={25:520,50:600,75:690}[cm];
+  return '<line x1="'+x+'" y1="'+(y+30)+'" x2="'+x+'" y2="1240" stroke="#7A1F2B" stroke-width="4" stroke-dasharray="14 12"/>'+
+         '<circle cx="'+x+'" cy="'+y+'" r="20" fill="#7A1F2B" stroke="#F6EFDF" stroke-width="6"/>';}
+
+var TEKO='<g transform="rotate(35 710 280)"><path d="M630 190 H790 V350 Q790 372 768 372 H652 Q630 372 630 350 Z" fill="#D6DCD8" stroke="#0E4D32" stroke-width="9" stroke-linejoin="round"/>'+
+ '<path d="M630 230 Q560 240 566 290 Q572 340 630 335" fill="none" stroke="#0E4D32" stroke-width="14" stroke-linecap="round"/>'+
+ '<path d="M640 212 H780" stroke="#F6EFDF" stroke-width="7" stroke-linecap="round" opacity=".8"/><rect x="655" y="300" width="110" height="22" rx="4" fill="#0E4D32"/></g>';
+var CUP='<g transform="translate(4690 838)"><path d="M10 40 H330 L298 360 H42 Z" fill="#B9824F" stroke="#0E4D32" stroke-width="9" stroke-linejoin="round"/>'+
+ '<path d="M4 44 Q170 -40 336 44 Z" fill="#F6EFDF" stroke="#0E4D32" stroke-width="9" stroke-linejoin="round"/>'+
+ '<circle cx="120" cy="22" r="14" fill="#F6EFDF" stroke="#B9824F" stroke-width="3"/><circle cx="214" cy="16" r="11" fill="#F6EFDF" stroke="#B9824F" stroke-width="3"/><circle cx="260" cy="30" r="8" fill="#F6EFDF" stroke="#B9824F" stroke-width="3"/>'+
+ '<path d="M28 120 H312" stroke="#DDB07A" stroke-width="14"/><circle cx="170" cy="230" r="54" fill="#F6EFDF"/><circle cx="170" cy="230" r="36" fill="#C9A24B"/>'+
+ '<path d="M152 230 Q170 210 188 230 Q170 250 152 230 Z" fill="#0E4D32"/></g>';
+
+function pano(){
+  if(BUB===null)BUB=bubbles();
+  var svg='<svg width="100%" height="100%" viewBox="0 0 5400 1350" preserveAspectRatio="none" aria-hidden="true">'+
+    ruler()+
+    '<path d="'+PATH+'" fill="none" stroke="#9A6A3C" stroke-width="34" stroke-linecap="round"/>'+
+    '<path d="'+PATH+'" fill="none" stroke="#B9824F" stroke-width="24" stroke-linecap="round"/>'+
+    '<path d="'+PATH+'" fill="none" stroke="#DDB07A" stroke-width="6" stroke-linecap="round" transform="translate(0 -6)"/>'+
+    BUB+marker(25)+marker(50)+marker(75)+TEKO+CUP+'</svg>';
+  var h='<div class="a bg"></div><div class="a svgbox">'+svg+'</div>';
+  h+='<div class="a wm">TOKO TEH · TJAP DUA KOI</div>';
+  for(var i=0;i<5;i++){h+='<div class="a pg" '+pos(i*1080+960,58)+'>'+(i+1)+'/5</div>';}
+  h+='<div class="a s1h"><p class="D">GESER</p><p class="S">buat narik.</p><p class="small">Pelan-pelan aja,<br>kayak PDKT.</p></div>';
+  h+='<div class="a arrow">→</div>';
+  var mk=[[25,"masih teh biasa.","belum ditarik namanya."],[50,"mulai berbusa.","di sini teh mulai kenalan sama udara."],[75,"level pro.","jangan dicoba di rumah, nanti lantainya ikut ngeteh."]];
+  mk.forEach(function(m,i){var x=X0+m[0]*PX_CM;h+='<div class="a mk" '+pos(x-300,i===0?100:(i===1?170:220))+'><p class="D">'+m[0]+'<small>CM</small></p><p>'+m[1]+'<span>'+m[2]+'</span></p></div>';});
+  h+='<div class="a s5h"><p class="D">KENTAL.</p><p class="S">tarikan aslinya di Lampion.</p></div>';
+  [0,25,50,75].forEach(function(cm){h+='<div class="a rl" '+pos(X0+cm*PX_CM,1300)+'>'+cm+' cm</div>';});
+  h+='<div class="a" '+pos(5300,52)+'><span class="stamp">茶</span></div>';
+  h+='<div class="a pills"><span class="pill f">Minggu 29.11 · 16.00–24.00</span><span class="pill">Mahakam Lampion Garden</span></div>';
+  return h;}
+
+document.getElementById("panoPhone").innerHTML=pano();
+document.getElementById("panoStrip").innerHTML=pano();
+
+var vp=document.getElementById("vp"),dots=document.getElementById("dots").children;
+vp.addEventListener("scroll",function(){var i=Math.round(vp.scrollLeft/vp.clientWidth);for(var k=0;k<dots.length;k++)dots[k].className=k===i?"on":"";},{passive:true});
+vp.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){vp.scrollBy({left:vp.clientWidth,behavior:"smooth"});e.preventDefault();}if(e.key==="ArrowLeft"){vp.scrollBy({left:-vp.clientWidth,behavior:"smooth"});e.preventDefault();}});
+
+document.getElementById("cp").onclick=function(){var b=this,t=document.getElementById("cap").textContent;
+  try{navigator.clipboard.writeText(t).then(function(){b.textContent="Tersalin";setTimeout(function(){b.textContent="Salin";},1600);},function(){b.textContent="Pilih teks manual";});}catch(e){b.textContent="Pilih teks manual";}};
+
+var ov=document.getElementById("ov"),st=document.getElementById("st");
+document.getElementById("ovclose").onclick=function(){ov.hidden=true;};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ov.hidden=true;});
+document.getElementById("save").onclick=function(){
+  if(typeof html2canvas!=="function"){st.textContent="Pembuat gambar belum termuat. Muat ulang halaman.";return;}
+  st.textContent="Membuat 5 gambar…";var stage=document.getElementById("stage");
+  stage.innerHTML='<div class="pano" style="position:relative;width:5400px;height:1350px">'+pano()+'</div>';
+  var el=stage.firstChild;
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){return html2canvas(el,{scale:1,width:5400,height:1350,logging:false});})
+  .then(function(cv){var box=document.getElementById("imgs");box.innerHTML="";
+    for(var i=0;i<5;i++){var c=document.createElement("canvas");c.width=1080;c.height=1350;c.getContext("2d").drawImage(cv,i*1080,0,1080,1350,0,0,1080,1350);
+      var f=document.createElement("figure");var im=new Image();im.alt="Slide "+(i+1);im.src=c.toDataURL("image/png");var fc=document.createElement("figcaption");fc.textContent="Slide "+(i+1)+" / 5";f.appendChild(im);f.appendChild(fc);box.appendChild(f);}
+    ov.hidden=false;st.textContent="";stage.innerHTML="";})
+  .catch(function(){st.textContent="Gagal membuat gambar. Coba lagi atau screenshot strip-nya.";stage.innerHTML="";});
+};
+})();
+</script>

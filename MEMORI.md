@@ -37,7 +37,8 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Caravan di **Mahakam Lampion Garden, Samarinda**. Launching **Minggu 29 November 2026**.
 - Slogan: "Sepasang koi, secangkir teh". Neon: "Teh kental, teman kental."
 - Produk: semua dari base C teh tarik (Teh Tarik, Milo Tarik, Matcha Tarik, Houjicha Tarik), cup 14 oz & jumbo 22 oz, plus **bagel dan wrap**.
-- Program referral: **Teman Tarik**. Karyawan: Ocha.
+- Program referral: **Teman Tarik**. Karyawan pertama (Ocha) sudah berhenti per 26 Nov 2026.
+- **Aturan konten: jangan pernah memasukkan nama karyawan ke konten apa pun** (post, caption, reels, poster).
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
@@ -62,6 +63,9 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 | Database Bahan & HPP | https://claude.ai/artifact/GofdwDvVf5545GnUg9nkiv |
 | Inventaris Aset — Kursi | https://claude.ai/artifact/RKVbpyBA81WhRRnfSFo3ye |
 | Keuangan Keluarga & Toko Teh 2026–2027 | https://claude.ai/artifact/WLsYjuYErwjvSnucmruygP |
+| Tarikan Pertama (paket 9 post launching) | https://claude.ai/artifact/URqWDTqhTxW3aRipL9J32Y |
+| Geser Buat Narik (carousel 5 slide) | https://claude.ai/artifact/BdHQW7w3UMmFFD7Ji6Q2fg |
+| Cari Tjap-nya (post tebak-tebakan) | https://claude.ai/artifact/WgkdJHixcDjpUtwVPj3c6j |
 
 ### Google Drive / Docs
 - Logo final vector: https://drive.google.com/file/d/1qCjtX-Pbnc4CeLjG_i9WNMX0D1a-Xasv/view
@@ -94,6 +98,8 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 - `notes/ai-ad-poster-guide.md` — iklan AI: foto asli, satu ide, tanpa tambahan; template prompt.
 - `notes/villa-promo-keyframe-animation.md` — video promo villa Panoramic Highland dengan animasi keyframe halus.
 - `konten/PANDUAN-KONTEN.md` — panduan postingan Toko Teh (referensi @madlyfuel; cocok untuk jualan wrap).
+- `konten/PLAYBOOK-REFERENSI.md` — playbook dari @based.dough, @hooluburger, @jagocoffee (25 Nov).
+- Audiens: keluarga, remaja skena, cewek pemburu foto. Jam buka sementara 16.00–24.00. Harga belum ditetapkan.
 
 ---
 
@@ -108,6 +114,7 @@ Perkiraan untung bersih hari itu ±Rp74.200 (modal bahan masih estimasi 35%).
 | Tjap Dua Koi tea shop launch | 21–23 Nov | Brand, caravan, menu/HPP, marketing, Dompet Koi, rekap ESB |
 | Website visibility issue | 23 Nov | Kenapa Claude chat lain tak bisa buka artifact; tip Rp50rb ke Ocha |
 | Claude-mem installation | 24 Nov | Pasang skill/plugin + script laptop |
-| Pelajari dan ingat (sesi ini) | 24 Nov | Panduan iklan AI, video villa, gabung semua memori |
+| Pelajari dan ingat | 24 Nov | Panduan iklan AI, video villa, gabung semua memori |
+| Playbook konten & ide inovatif | 25–27 Nov | Playbook @based.dough/@hooluburger/@lokastreetside/@jagocoffee, paket Tarikan Pertama, Geser Buat Narik, Cari Tjap-nya; aturan tanpa nama karyawan; rencana "studio kru AI" (ide→naskah→cek→produksi→posting→analisa) — Metricool belum tersambung ke Instagram |
 
 Catatan: sesi Tjap Dua Koi sangat panjang; yang dirangkum di sini adalah hasil akhir (file, link, keputusan), bukan setiap pesan.

@@ -1,0 +1,514 @@
+<title>Tarikan Pertama</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700&family=Inter:wght@400;500;600;700;800&family=Mr+Dafoe&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E8%8C%B6&display=swap" rel="stylesheet">
+<style>
+/* Papan kerja konten: satu dunia hijau koi. Kiri feed 3x3 seperti Instagram, kanan brief post yang dipilih. */
+:root{
+  --koi:#0E4D32; --koi-deep:#09331F; --koi-ink:#062619;
+  --krem:#F6EFDF; --krem-2:#EBE1C9; --emas:#C9A24B; --marun:#7A1F2B; --stempel:#B3261E; --teh:#B9824F;
+  --muted:#A9C2B4; --line:rgba(246,239,223,.16);
+  --display:"Bebas Neue","Oswald","Arial Narrow",sans-serif;
+  --script:"Mr Dafoe","Brush Script MT",cursive;
+  --serif:"Cinzel",Georgia,serif;
+  --body:"Inter",system-ui,-apple-system,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--koi-ink);color:var(--krem);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--emas);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- page header ---------- */
+.top{background:var(--koi);border-bottom:1px solid var(--line)}
+.top .wrap{padding-block:28px 24px;display:grid;gap:10px}
+.eyebrow{font-family:var(--serif);font-size:11px;letter-spacing:.32em;color:var(--emas);text-transform:uppercase}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,7vw,76px);line-height:.9;margin:0;letter-spacing:.01em}
+h1 em{font-family:var(--script);font-style:normal;color:var(--emas);font-size:.8em;margin-left:.15em;letter-spacing:0}
+.lede{max-width:68ch;margin:0;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:600;color:var(--krem)}
+
+/* ---------- price form ---------- */
+details.harga{margin-top:6px;background:rgba(246,239,223,.06);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+details.harga summary{cursor:pointer;font-weight:700;font-size:14px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px}
+.pgrid label{display:grid;gap:4px;font-size:12px;color:var(--muted);font-weight:600}
+.pgrid input{font:600 15px var(--body);padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--koi-deep);color:var(--krem);width:100%}
+.hint{font-size:12px;color:var(--muted);margin:8px 0 0}
+
+/* ---------- board ---------- */
+.board{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;padding-block:28px}
+@media (max-width:860px){.board{grid-template-columns:minmax(0,1fr)}}
+.feedcol h2,.sec h2{font-family:var(--display);font-weight:400;font-size:34px;line-height:1;margin:0 0 4px;letter-spacing:.01em}
+.feedcol p.sub{margin:0 0 14px;color:var(--muted);font-size:13.5px}
+.phone{background:#000;border-radius:18px;padding:12px 0 0;border:1px solid var(--line)}
+.phone .handle{display:flex;align-items:center;gap:10px;padding:0 14px 12px}
+.phone .av{width:38px;height:38px;border-radius:50%;background:var(--koi);border:2px solid var(--emas);display:grid;place-items:center;font-family:"Noto Serif SC",serif;color:var(--krem);font-size:16px}
+.phone .nm{font-weight:700;font-size:14px}
+.phone .nm small{display:block;font-weight:500;color:#9aa;font-size:11.5px}
+.feed{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+.tile{position:relative;padding:0;border:0;background:none;cursor:pointer;display:block;width:100%}
+.tile .num{position:absolute;left:6px;top:6px;z-index:3;background:rgba(0,0,0,.65);color:#fff;font:700 11px var(--body);border-radius:999px;padding:2px 7px}
+.tile .fmt{position:absolute;right:6px;top:6px;z-index:3;background:rgba(0,0,0,.55);color:#fff;font:600 10px var(--body);border-radius:4px;padding:2px 5px}
+.tile[aria-pressed="true"]::after{content:"";position:absolute;inset:0;border:3px solid var(--emas);z-index:4;pointer-events:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:12px;color:var(--muted)}
+
+.detail{display:grid;gap:18px;align-content:start;min-width:0}
+@media (min-width:861px){.detail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);max-height:calc(100vh - 32px);overflow:auto;padding-right:6px}}
+.dhead{display:grid;gap:6px}
+.dhead .meta{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:var(--emas);color:var(--koi-ink)}
+.tag.alt{background:transparent;border:1px solid var(--line);color:var(--krem)}
+.dhead h3{font-family:var(--display);font-weight:400;font-size:40px;line-height:.95;margin:0;text-wrap:balance}
+.dhead .hook{margin:0;color:var(--muted)}
+.big{max-width:420px;width:100%}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:700 13.5px var(--body);border-radius:10px;padding:10px 14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--krem)}
+.btn.primary{background:var(--emas);border-color:var(--emas);color:var(--koi-ink)}
+.block{background:rgba(246,239,223,.05);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.block h4{margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--emas);font-family:var(--serif)}
+.block p,.block li{margin:0;font-size:14px}
+.block ul,.block ol{margin:0;padding-left:18px;display:grid;gap:4px}
+.cap{white-space:pre-wrap;font-size:14px;margin:0;font-family:var(--body)}
+.prompt{white-space:pre-wrap;font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#D8E6DD;margin:0;overflow-wrap:anywhere}
+.rowhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mini{font:700 12px var(--body);background:transparent;border:1px solid var(--line);color:var(--krem);border-radius:8px;padding:4px 10px;cursor:pointer}
+.status{font-size:12px;color:var(--emas);min-height:1em}
+
+/* ---------- lower sections ---------- */
+.sec{padding-block:26px;border-top:1px solid var(--line)}
+.sec>p.sub{margin:0 0 16px;color:var(--muted);max-width:70ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--koi);border-radius:14px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{margin:0;font-family:var(--display);font-weight:400;font-size:26px;line-height:1}
+.card p{margin:0;font-size:14px;color:#D5E3DA}
+.card .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--emas);font-weight:700}
+.words{display:flex;flex-wrap:wrap;gap:6px}
+.w{background:var(--krem);color:var(--koi);border-radius:6px;padding:3px 8px;font-weight:700;font-size:13px}
+.w.no{background:transparent;color:#E7B4AE;border:1px dashed #E7B4AE;text-decoration:line-through}
+.shots{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.shots li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;background:rgba(246,239,223,.05);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px}
+.shots li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--emas);color:var(--koi-ink);display:grid;place-items:center;font:800 13px var(--body)}
+.shots b{display:block}
+.shots span{color:var(--muted);font-size:13px}
+footer{padding-block:24px 40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+
+/* ---------- export overlay ---------- */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:50;display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 16px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 16px) max(16px,env(safe-area-inset-left,0px))}
+.ov .box{display:grid;gap:10px;justify-items:center;max-width:min(440px,100%)}
+.ov img{width:100%;height:auto;border-radius:6px;max-height:72vh;object-fit:contain}
+.ov p{margin:0;text-align:center;font-size:13.5px;color:#ddd}
+#stage{position:fixed;left:-20000px;top:0;width:1080px}
+
+/* =========================================================
+   POSTER SYSTEM — semua ukuran dalam cqw (1cqw = 10.8px di 1080)
+   ========================================================= */
+.poster{aspect-ratio:4/5;width:100%;max-width:100%;container-type:inline-size;position:relative;overflow:hidden;font-family:var(--body);color:var(--krem);background:var(--koi);isolation:isolate}
+.poster *{box-sizing:border-box}
+.pin{position:absolute;inset:0;padding:10cqw 7cqw 8cqw;display:flex;flex-direction:column}
+.wm{position:absolute;top:3.6cqw;left:0;right:0;text-align:center;font-family:var(--serif);font-size:1.9cqw;letter-spacing:.45cqw;z-index:5}
+.cn{position:absolute;font-size:1.55cqw;font-weight:600;letter-spacing:.08cqw;opacity:.85;z-index:5;line-height:1.2}
+.cn.tl{top:3.6cqw;left:4cqw}.cn.tr{top:3.6cqw;right:4cqw;text-align:right}.cn.bl{bottom:3.6cqw;left:4cqw}.cn.br{bottom:3.6cqw;right:4cqw;text-align:right}
+.stamp{display:inline-grid;place-items:center;width:6cqw;height:6cqw;background:var(--stempel);color:var(--krem);border-radius:.8cqw;font-family:"Noto Serif SC",serif;font-size:3.8cqw;line-height:1}
+.D{font-family:var(--display);font-weight:400;line-height:.86;letter-spacing:.02em;margin:0}
+.S{font-family:var(--script);line-height:1;margin:0;font-weight:400;white-space:nowrap}
+.pills{display:flex;flex-wrap:wrap;gap:1.4cqw}
+.pill{border:.28cqw solid currentColor;border-radius:99cqw;padding:.9cqw 2.4cqw;font-size:2.35cqw;font-weight:700;line-height:1.15;white-space:nowrap}
+.pill.fill{background:var(--krem);color:var(--koi);border-color:var(--krem)}
+.badge{width:18cqw;height:18cqw;border-radius:50%;background:var(--emas);color:var(--koi-ink);display:grid;place-items:center;text-align:center;font-family:var(--display);line-height:.85}
+.badge b{font-weight:400;font-size:8.6cqw;display:block}
+.badge small{font-family:var(--body);font-weight:800;font-size:1.7cqw;letter-spacing:.1cqw;display:block}
+.ph{position:absolute;inset:0;z-index:0}
+.phnote{position:absolute;z-index:2;font-size:1.6cqw;font-weight:700;letter-spacing:.1cqw;background:rgba(0,0,0,.5);color:#fff;padding:.6cqw 1.4cqw;border-radius:.6cqw}
+
+/* P1 teaser */
+.p1{background:var(--koi)}
+.p1 .car{position:absolute;left:12cqw;right:12cqw;top:17cqw;opacity:.55}
+.p1 .h{margin-top:auto;position:relative}
+.p1 .h .D{font-size:16.5cqw;color:var(--krem)}
+.p1 .h .S{position:absolute;right:-1cqw;top:13cqw;font-size:15cqw;color:var(--emas);transform:rotate(-7deg)}
+.p1 .pills{margin-top:5cqw;color:var(--krem)}
+
+/* P2 geser buat narik (slide 1 dari carousel menyambung) */
+.p2{background:var(--krem);color:var(--koi)}
+.p2 .tk{position:absolute;left:52cqw;top:11cqw;width:34cqw;height:30cqw}
+.p2 .stream{position:absolute;left:0;top:0;width:100cqw;height:125cqw}
+.p2 .pin{justify-content:flex-end;padding-bottom:16cqw}
+.p2 .D{font-size:33cqw}
+.p2 .S{font-size:13cqw;color:var(--marun);margin:-4cqw 0 0 16cqw;transform:rotate(-6deg)}
+.p2 .small{margin:4cqw 0 0;font-size:3.4cqw;font-weight:700;line-height:1.35}
+.p2 .arr{position:absolute;right:6cqw;bottom:17cqw;font-family:var(--display);font-size:14cqw;color:var(--marun);line-height:1}
+.p2 .rul{position:absolute;left:0;right:0;bottom:4.5cqw;height:4cqw;border-top:.4cqw solid var(--koi);background:repeating-linear-gradient(90deg,var(--koi) 0 .3cqw,transparent .3cqw 3cqw);background-size:100% 1.6cqw;background-repeat:no-repeat}
+/* P3 reel cover */
+.p3{background:#1a1410;color:var(--krem)}
+.p3 .ph{background:radial-gradient(ellipse at 30% 20%,rgba(201,162,75,.35),transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(122,31,43,.45),transparent 60%),linear-gradient(160deg,#2b2219,#120e0b)}
+.p3 .grain{position:absolute;inset:0;z-index:1;opacity:.18;background-image:repeating-radial-gradient(circle at 17% 32%,#fff 0 .08cqw,transparent .1cqw .5cqw)}
+.p3 .leak{position:absolute;right:-20cqw;top:-10cqw;width:60cqw;height:60cqw;border-radius:50%;background:radial-gradient(circle,rgba(255,140,60,.45),transparent 65%);z-index:1}
+.p3 .pin{z-index:2;justify-content:center}
+.p3 .hminus{font-family:var(--body);font-weight:800;font-size:3cqw;letter-spacing:.6cqw;color:var(--emas)}
+.p3 .D{font-size:31cqw}
+.p3 .S{font-size:14cqw;color:var(--emas);margin:-3cqw 0 -2cqw 3cqw;transform:rotate(-5deg)}
+.p3 .sub3{font-size:2.8cqw;font-weight:600;margin-top:4cqw;max-width:62cqw;line-height:1.35;opacity:.9}
+.p3 .play{position:absolute;right:7cqw;bottom:8cqw;width:11cqw;height:11cqw;border-radius:50%;border:.4cqw solid var(--krem);display:grid;place-items:center;z-index:3}
+
+/* P4 launch */
+.p4{background:var(--marun)}
+.p4 .lamps{position:absolute;left:0;right:0;top:7cqw;height:28cqw;z-index:1}
+.p4 .pin{z-index:2;padding-top:36cqw}
+.p4 .D{font-size:40cqw;color:var(--krem);letter-spacing:.01em}
+.p4 .S{font-size:12cqw;color:var(--emas);margin:-8cqw 0 0 10cqw;transform:rotate(-6deg)}
+.p4 .date{display:flex;align-items:stretch;gap:2.4cqw;margin-top:5cqw}
+.p4 .date .day{background:var(--krem);color:var(--marun);padding:1.6cqw 2.6cqw;border-radius:1.2cqw;text-align:center}
+.p4 .date .day b{font-family:var(--display);font-weight:400;font-size:12cqw;line-height:.85;display:block}
+.p4 .date .day small{font-weight:800;font-size:1.9cqw;letter-spacing:.3cqw}
+.p4 .date .pills{flex-direction:column;align-items:flex-start;gap:1.2cqw;justify-content:center;color:var(--krem)}
+.p4 .foot{margin-top:auto;font-size:2.6cqw;font-weight:600;color:var(--krem-2)}
+
+/* P5 hero */
+.p5{background:radial-gradient(circle at 50% 62%,#1b6a47 0,var(--koi) 45%,var(--koi-deep) 100%)}
+.p5 .tex{position:absolute;inset:0;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 4 L36 20 L20 36 L4 20 Z' fill='none' stroke='%23F6EFDF' stroke-width='1.4'/%3E%3C/svg%3E");background-size:6cqw 6cqw}
+.p5 .D{font-size:30cqw;text-align:center;position:relative;z-index:2}
+.p5 .S{font-size:13cqw;color:var(--emas);text-align:center;margin-top:-6cqw;position:relative;z-index:3;transform:rotate(-5deg)}
+.p5 .cup{position:absolute;left:50%;bottom:5cqw;width:40cqw;transform:translateX(-50%);z-index:1}
+.p5 .badge{position:absolute;right:6cqw;bottom:22cqw;z-index:3;transform:rotate(8deg)}
+.p5 .stk{position:absolute;left:6cqw;bottom:16cqw;z-index:3;background:var(--krem);color:var(--koi);font-family:var(--display);font-size:5cqw;line-height:.9;padding:1.4cqw 2cqw;transform:rotate(-8deg);border-radius:1cqw;text-align:center}
+.p5 .stk small{display:block;font-family:var(--body);font-size:1.6cqw;font-weight:800;letter-spacing:.1cqw}
+
+/* P6 menu */
+.p6{background:var(--krem);color:var(--koi)}
+.p6 .pin{padding:10cqw 5.5cqw 7cqw}
+.p6 .tt{display:flex;align-items:flex-end;gap:2cqw}
+.p6 .tt .D{font-size:15cqw}
+.p6 .tt .S{font-size:8cqw;color:var(--marun);margin-bottom:2cqw;transform:rotate(-5deg)}
+.p6 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;margin-top:3cqw;flex:1}
+.p6 .m{background:var(--koi);color:var(--krem);border-radius:2cqw;padding:2cqw;display:flex;flex-direction:column;position:relative}
+.p6 .m.food{background:var(--marun)}
+.p6 .m svg{width:11cqw;height:13cqw;margin:0 auto .8cqw;display:block}
+.p6 .m .D{font-size:6cqw;line-height:.9}
+.p6 .m p{margin:.6cqw 0 0;font-size:1.75cqw;line-height:1.3;opacity:.85;font-weight:500}
+.p6 .m .pb{position:absolute;right:-1cqw;top:-1cqw;width:9.5cqw;height:9.5cqw;border-radius:50%;background:var(--emas);color:var(--koi-ink);display:grid;place-items:center;font-family:var(--display);font-size:4.4cqw;transform:rotate(8deg)}
+.p6 .note{margin-top:2.4cqw;font-size:2.1cqw;font-weight:700;display:flex;justify-content:space-between;gap:2cqw}
+
+/* P7 fit check */
+.p7{background:#0b0f0d}
+.p7 .ph{background:radial-gradient(circle at 15% 20%,rgba(201,162,75,.75) 0 2.6cqw,transparent 3cqw),radial-gradient(circle at 85% 12%,rgba(179,38,30,.8) 0 3.4cqw,transparent 3.8cqw),radial-gradient(circle at 70% 30%,rgba(201,162,75,.55) 0 1.8cqw,transparent 2.2cqw),radial-gradient(circle at 30% 8%,rgba(179,38,30,.6) 0 1.6cqw,transparent 2cqw),radial-gradient(circle at 92% 45%,rgba(201,162,75,.4) 0 2.4cqw,transparent 2.8cqw),linear-gradient(180deg,#1b2620,#0b0f0d 75%)}
+.p7 .fig{position:absolute;left:50%;bottom:0;width:62cqw;transform:translateX(-50%);z-index:1}
+.p7 .phnote{left:4cqw;top:44cqw}
+.p7 .pin{z-index:2}
+.p7 .D{font-size:24cqw;color:var(--krem);margin-top:2cqw}
+.p7 .S{font-size:8.5cqw;color:var(--emas);margin:-3cqw 0 0 4cqw;transform:rotate(-6deg)}
+.p7 .list{margin-top:auto;background:var(--krem);color:var(--koi);border-radius:2cqw;padding:3cqw 3.4cqw;width:52cqw;display:grid;gap:1.4cqw;transform:rotate(-2deg)}
+.p7 .list div{display:flex;align-items:center;gap:1.8cqw;font-size:2.7cqw;font-weight:700}
+.p7 .list i{font-style:normal;width:4.2cqw;height:4.2cqw;border-radius:.8cqw;background:var(--koi);color:var(--krem);display:grid;place-items:center;font-size:2.8cqw;flex:none}
+
+/* P8 family */
+.p8{background:var(--krem);color:var(--koi)}
+.p8 .D{font-size:17cqw}
+.p8 .S{font-size:8cqw;color:var(--marun);margin:-1cqw 0 0 8cqw;transform:rotate(-5deg)}
+.p8 .fam{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:1.5cqw;border-bottom:.5cqw solid var(--koi);padding-bottom:0}
+.p8 .fm{display:flex;flex-direction:column;align-items:center;flex:1}
+.p8 .fm svg{width:100%;display:block}
+.p8 .lbl{text-align:center;margin-top:2cqw}
+.p8 .lbls{display:flex;justify-content:space-between;gap:1.5cqw}
+.p8 .lbls div{flex:1;text-align:center}
+.p8 .lbls b{display:block;font-family:var(--display);font-weight:400;font-size:5.4cqw;line-height:1}
+.p8 .lbls span{display:block;font-size:1.9cqw;font-weight:700;line-height:1.25;color:var(--marun)}
+
+/* P9 teman tarik */
+.p9{background:var(--koi)}
+.p9 .masc{position:absolute;right:-3cqw;bottom:6cqw;width:46cqw;z-index:1}
+.p9 .pin{z-index:2}
+.p9 .D{font-size:21cqw}
+.p9 .S{font-size:8.5cqw;color:var(--emas);margin:-1cqw 0 0 2cqw;transform:rotate(-5deg)}
+.p9 .steps{margin-top:auto;display:grid;gap:1.6cqw;width:54cqw}
+.p9 .st{display:flex;gap:2cqw;align-items:center;font-size:2.6cqw;font-weight:700;line-height:1.25}
+.p9 .st i{font-style:normal;flex:none;width:6cqw;height:6cqw;border-radius:50%;background:var(--emas);color:var(--koi-ink);display:grid;place-items:center;font-family:var(--display);font-size:4cqw}
+.p9 .code{margin-top:3cqw;display:inline-block;border:.35cqw dashed var(--krem);border-radius:1.4cqw;padding:1.2cqw 2.4cqw;font-family:var(--display);font-size:5.4cqw;letter-spacing:.4cqw;align-self:flex-start}
+@media (prefers-reduced-motion:no-preference){.tile .poster{transition:transform .2s}.tile:hover .poster{transform:scale(.985)}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Toko Teh · Tjap Dua Koi · Paket konten launching</div>
+    <h1>Tarikan Pertama<em>9 post</em></h1>
+    <p class="lede">Feed 3×3 untuk minggu launching, disusun dari pola @based.dough dan @hooluburger tapi dengan warna dan suara kita sendiri. Ketuk tiap kotak untuk melihat headline, caption, arahan visual, dan prompt foto. Semua poster bisa disimpan sebagai gambar 1080×1350.</p>
+    <div class="chips">
+      <span class="chip">Keluarga</span><span class="chip">Remaja skena</span><span class="chip">Cewek yang suka foto &amp; gengsi</span><span class="chip">Buka 16.00–24.00</span><span class="chip">Mahakam Lampion Garden</span>
+    </div>
+    <details class="harga" id="hargaBox">
+      <summary>Isi harga (opsional) — badge di poster akan ikut berubah</summary>
+      <div class="pgrid" id="pgrid"></div>
+      <p class="hint">Tulis dalam ribuan, misalnya 18 untuk Rp18.000. Kosong = tampil "??rb". Tersimpan di browser ini saja.</p>
+    </details>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="board">
+    <div class="feedcol">
+      <h2>Preview feed</h2>
+      <p class="sub">Angka = urutan posting. Post terbaru muncul di kiri atas, jadi post 1 ada di kanan bawah.</p>
+      <div class="phone">
+        <div class="handle"><div class="av">茶</div><div class="nm">tjapduakoi<small>Toko Teh · Mahakam Lampion Garden</small></div></div>
+        <div class="feed" id="feed"></div>
+      </div>
+      <div class="legend"><span>Hijau = info &amp; identitas</span><span>Krem = menu &amp; keluarga</span><span>Gelap = foto/reels manusia</span><span>Marun = event</span></div>
+    </div>
+    <article class="detail" id="detail" aria-live="polite"></article>
+  </section>
+
+  <section class="sec">
+    <h2>Siapa yang kita ajak ngomong</h2>
+    <p class="sub">Tiga kelompok, satu tempat. Lampion Garden sudah jadi spot jalan-jalan sore keluarga dan spot foto anak muda. Tugas konten kita: bikin cup Tjap Dua Koi jadi bagian dari foto mereka.</p>
+    <div class="cols">
+      <div class="card"><span class="k">Keluarga</span><h3>Satu meja, beda selera</h3><p>Butuh alasan mampir yang aman buat anak dan orang tua. Tonjolkan Milo Tarik buat adek, jumbo 22 oz buat dibagi, wrap buat ganjel. Post: 4, 6, 8.</p></div>
+      <div class="card"><span class="k">Remaja skena</span><h3>Yang dipegang ikut dinilai</h3><p>Matcha dan Houjicha Tarik itu "kartu identitas". Bahasa harus terasa teman sendiri, bukan iklan. Humor sketsa dan plesetan. Post: 1, 3, 7.</p></div>
+      <div class="card"><span class="k">Cewek &amp; pemburu foto</span><h3>Cup = aksesori</h3><p>Mereka beli karena fotonya cakep dan ceritanya bisa diunggah. Kasih spot, kasih alasan repost, kasih apresiasi. Post: 2, 5, 7, 9.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Kamus suara Tjap Dua Koi</h2>
+    <p class="sub">Gaul dan skena, tapi tetap punya ciri lawas. Satu post satu candaan, jangan ditumpuk.</p>
+    <div class="cols">
+      <div class="card"><span class="k">Pakai</span><div class="words"><span class="w">mampir</span><span class="w">seruput</span><span class="w">kental</span><span class="w">no debat</span><span class="w">bestie</span><span class="w">skena</span><span class="w">gas</span><span class="w">fix</span><span class="w">tipis-tipis</span><span class="w">valid</span><span class="w">tjap</span></div></div>
+      <div class="card"><span class="k">Plesetan "tarik" (jadi benang merah)</span><div class="words"><span class="w">tarik ulur</span><span class="w">narik perhatian</span><span class="w">tarikan pertama</span><span class="w">tinggal tarik</span><span class="w">tarik temanmu</span><span class="w">ditarik, bukan diulur</span></div></div>
+      <div class="card"><span class="k">Hindari</span><div class="words"><span class="w no">Dapatkan segera!</span><span class="w no">Kualitas terbaik</span><span class="w no">full English</span><span class="w no">promo tiap post</span><span class="w no">nyindir brand lain</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Shot list sebelum Minggu</h2>
+    <p class="sub">Belum ada foto, jadi ini daftar wajib dari HP. Rekam vertikal 4K, bersihkan lensa, jangan pakai zoom digital. Jam terbaik: 16.30–18.15 (cahaya emas, lalu lampu lampion menyala).</p>
+    <ol class="shots">
+      <li><div><b>Caravan saat lampu menyala</b><span>Dari depan, agak rendah, 18.00. Untuk post 1 slide 2 dan post 4.</span></div></li>
+      <li><div><b>Teh ditarik</b><span>Mode burst, cukup tangan dan aliran teh di udara, tanpa wajah. Untuk reels lanjutan post 2.</span></div></li>
+      <li><div><b>Slow-mo tarikan</b><span>Mode slow-mo 120 fps, 5 detik, latar gelap. Untuk post 5 versi reels.</span></div></li>
+      <li><div><b>Busa teh tarik dari atas</b><span>Top-down, cup tanpa tutup, di atas kain hijau.</span></div></li>
+      <li><div><b>Tangan pegang cup</b><span>Logo menghadap kamera, latar bokeh lampion (mode Potret). Untuk post 7.</span></div></li>
+      <li><div><b>Empat cup berjajar</b><span>14 oz dan 22 oz, urut tinggi rendah, latar krem. Untuk post 8.</span></div></li>
+      <li><div><b>Bagel &amp; wrap dibelah</b><span>Isi terlihat, uap atau saus menetes kalau ada. Untuk post 6.</span></div></li>
+      <li><div><b>Detail kecil</b><span>Stempel 茶, mesin sealer, logo di tutup cup. Untuk transisi reels.</span></div></li>
+      <li><div><b>Seduh base C (di balik layar)</b><span>Teh dituang, disaring, uap. Untuk story H-2.</span></div></li>
+      <li><div><b>Seruput pertama pengunjung</b><span>Hari Minggu, minta izin dulu. Reaksi jujur = konten minggu berikutnya.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="sec">
+    <h2>Bank ide setelah launching</h2>
+    <p class="sub">Pola campaign berseri ala hooolu: satu nama, 3–6 post, satu baris grid. Pilih satu per dua minggu.</p>
+    <div class="cols">
+      <div class="card"><span class="k">Mingguan · reels</span><h3>Malam Minggu Tarik</h3><p>Seri sketsa tiap Sabtu: obrolan absurd di bangku Lampion, ditutup seruput. Gaya grading film lawas seperti video @jagocoffee.</p></div>
+      <div class="card"><span class="k">Musim hujan · Desember</span><h3>Desember Basah</h3><p>"Hujan di luar, kental di dalam." Teh Tarik panas dan Houjicha jadi top 3, poster payung + cup berembun.</p></div>
+      <div class="card"><span class="k">22 Desember</span><h3>Mama Dulu yang Pilih</h3><p>Hari Ibu: ajak mama, mama pilih menu, anak yang bayar. Poster foto keluarga + kartu ucapan di cup.</p></div>
+      <div class="card"><span class="k">31 Desember</span><h3>Tarik ke 2027</h3><p>Hitung mundur tahun baru di Lampion. Buka sampai lewat tengah malam kalau diizinkan pengelola.</p></div>
+      <div class="card"><span class="k">Akronim ala M.O.K.E.L</span><h3>G.E.N.G.S.I</h3><p>"Gak Enak Nongkrong Ga Seruput Ini." Poster tipografi besar untuk remaja skena; bisa jadi stiker cup.</p></div>
+      <div class="card"><span class="k">Kolaborasi</span><h3>Tarik Bareng</h3><p>Ajak brand thrift, musisi akustik, atau komunitas foto Samarinda bikin pop-up kecil di samping caravan.</p></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Disusun dari playbook referensi @based.dough, @hooluburger, dan @jagocoffee. Pola dipelajari, aset mereka tidak dipakai. Harga dan promo belum final; badge "??rb" diganti setelah harga ditetapkan.</div></footer>
+
+<div id="stage" aria-hidden="true"></div>
+<div class="ov" id="ov" hidden>
+  <div class="box">
+    <img id="ovimg" alt="Poster siap disimpan">
+    <p id="ovtxt">Tekan lama gambar lalu pilih Simpan. Di laptop: klik kanan → Simpan gambar.</p>
+    <button class="btn primary" id="ovclose" type="button">Tutup</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function(){
+var PRICE_FIELDS=[["tt","Teh Tarik 14 oz"],["tt22","Teh Tarik 22 oz"],["milo","Milo Tarik 14 oz"],["matcha","Matcha Tarik 14 oz"],["houji","Houjicha Tarik 14 oz"],["bagel","Bagel"],["wrap","Wrap"]];
+var P={};
+try{P=JSON.parse(localStorage.getItem("tdk-harga")||"{}")||{};}catch(e){P={};}
+function pr(k){var v=(P[k]||"").toString().replace(/[^0-9]/g,"");return v?v:"??";}
+
+/* ---------- SVG parts ---------- */
+function cup(fill,h,opts){opts=opts||{};var H=h||120;
+ return '<svg viewBox="0 0 100 '+(H+30)+'" aria-hidden="true">'+
+ '<path d="M10 18 H90 L80 '+(H+26)+' H20 Z" fill="'+fill+'" stroke="#0E4D32" stroke-width="3" stroke-linejoin="round"/>'+
+ '<path d="M6 10 Q50 2 94 10 L94 18 H6 Z" fill="#F6EFDF" stroke="#0E4D32" stroke-width="3" stroke-linejoin="round"/>'+
+ '<path d="M14 '+(H*0.32+18)+' H86" stroke="rgba(246,239,223,.55)" stroke-width="5"/>'+
+ '<circle cx="50" cy="'+(H*0.62+18)+'" r="'+Math.min(14,H*0.12)+'" fill="#F6EFDF"/>'+
+ '<circle cx="50" cy="'+(H*0.62+18)+'" r="'+Math.min(9,H*0.08)+'" fill="#C9A24B"/>'+
+ (opts.face?'<path d="M40 '+(H*0.4+18)+' q4 -4 8 0 M52 '+(H*0.4+18)+' q4 -4 8 0" stroke="#0E4D32" stroke-width="2.5" fill="none" stroke-linecap="round"/>':'')+
+ '</svg>';}
+var MASCOT='<svg viewBox="0 0 200 250" aria-hidden="true"><path d="M156 44 C128 84 66 112 44 184" fill="none" stroke="#B9824F" stroke-width="6" stroke-linecap="round"/><path d="M74 112 Q100 100 126 112 L138 230 Q100 242 62 230 Z" fill="#F6EFDF" stroke="#0E4D32" stroke-width="4" stroke-linejoin="round"/><path d="M80 140 L120 140 L128 230 Q100 238 72 230 Z" fill="#0E4D32"/><circle cx="100" cy="172" r="9" fill="#F6EFDF"/><path d="M95 172 Q100 166 105 172 Q100 178 95 172 Z" fill="#0E4D32"/><path d="M114 106 L134 112 L130 160 L116 156 Z" fill="#7A1F2B" stroke="#0E4D32" stroke-width="3" stroke-linejoin="round"/><path d="M126 116 L160 50" stroke="#0E4D32" stroke-width="16" stroke-linecap="round"/><path d="M126 116 L160 50" stroke="#F6EFDF" stroke-width="9" stroke-linecap="round"/><path d="M76 118 L46 180" stroke="#0E4D32" stroke-width="16" stroke-linecap="round"/><path d="M76 118 L46 180" stroke="#F6EFDF" stroke-width="9" stroke-linecap="round"/><g transform="rotate(-25 162 34)"><rect x="150" y="22" width="26" height="24" rx="4" fill="#F6EFDF" stroke="#0E4D32" stroke-width="4"/><path d="M176 28 Q186 34 176 40" fill="none" stroke="#0E4D32" stroke-width="3"/></g><rect x="28" y="184" width="30" height="26" rx="4" fill="#F6EFDF" stroke="#0E4D32" stroke-width="4"/><path d="M30 190 L56 190" stroke="#B9824F" stroke-width="5"/><circle cx="100" cy="72" r="32" fill="#F6EFDF" stroke="#0E4D32" stroke-width="4"/><path d="M68 70 C66 38 134 38 132 70 C124 54 110 50 98 55 C88 52 76 58 68 70 Z" fill="#0E4D32"/><path d="M85 78 Q90 72 95 78 M105 78 Q110 72 115 78" fill="none" stroke="#0E4D32" stroke-width="3.5" stroke-linecap="round"/><path d="M89 90 Q100 100 111 90" fill="none" stroke="#0E4D32" stroke-width="3.5" stroke-linecap="round"/><circle cx="80" cy="88" r="5" fill="#E9A48F"/><circle cx="120" cy="88" r="5" fill="#E9A48F"/></svg>';
+var CARAVAN='<svg viewBox="0 0 400 220" aria-hidden="true" fill="none" stroke="#F6EFDF" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"><path d="M40 170 V70 Q40 30 90 30 H330 Q370 30 370 70 V170 Z"/><rect x="80" y="70" width="170" height="60" rx="6"/><path d="M80 70 L250 70 L240 55 H90 Z"/><rect x="280" y="65" width="55" height="105" rx="4"/><circle cx="120" cy="185" r="22"/><circle cx="300" cy="185" r="22"/><path d="M370 160 H395"/><path d="M60 30 V12 M200 30 V8 M340 30 V12"/><circle cx="60" cy="8" r="6"/><circle cx="200" cy="4" r="6"/><circle cx="340" cy="8" r="6"/></svg>';
+function lamps(){var s='<svg class="lamps" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0 2 Q50 14 100 2" stroke="#C9A24B" stroke-width=".3" fill="none"/>';
+ [[12,6,1],[30,9,.8],[50,10,1.1],[70,9,.8],[88,6,1]].forEach(function(l){var x=l[0],y=l[1],k=l[2];
+  s+='<line x1="'+x+'" y1="'+(y-3)+'" x2="'+x+'" y2="'+y+'" stroke="#C9A24B" stroke-width=".3"/>'+
+  '<rect x="'+(x-1.6*k)+'" y="'+y+'" width="'+(3.2*k)+'" height="1" fill="#C9A24B"/>'+
+  '<ellipse cx="'+x+'" cy="'+(y+1+5*k)+'" rx="'+(4*k)+'" ry="'+(5*k)+'" fill="#B3261E"/>'+
+  '<ellipse cx="'+x+'" cy="'+(y+1+5*k)+'" rx="'+(1.6*k)+'" ry="'+(5*k)+'" fill="none" stroke="#E0574E" stroke-width=".3"/>'+
+  '<rect x="'+(x-1.6*k)+'" y="'+(y+1+10*k)+'" width="'+(3.2*k)+'" height="1" fill="#C9A24B"/>';});
+ return s+'</svg>';}
+var PERSON='<svg viewBox="0 0 200 200" aria-hidden="true"><path d="M40 200 Q46 120 100 116 Q154 120 160 200 Z" fill="#1e2a24"/><circle cx="100" cy="78" r="34" fill="#2a3830"/><path d="M64 70 Q70 30 104 34 Q140 36 138 78 Q128 58 104 56 Q80 56 64 70 Z" fill="#141c18"/><g transform="translate(118 132) rotate(-8)"><path d="M0 0 H30 L27 46 H3 Z" fill="#F6EFDF" stroke="#0E4D32" stroke-width="2"/><path d="M-2 -5 Q15 -9 32 -5 V0 H-2 Z" fill="#F6EFDF" stroke="#0E4D32" stroke-width="2"/><rect x="3" y="12" width="24" height="22" fill="#0E4D32"/><circle cx="15" cy="23" r="5" fill="#C9A24B"/></g><path d="M112 168 Q118 150 130 146" stroke="#2a3830" stroke-width="12" stroke-linecap="round" fill="none"/></svg>';
+var BAGEL='<svg viewBox="0 0 100 110" aria-hidden="true"><ellipse cx="50" cy="62" rx="44" ry="34" fill="#C98A4B" stroke="#F6EFDF" stroke-width="3"/><ellipse cx="50" cy="58" rx="12" ry="8" fill="#7A1F2B"/><path d="M18 50 l3 2 M30 38 l3 1 M64 36 l2 3 M80 50 l3 1 M40 82 l3 -1 M66 80 l2 2" stroke="#F6EFDF" stroke-width="2.5" stroke-linecap="round"/></svg>';
+var WRAP='<svg viewBox="0 0 100 110" aria-hidden="true"><path d="M20 30 L80 22 L72 100 L28 100 Z" fill="#E7C98E" stroke="#F6EFDF" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="27" rx="31" ry="9" fill="#F6EFDF"/><ellipse cx="50" cy="27" rx="25" ry="6" fill="#7FA650"/><circle cx="42" cy="26" r="3" fill="#B3261E"/><circle cx="58" cy="27" r="3" fill="#C9A24B"/></svg>';
+
+function corners(tl,tr,bl,br){return '<div class="wm">TOKO TEH · TJAP DUA KOI</div>'+
+ (tl?'<div class="cn tl">'+tl+'</div>':'')+(tr?'<div class="cn tr">'+tr+'</div>':'')+(bl?'<div class="cn bl">'+bl+'</div>':'')+(br?'<div class="cn br">'+br+'</div>':'');}
+
+/* ---------- posters ---------- */
+var R={
+p1:function(){return '<div class="poster p1">'+corners('H-3','#TarikanPertama','16.00—24.00','<span class="stamp">茶</span>')+
+ '<div class="car">'+CARAVAN+'</div><div class="pin"><div class="h"><p class="D">ADA YANG<br>LAGI DISEDUH</p><p class="S">pelan-pelan</p></div>'+
+ '<div class="pills"><span class="pill">Mahakam Lampion Garden</span><span class="pill fill">Minggu · 29.11.26</span></div></div></div>';},
+p2:function(){return '<div class="poster p2"><div class="stream"><svg width="100%" height="100%" viewBox="0 0 1080 1350" aria-hidden="true"><path d="M813 255 C1000 330 1060 360 1100 380" fill="none" stroke="#9A6A3C" stroke-width="34" stroke-linecap="round"/><path d="M813 255 C1000 330 1060 360 1100 380" fill="none" stroke="#B9824F" stroke-width="24"/></svg></div>'+
+ '<div class="tk"><svg width="100%" height="100%" viewBox="540 120 340 300" aria-hidden="true"><g transform="rotate(35 710 280)"><path d="M630 190 H790 V350 Q790 372 768 372 H652 Q630 372 630 350 Z" fill="#D6DCD8" stroke="#0E4D32" stroke-width="9" stroke-linejoin="round"/><path d="M630 230 Q560 240 566 290 Q572 340 630 335" fill="none" stroke="#0E4D32" stroke-width="14" stroke-linecap="round"/><rect x="655" y="300" width="110" height="22" rx="4" fill="#0E4D32"/></g></svg></div>'+
+ corners('','1/5','','')+'<div class="rul"></div><div class="arr">→</div>'+
+ '<div class="pin"><p class="D">GESER</p><p class="S">buat narik.</p><p class="small">Pelan-pelan aja,<br>kayak PDKT.</p></div></div>';},
+p3:function(){return '<div class="poster p3"><div class="ph"></div><div class="grain"></div><div class="leak"></div>'+corners('H-1','Reels · 0:25','Sabtu 28.11','<span class="stamp">茶</span>')+
+ '<div class="pin"><div class="hminus">BESOK · 16.00</div><p class="D">BESOK</p><p class="S">tinggal</p><p class="D">TARIK.</p>'+
+ '<p class="sub3">"Ada yang baru di Lampion. Bisa ditarik, tapi nggak bikin sakit hati."</p></div>'+
+ '<div class="play"><svg viewBox="0 0 10 10" width="40%" aria-hidden="true"><path d="M2 1 L9 5 L2 9 Z" fill="#F6EFDF"/></svg></div></div>';},
+p4:function(){return '<div class="poster p4">'+lamps()+corners('','','#TarikanPertama','<span class="stamp">茶</span>')+
+ '<div class="pin"><p class="D">BUKA!</p><p class="S">tarikan pertama</p>'+
+ '<div class="date"><div class="day"><small>MINGGU</small><b>29.11</b><small>2026</small></div><div class="pills"><span class="pill">16.00 — 24.00</span><span class="pill">Mahakam Lampion Garden</span><span class="pill">Teh tarik · bagel · wrap</span></div></div>'+
+ '<p class="foot">Ajak keluarga. Ajak bestie. Ajak gebetan.</p></div></div>';},
+p5:function(){return '<div class="poster p5"><div class="tex"></div>'+corners('Teh Tarik','Diseduh tiap hari','Base C, ditarik','<span class="stamp">茶</span>')+
+ '<div class="pin"><p class="D">KENTAL.</p><p class="S">no debat.</p></div>'+
+ '<div class="cup">'+cup('#B9824F',150)+'</div>'+
+ '<div class="badge"><div><b>'+pr("tt")+'rb</b><small>14 OZ</small></div></div>'+
+ '<div class="stk">JUMBO<br>22 OZ<small>BUAT HAUS SERIUS</small></div></div>';},
+p6:function(){var m=[["TEH TARIK","yang original, bikin balik lagi","#B9824F","tt"],["MILO TARIK","favorit adek, diam-diam favorit papa","#5C3A2A","milo"],["MATCHA TARIK","buat yang skena","#7FA650","matcha"],["HOUJICHA TARIK","buat yang anti-mainstream","#A87452","houji"]];
+ var h='<div class="poster p6">'+corners('Menu','#TarikanPertama','','<span class="stamp">茶</span>')+'<div class="pin"><div class="tt"><p class="D">4 TARIKAN</p><p class="S">+ 2 ganjelan</p></div><div class="grid">';
+ m.forEach(function(x){h+='<div class="m">'+cup(x[2],100)+'<div class="pb">'+pr(x[3])+'</div><p class="D">'+x[0]+'</p><p>'+x[1]+'</p></div>';});
+ h+='<div class="m food">'+BAGEL+'<div class="pb">'+pr("bagel")+'</div><p class="D">BAGEL</p><p>ganjelan manis-gurih</p></div>';
+ h+='<div class="m food">'+WRAP+'<div class="pb">'+pr("wrap")+'</div><p class="D">WRAP</p><p>buat yang belum makan malam</p></div>';
+ return h+'</div><div class="note"><span>Semua minuman ada 14 oz &amp; jumbo 22 oz</span><span>Harga dalam ribu rupiah</span></div></div></div>';},
+p7:function(){return '<div class="poster p7"><div class="ph"></div><div class="fig">'+PERSON+'</div><span class="phnote">FOTO: OOTD + cup, bokeh lampion</span>'+corners('Fit #01','#FitTarik','Repost tiap Jumat','<span class="stamp">茶</span>')+
+ '<div class="pin"><p class="D">FIT CHECK</p><p class="S">biar feed naik kelas</p>'+
+ '<div class="list"><div><i>✓</i>Outfit: udah niat</div><div><i>✓</i>Spot: Lampion Garden</div><div><i>✓</i>Di tangan: Tjap Dua Koi</div></div></div></div>';},
+p8:function(){var f=[["#B9824F",160,"PAPA","Teh Tarik jumbo"],["#A87452",120,"MAMA","Houjicha Tarik"],["#7FA650",120,"KAKAK","Matcha, katanya skena"],["#5C3A2A",82,"ADEK","Milo Tarik"]];
+ var h='<div class="poster p8">'+corners('Malam Minggu','#TarikanPertama','Mahakam Lampion Garden','<span class="stamp">茶</span>')+'<div class="pin"><p class="D">SATU MEJA,<br>BEDA SELERA.</p><p class="S">untung semua bisa ditarik</p><div class="fam">';
+ f.forEach(function(x){h+='<div class="fm">'+cup(x[0],x[1],{face:true})+'</div>';});
+ h+='</div><div class="lbls">';f.forEach(function(x){h+='<div><b>'+x[2]+'</b><span>'+x[3]+'</span></div>';});
+ return h+'</div></div></div>';},
+p9:function(){return '<div class="poster p9"><div class="masc">'+MASCOT+'</div>'+corners('Teman Tarik','#TemanTarik','Link di bio','<span class="stamp">茶</span>')+
+ '<div class="pin"><p class="D">TARIK<br>TEMANMU.</p><p class="S">es tehnya kita traktir</p>'+
+ '<div class="steps"><div class="st"><i>1</i>Bikin kode ajakan dari link di bio</div><div class="st"><i>2</i>Kirim ke teman yang belum pernah beli</div><div class="st"><i>3</i>Dia beli 1 minuman, es tehnya gratis</div></div>'+
+ '<span class="code">KOI-NAMAMU</span></div></div>';}
+};
+
+/* ---------- content ---------- */
+var POSTS=[
+{id:"p1",n:1,when:"Kamis 26 Nov · 19.00",fmt:"Carousel 2 slide",type:"Teaser · storytelling sebelum buka",
+ head:"ADA YANG LAGI DISEDUH",hook:"Bikin penasaran tanpa jualan. Pola hitung mundur ala @based.dough (garis putus-putus \"Prepare for Impact\").",
+ cap:"Ada caravan baru parkir di Lampion. Bukan kopi, bukan boba. Isinya kental, kayak pertemanan kalian 👀\n\nTebak di kolom komentar. Yang bener, kita inget mukanya pas buka nanti 🫡\n\n📍 Mahakam Lampion Garden\n🗓️ Minggu, 29.11 · mulai 16.00\n\n#TarikanPertama #TjapDuaKoi #SamarindaNgeteh #LampionGarden",
+ vis:["Slide 1: poster ini. Latar hijau koi polos, siluet caravan garis putus-putus krem, headline besar, kata \"pelan-pelan\" dalam script emas.","Slide 2: foto asli caravan saat lampu menyala (shot list no. 1), ditutup kain atau terpal sebagian supaya masih misterius.","Empat pojok berisi mikro-teks seperti poster editorial."],
+ prompt:"Vertical 4:5 photo, a small vintage tea caravan parked in an evening lantern garden by a river in Samarinda, Indonesia, half covered with a cream canvas sheet, warm string lights, red paper lanterns softly out of focus, deep green paint on the caravan, cinematic film grain, moody blue-hour light, no text, no logo",
+ why:"Penonton diajak ikut menebak. Komentar di post pertama juga membantu jangkauan post berikutnya."},
+{id:"p2",n:2,when:"Jumat 27 Nov · 19.00",fmt:"Carousel 5 slide",type:"Carousel menyambung · ide khas teh tarik",
+ head:"GESER BUAT NARIK",hook:"Lima slide jadi satu gambar panjang. Tiap geseran memperpanjang tarikan teh sampai jatuh ke cup di slide 5. File lengkap: halaman \"Geser Buat Narik\".",
+ cap:"Teh tarik yang bener itu ditarik. Jadi kali ini kamu yang narik 👉 geser sampai habis.\n\nMakin panjang tarikannya, makin berbusa, makin kental. Kamu berhenti di slide berapa? 😏\n\nTarikan aslinya bisa kamu tonton langsung mulai Minggu 29.11, jam 16.00–24.00 di Mahakam Lampion Garden.\n\n#GeserBuatNarik #TarikanPertama #TjapDuaKoi #SamarindaNgeteh",
+ vis:["Slide 1: GESER buat narik. Teko miring mulai menuang, panah ke kanan.","Slide 2–4: penanda 25 cm (masih teh biasa), 50 cm (mulai berbusa), 75 cm (level pro), dengan penggaris di bawah.","Slide 5: teh jatuh ke cup. KENTAL. Tarikan aslinya di Lampion. Info buka.","Simpan kelima slide dari halaman Geser Buat Narik, unggah berurutan tanpa dipotong ulang."],
+ prompt:"",
+ why:"Gerakan khas teh tarik dipindahkan ke jempol pengikut. Ide ini tidak bisa dipakai brand lain."},
+{id:"p3",n:3,when:"Sabtu 28 Nov · 19.00",fmt:"Reels 25 detik",type:"Sketsa relatable · H-1",
+ head:"BESOK TINGGAL TARIK",hook:"Sketsa obrolan absurd ala @jagocoffee: 90% cerita, 10% jualan, ditutup kartu ajakan.",
+ cap:"Besok jam 4 sore. Yang ditarik tehnya, perasaanmu aman 🫶\n\nTag bestie yang selalu bilang \"ngapain ke Lampion, udah sering\".\n\n#TarikanPertama #TjapDuaKoi",
+ vis:["Cover reels: poster ini (latar gelap hangat, grain, light leak oranye).","Rekam dua orang di bangku Lampion, kamera diam di tripod, grading film pudar, subtitle kecil warna krem.","Kartu penutup 2 detik: \"BESOK · 16.00 · TINGGAL TARIK\" + logo."],
+ script:["A: Besok malem ke mana?","B: Lampion lah.","A: Ngapain, udah sering.","B: Ada yang baru. Bisa ditarik…","A: …tapi nggak bikin sakit hati?","B: (diam, nyeruput cup kosong, tatap kamera) Teh.","Kartu: BESOK · 16.00 · TINGGAL TARIK."],
+ prompt:"",
+ why:"Sketsa lebih sering ditonton sampai habis dan dibagikan dibanding poster. Ini juga menyapa remaja skena dengan bahasa mereka."},
+{id:"p4",n:4,when:"Minggu 29 Nov · 09.00 · sematkan",fmt:"Feed 4:5 + story",type:"Poster event · hari launching",
+ head:"BUKA! TARIKAN PERTAMA",hook:"Poster event ala IramaRasa/Hooluween: satu warna kuat (marun), tanggal besar, info dalam pil.",
+ cap:"HARI INI KITA BUKA! 🎉\n\nCaravan Tjap Dua Koi di Mahakam Lampion Garden, jam 4 sore sampai tengah malam.\n\nTeh Tarik, Milo Tarik, Matcha Tarik, Houjicha Tarik. Ada jumbo 22 oz buat yang hausnya serius. Lapar? Bagel & wrap siap.\n\nDatang rame-rame, foto yang banyak, tag kita 📸\n\n#TarikanPertama #TjapDuaKoi #SamarindaNgeteh",
+ vis:["Latar marun penuh dengan lampion merah bergantung di atas (nyambung ke nama tempat).","\"BUKA!\" raksasa, script emas \"tarikan pertama\" menimpa.","Blok tanggal krem + tiga pil info. Kalimat penutup untuk tiga audiens: keluarga, bestie, gebetan.","Story: versi 9:16 + stiker hitung mundur Instagram."],
+ prompt:"",
+ extra:"Usulan promo (belum diputuskan): stiker koi gratis untuk 50 pembeli pertama. Murah, dan stikernya akan muncul di HP dan botol minum mereka.",
+ why:"Post tersemat pertama. Semua info praktis ada di sini, jadi pengunjung baru tidak perlu bertanya."},
+{id:"p5",n:5,when:"Minggu 29 Nov · 15.00",fmt:"Feed 4:5 atau Reels slow-mo",type:"Spotlight produk",
+ head:"KENTAL. NO DEBAT.",hook:"Satu produk, satu klaim, harga besar. Seperti \"Pepperoni\" dan \"Cloudy Berry Only 40K\".",
+ cap:"Teh Tarik kita diseduh tiap hari, ditarik sampai berbusa. Kentalnya nggak perlu dibela, cukup diseruput 🧋\n\n14 oz atau jumbo 22 oz? Komen pilihanmu 👇\n\n#TarikanPertama #TehTarik #TjapDuaKoi",
+ vis:["Latar hijau bertekstur motif tegel, cahaya memusat di tengah.","Cup berdiri sendiri di tengah, aliran teh dari atas (foto asli dari shot list no. 3 dan 4).","Badge harga bulat emas di kanan, stiker \"Jumbo 22 oz\" miring di kiri.","Versi reels: slow-mo tarikan 5 detik → cup ditutup sealer → teks KENTAL."],
+ prompt:"Vertical 4:5 product photo, a tall clear plastic cup of creamy Malaysian-style pulled milk tea with thick foam on top, deep green textured velvet background, a stream of tea pouring from above, condensation droplets, dramatic soft spotlight from the front, high detail, commercial food photography, no text",
+ why:"Produk utama butuh satu post yang hanya bicara soal rasa. Kata \"kental\" sekaligus mengingatkan slogan."},
+{id:"p6",n:6,when:"Senin 30 Nov · 12.00 · sematkan",fmt:"Feed 4:5",type:"Menu & harga",
+ head:"4 TARIKAN + 2 GANJELAN",hook:"Kartu menu grid ala \"Slices of Pizza\", tiap menu dapat satu kalimat karakter.",
+ cap:"Simpan dulu biar nggak bingung di depan caravan 📌\n\n🟤 Teh Tarik: yang original\n🟫 Milo Tarik: favorit adek (dan diam-diam papa)\n🟢 Matcha Tarik: buat yang skena\n🟠 Houjicha Tarik: buat yang anti-mainstream\n🥯 Bagel & 🌯 Wrap: ganjelan\n\nSemua minuman ada 14 oz & jumbo 22 oz.\nBuka tiap hari 16.00–24.00 di Mahakam Lampion Garden.\n\n#TjapDuaKoi #MenuTjapDuaKoi",
+ vis:["Latar krem, enam kartu: empat hijau (minuman), dua marun (makanan).","Badge harga bulat emas di pojok tiap kartu. Isi harga di kotak atas halaman ini.","Setelah ada foto asli, ganti ikon cup dengan foto cutout tiap minuman."],
+ prompt:"",
+ why:"Post yang paling sering dibuka orang sebelum datang. Dengan deskripsi berkarakter, menu sekaligus jadi konten."},
+{id:"p7",n:7,when:"Rabu 2 Des · 18.00",fmt:"Carousel 4 slide",type:"Ajakan UGC · gengsi & foto",
+ head:"FIT CHECK",hook:"Cup sebagai aksesori. Memberi alasan orang memotret dan menandai kita.",
+ cap:"Outfit udah, spot udah, yang kurang cuma cup di tangan 😮‍💨\n\nFoto fit kamu di Lampion bareng cup Tjap Dua Koi, tag @tjapduakoi + #FitTarik. Tiap Jumat kita repost fit paling niat ke story ✨\n\n#FitTarik #TjapDuaKoi #LampionGarden #OOTDSamarinda",
+ vis:["Slide 1: poster ini. Foto OOTD malam, bokeh lampion, cup di depan dada dengan logo menghadap kamera, flash HP.","Daftar centang krem miring di bawah (\"Outfit: udah niat · Spot: Lampion · Di tangan: Tjap Dua Koi\").","Slide 2–4: 3 pose contoh (cewek, cowok, berdua) supaya orang tahu harus foto seperti apa."],
+ prompt:"Vertical 4:5 street-style photo at night, stylish Indonesian young woman in a casual oversized outfit holding a cream-and-green tea cup at chest height with the logo facing camera, red and gold paper lanterns glowing as bokeh behind, on-camera flash, candid confident pose, fashion editorial, film grain, no text",
+ extra:"Usulan hadiah (belum diputuskan): fit terpilih tiap Jumat dapat 1 minuman gratis.",
+ why:"Audiens yang suka foto dan gengsi menjadi tenaga promosi. Repost memberi mereka pengakuan."},
+{id:"p8",n:8,when:"Jumat 4 Des · 17.00",fmt:"Feed 4:5",type:"Relatable keluarga · ilustrasi",
+ head:"SATU MEJA, BEDA SELERA",hook:"Ilustrasi pop seperti cup berwajah; setiap anggota keluarga dapat menunya sendiri.",
+ cap:"Papa maunya yang kental, mama yang wangi, kakak yang skena, adek yang cokelat 😆\nUntung semuanya bisa ditarik.\n\nMalam Minggu ini, bawa satu keluarga ke Lampion. Kamu yang mana di keluargamu? Komen 👇\n\n#TjapDuaKoi #MalamMingguSamarinda",
+ vis:["Latar krem, empat cup berwajah berbaris dari tinggi ke pendek seperti foto keluarga.","Label di bawah tiap cup: Papa (Teh Tarik jumbo), Mama (Houjicha), Kakak (Matcha), Adek (Milo).","Versi foto: empat cup asli berjajar (shot list no. 6) dengan label yang sama."],
+ prompt:"",
+ why:"Menyapa keluarga tanpa terasa kaku, dan pertanyaan \"kamu yang mana\" memancing komentar."},
+{id:"p9",n:9,when:"Sabtu 5 Des · 16.00",fmt:"Feed 4:5 + story link",type:"Program referral",
+ head:"TARIK TEMANMU",hook:"Memakai maskot si penarik teh. Langkah singkat dalam angka, kode ditulis besar.",
+ cap:"Teh kental, teman kental 🤝\n\nAjak teman yang belum pernah nyobain Tjap Dua Koi. Dia beli 1 minuman, es tehnya kita yang traktir.\n\n1. Bikin kode dari link di bio\n2. Kirim ke temanmu\n3. Tunjukkan kode di kasir\n\nKode berlaku 14 hari. Satu kode untuk satu teman.\n\n#TemanTarik #TjapDuaKoi",
+ vis:["Latar hijau, maskot si penarik teh di kanan bawah.","\"TARIK TEMANMU.\" besar, script emas \"es tehnya kita traktir\".","Tiga langkah bernomor dan kotak kode bergaris putus-putus.","Story: link ke halaman Teman Tarik."],
+ prompt:"",
+ why:"Mengubah pembeli minggu pertama menjadi pembawa teman baru. Ini menutup baris grid dengan slogan utama."}
+];
+var ORDER=[9,8,7,6,5,4,3,2,1];
+
+/* ---------- render ---------- */
+var feed=document.getElementById("feed"),detail=document.getElementById("detail"),cur="p4";
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function byN(n){for(var i=0;i<POSTS.length;i++)if(POSTS[i].n===n)return POSTS[i];}
+function byId(id){for(var i=0;i<POSTS.length;i++)if(POSTS[i].id===id)return POSTS[i];}
+function drawFeed(){feed.innerHTML="";ORDER.forEach(function(n){var p=byN(n);var b=document.createElement("button");b.type="button";b.className="tile";b.setAttribute("aria-pressed",p.id===cur?"true":"false");b.setAttribute("aria-label","Post "+p.n+": "+p.head);
+ b.innerHTML='<span class="num">'+p.n+'</span><span class="fmt">'+(p.fmt.indexOf("Reels")===0?"Reels":p.fmt.indexOf("Carousel")===0?"Carousel":"Feed")+'</span>'+R[p.id]();
+ b.addEventListener("click",function(){cur=p.id;drawFeed();drawDetail();if(window.innerWidth<=860)detail.scrollIntoView({behavior:"smooth",block:"start"});});feed.appendChild(b);});}
+function list(a){return '<ul>'+a.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul>';}
+function drawDetail(){var p=byId(cur);
+ var h='<div class="dhead"><div class="meta"><span class="tag">Post '+p.n+'</span><span class="tag alt">'+esc(p.when)+'</span><span class="tag alt">'+esc(p.fmt)+'</span></div>'+
+ '<div class="eyebrow">'+esc(p.type)+'</div><h3>'+esc(p.head)+'</h3><p class="hook">'+esc(p.hook)+'</p></div>'+
+ '<div class="big" id="bigp">'+R[p.id]()+'</div>'+
+ '<div class="actions"><button class="btn primary" id="save" type="button">Simpan gambar 1080×1350</button><span class="status" id="st" role="status"></span></div>'+
+ '<div class="block"><div class="rowhead"><h4>Caption</h4><button class="mini" id="cp" type="button">Salin</button></div><p class="cap" id="captxt">'+esc(p.cap)+'</p></div>'+
+ '<div class="block"><h4>Arahan visual &amp; layout</h4>'+list(p.vis)+'</div>'+
+ (p.script?'<div class="block"><h4>Naskah reels</h4><ol>'+p.script.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ol></div>':'')+
+ (p.prompt?'<div class="block"><div class="rowhead"><h4>Prompt foto AI (mockup sebelum foto asli)</h4><button class="mini" id="cpp" type="button">Salin</button></div><p class="prompt" id="prtxt">'+esc(p.prompt)+'</p></div>':'')+
+ (p.extra?'<div class="block"><h4>Catatan</h4><p>'+esc(p.extra)+'</p></div>':'')+
+ '<div class="block"><h4>Kenapa post ini</h4><p>'+esc(p.why)+'</p></div>';
+ detail.innerHTML=h;
+ document.getElementById("cp").onclick=function(){copy(p.cap,this);};
+ var c2=document.getElementById("cpp");if(c2)c2.onclick=function(){copy(p.prompt,this);};
+ document.getElementById("save").onclick=function(){exportPNG(p);};}
+function copy(t,btn){var done=function(){btn.textContent="Tersalin";setTimeout(function(){btn.textContent="Salin";},1600);};
+ try{navigator.clipboard.writeText(t).then(done,function(){btn.textContent="Pilih teks manual";});}catch(e){btn.textContent="Pilih teks manual";}}
+
+/* ---------- export ---------- */
+var ov=document.getElementById("ov");
+document.getElementById("ovclose").onclick=function(){ov.hidden=true;};
+ov.addEventListener("click",function(e){if(e.target===ov)ov.hidden=true;});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ov.hidden=true;});
+function exportPNG(p){var st=document.getElementById("st");
+ if(typeof html2canvas!=="function"){st.textContent="Pembuat gambar belum termuat. Coba muat ulang halaman.";return;}
+ st.textContent="Membuat gambar…";var stage=document.getElementById("stage");stage.innerHTML=R[p.id]();var el=stage.firstChild;
+ (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){
+  return html2canvas(el,{scale:1,width:1080,height:1350,backgroundColor:null,logging:false,useCORS:true});
+ }).then(function(cv){document.getElementById("ovimg").src=cv.toDataURL("image/png");ov.hidden=false;st.textContent="";stage.innerHTML="";
+ }).catch(function(){st.textContent="Gagal membuat gambar. Sebagai gantinya, screenshot poster di atas.";stage.innerHTML="";});}
+
+/* ---------- price form ---------- */
+var pg=document.getElementById("pgrid");
+PRICE_FIELDS.forEach(function(f){var l=document.createElement("label");l.setAttribute("for","h-"+f[0]);l.textContent=f[1]+" (rb)";
+ var i=document.createElement("input");i.id="h-"+f[0];i.inputMode="numeric";i.placeholder="??";i.value=P[f[0]]||"";
+ i.addEventListener("input",function(){P[f[0]]=i.value.replace(/[^0-9]/g,"");try{localStorage.setItem("tdk-harga",JSON.stringify(P));}catch(e){}drawFeed();drawDetail();});
+ l.appendChild(i);pg.appendChild(l);});
+
+drawFeed();drawDetail();
+})();
+</script>
