@@ -40,8 +40,9 @@ Yang sengaja **tidak** dipasang: document-skills & claude-api (sudah bawaan), di
 - Program referral: **Teman Tarik**. Karyawan: Ocha.
 - Kasir/POS: **ESB** (laporan rangkuman penjualan harian dikirim sebagai .xlsx), sedang beralih pelan-pelan ke **Kasir Koi** (POS buatan sendiri, tayang 26 Nov 2026): https://tokotehtjapduakoi.github.io/kasir/ — status & langkah lanjut di `rancangan/2026-11-25-pos-kasir-LANJUT.md`.
 - Patokan HPP: margin minimal 65% (modal bahan ±35% dari penjualan).
-- Sablon logo cup: **Rp650/cup** (harga sementara), sudah pesan **500 pcs** (Rp325.000) — 27 Nov 2026. Sudah masuk HPP di sheet Database Bahan & HPP.
-- Resep base yang disetujui: menurut pemilik pakai **Tiga Sapi + SKM "Dairy" (Champ atau Crown?)**, bukan Carnation seperti tertulis di sheet. Belum dikonfirmasi detailnya (27 Nov 2026) — tanyakan dulu sebelum mengubah sheet.
+- **Cup 14 oz sablon = Rp650/cup** (harga cup sudah termasuk sablon, bukan biaya tambahan). Sudah pesan 500 pcs = Rp325.000 (27 Nov 2026). Cup 22 oz belum ada harga asli.
+- **Resep resmi = base C**: SKM Tiga Sapi + evaporasi Tiga Sapi, tanpa krimer. Konsentrat 110 ml, SKM 30 g, evaporasi 30 g, rich milk 24 ml, gula cair 10 ml. **Semua menu wajib pakai konsentrat teh** (tidak boleh diganti air panas). Versi A (Carnation) & B hanya pembanding.
+- HPP 14 oz base C (27 Nov 2026): Teh Tarik Rp4.249 · Milo Tarik (20 g) Rp6.446 · Matcha Tarik (2 g) Rp7.361 · Houjicha Tarik (3 g) Rp7.230. Selalu cek margin ≥65% per menu.
 - Warna brand: hijau koi `#0E4D32`, marun `#7A1F2B`, emas `#C9A24B`, krem `#F6EFDF`, merah stempel `#B3261E`.
 - Panduan konten lengkap (gaya, referensi @madlyfuel, format, pola post): `konten/PANDUAN-KONTEN.md`.
 
